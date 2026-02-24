@@ -7,7 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- jsPDF Library untuk generate PDF -->
+<!-- jsPDF Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -33,6 +33,8 @@
   --print-color:#7b1fa2;
   --danger-color:#e53935;
   --tiktok-color:#000000;
+  --imsak-color:#00bcd4;
+  --imsak-dark:#00838f;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -57,7 +59,7 @@ body{
   min-height:100dvh;
   margin:0;
   padding:16px;
-  padding-bottom:180px;
+  padding-bottom:240px;
   overflow-x:hidden;
   position:relative;
 }
@@ -97,14 +99,8 @@ body{
 }
 
 @keyframes sunGlow{
-  0%, 100%{
-    box-shadow:0 0 30px var(--gold), 0 0 60px rgba(255, 193, 7, 0.4);
-    transform:scale(1);
-  }
-  50%{
-    box-shadow:0 0 45px var(--orange), 0 0 80px rgba(255, 152, 0, 0.5);
-    transform:scale(1.03);
-  }
+  0%, 100%{box-shadow:0 0 30px var(--gold), 0 0 60px rgba(255, 193, 7, 0.4);transform:scale(1);}
+  50%{box-shadow:0 0 45px var(--orange), 0 0 80px rgba(255, 152, 0, 0.5);transform:scale(1.03);}
 }
 
 .sun-cloud{
@@ -166,6 +162,468 @@ body{
 @keyframes cloudFloat{
   0%, 100%{transform:translateX(0)}
   50%{transform:translateX(6px)}
+}
+
+/* ===== IMSAKIYAH WIDGET ===== */
+.imsakiyah-widget{
+  position:relative;
+  z-index:2;
+  max-width:480px;
+  margin:10px auto;
+  background:linear-gradient(135deg, rgba(0, 188, 212, 0.15) 0%, rgba(0, 131, 143, 0.2) 100%);
+  border:2px solid var(--imsak-color);
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 4px 20px rgba(0, 188, 212, 0.3);
+  animation:fadeInDown 1s ease-out 0.3s both;
+}
+
+.imsak-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.imsak-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+  font-weight:700;
+  color:var(--imsak-color);
+}
+
+.imsak-title-icon{
+  width:28px;
+  height:28px;
+  background:linear-gradient(135deg, var(--imsak-color) 0%, var(--imsak-dark) 100%);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+.imsak-location{
+  font-size:11px;
+  color:var(--gold-light);
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.imsak-countdown-box{
+  background:rgba(0, 188, 212, 0.2);
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.countdown-label{
+  font-size:11px;
+  color:rgba(255,255,255,0.8);
+  margin-bottom:4px;
+}
+
+.countdown-time{
+  font-size:28px;
+  font-weight:700;
+  color:var(--white);
+  text-shadow:0 2px 8px rgba(0, 188, 212, 0.5);
+  font-variant-numeric:tabular-nums;
+}
+
+.countdown-name{
+  font-size:13px;
+  font-weight:700;
+  color:var(--imsak-color);
+  margin-top:4px;
+}
+
+.imsak-times{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+}
+
+.imsak-time-item{
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  padding:8px;
+  text-align:center;
+  cursor:pointer;
+  transition:all 0.2s;
+  position:relative;
+}
+
+.imsak-time-item:hover{
+  background:rgba(255,255,255,0.2);
+  transform:translateY(-2px);
+}
+
+.imsak-time-item.active{
+  background:linear-gradient(135deg, var(--imsak-color) 0%, var(--imsak-dark) 100%);
+  box-shadow:0 4px 15px rgba(0, 188, 212, 0.4);
+}
+
+.imsak-time-item.next{
+  border:2px solid var(--gold);
+}
+
+.imsak-time-name{
+  font-size:10px;
+  color:rgba(255,255,255,0.8);
+  margin-bottom:2px;
+}
+
+.imsak-time-value{
+  font-size:14px;
+  font-weight:700;
+  color:var(--white);
+}
+
+.imsak-time-item.active .imsak-time-name,
+.imsak-time-item.active .imsak-time-value{
+  color:var(--white);
+}
+
+/* Alarm Settings */
+.alarm-settings{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid rgba(0, 188, 212, 0.3);
+}
+
+.alarm-main-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.alarm-toggle-label{
+  font-size:12px;
+  font-weight:700;
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.alarm-switch{
+  position:relative;
+  width:48px;
+  height:26px;
+  background:rgba(255,255,255,0.2);
+  border-radius:13px;
+  cursor:pointer;
+  transition:background 0.3s;
+}
+
+.alarm-switch.active{
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+}
+
+.alarm-switch::after{
+  content:'';
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:20px;
+  height:20px;
+  background:var(--white);
+  border-radius:50%;
+  transition:transform 0.3s;
+  box-shadow:0 2px 4px rgba(0,0,0,0.2);
+}
+
+.alarm-switch.active::after{
+  transform:translateX(22px);
+}
+
+.sound-selector{
+  display:flex;
+  gap:8px;
+}
+
+.sound-btn{
+  flex:1;
+  padding:8px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-radius:10px;
+  background:rgba(255,255,255,0.1);
+  color:var(--white);
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+
+.sound-btn:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+.sound-btn.active{
+  border-color:var(--gold);
+  background:rgba(255, 193, 7, 0.2);
+  color:var(--gold);
+}
+
+.sound-icon{
+  font-size:18px;
+}
+
+.btn-full-schedule{
+  display:block;
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  background:linear-gradient(135deg, var(--imsak-color) 0%, var(--imsak-dark) 100%);
+  border:none;
+  border-radius:10px;
+  color:var(--white);
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 15px rgba(0, 188, 212, 0.3);
+  transition:all 0.2s;
+}
+
+.btn-full-schedule:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0, 188, 212, 0.4);
+}
+
+.btn-widget-mode{
+  display:block;
+  width:100%;
+  margin-top:8px;
+  padding:8px;
+  background:linear-gradient(135deg, #455a64 0%, #37474f 100%);
+  border:none;
+  border-radius:10px;
+  color:var(--white);
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+
+.btn-widget-mode:hover{
+  transform:translateY(-2px);
+}
+
+/* ===== MODAL IMSAKIYAH ===== */
+.modal-imsak{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+  overflow-y:auto;
+}
+
+.modal-imsak-content{
+  background:linear-gradient(135deg, #006064 0%, #004d40 100%);
+  margin:20px auto;
+  padding:0;
+  border-radius:20px;
+  max-width:450px;
+  max-height:90vh;
+  overflow-y:auto;
+  border:3px solid var(--imsak-color);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  animation:modalPop 0.3s ease;
+}
+
+@keyframes modalPop{
+  from{opacity:0;transform:scale(0.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.modal-imsak-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  background:linear-gradient(135deg, var(--imsak-color) 0%, var(--imsak-dark) 100%);
+  border-radius:17px 17px 0 0;
+  position:sticky;
+  top:0;
+  z-index:1;
+}
+
+.modal-imsak-header h4{
+  margin:0;
+  font-size:16px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.modal-imsak-close{
+  cursor:pointer;
+  font-size:24px;
+  font-weight:bold;
+  color:#fff;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.2);
+  border-radius:50%;
+  transition:background 0.2s;
+}
+
+.modal-imsak-close:hover{
+  background:rgba(0,0,0,0.4);
+}
+
+.modal-imsak-body{
+  padding:20px;
+}
+
+.imsak-table{
+  width:100%;
+  border-collapse:collapse;
+  background:rgba(255,255,255,0.95);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+.imsak-table th{
+  background:linear-gradient(135deg, var(--imsak-color) 0%, var(--imsak-dark) 100%);
+  color:var(--white);
+  padding:10px 6px;
+  font-size:11px;
+  font-weight:700;
+  text-align:center;
+}
+
+.imsak-table td{
+  padding:8px 6px;
+  font-size:11px;
+  text-align:center;
+  color:var(--text);
+  border-bottom:1px solid rgba(0,0,0,0.05);
+}
+
+.imsak-table tr:hover td{
+  background:rgba(0, 188, 212, 0.1);
+}
+
+.imsak-table tr.today td{
+  background:linear-gradient(135deg, rgba(255, 193, 7, 0.3) 0%, rgba(255, 152, 0, 0.2) 100%);
+  font-weight:700;
+}
+
+.imsak-table .waktu-imsak{
+  color:var(--imsak-dark);
+  font-weight:700;
+}
+
+.imsak-table .waktu-maghrib{
+  color:#e65100;
+  font-weight:700;
+}
+
+/* ===== ALARM OVERLAY ===== */
+.alarm-overlay{
+  display:none;
+  position:fixed;
+  z-index:3000;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  backdrop-filter:blur(15px);
+  animation:fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+.alarm-content{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  text-align:center;
+  padding:30px;
+  animation:alarmPulse 1s ease-in-out infinite;
+}
+
+@keyframes alarmPulse{
+  0%, 100%{transform:translate(-50%, -50%) scale(1);}
+  50%{transform:translate(-50%, -50%) scale(1.02);}
+}
+
+.alarm-icon{
+  width:100px;
+  height:100px;
+  margin:0 auto 20px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  box-shadow:0 0 60px rgba(255, 193, 7, 0.6);
+  animation:alarmGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes alarmGlow{
+  0%, 100%{box-shadow:0 0 60px rgba(255, 193, 7, 0.6);}
+  50%{box-shadow:0 0 100px rgba(255, 193, 7, 0.9);}
+}
+
+.alarm-title{
+  font-family:var(--font-arabic);
+  font-size:32px;
+  color:var(--gold);
+  margin-bottom:10px;
+  text-shadow:0 0 20px rgba(255, 193, 7, 0.8);
+}
+
+.alarm-subtitle{
+  font-size:18px;
+  color:var(--white);
+  margin-bottom:20px;
+}
+
+.alarm-time{
+  font-size:48px;
+  font-weight:700;
+  color:var(--white);
+  text-shadow:0 0 30px rgba(0, 188, 212, 0.8);
+  margin-bottom:20px;
+}
+
+.alarm-btn{
+  padding:15px 40px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border:none;
+  border-radius:30px;
+  color:var(--white);
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 25px rgba(255, 193, 7, 0.5);
+  transition:all 0.2s;
+}
+
+.alarm-btn:hover{
+  transform:scale(1.05);
 }
 
 .ramadhan-header{
@@ -591,11 +1049,6 @@ body{
   animation:modalPop 0.3s ease;
 }
 
-@keyframes modalPop{
-  from{opacity:0;transform:scale(0.9);}
-  to{opacity:1;transform:scale(1);}
-}
-
 .modal-view-header{
   display:flex;
   justify-content:space-between;
@@ -782,6 +1235,24 @@ body{
   50%{transform:translateY(-6px)}
 }
 
+/* Widget Mode Styling */
+body.widget-mode{
+  padding:10px;
+  padding-bottom:50px;
+}
+body.widget-mode .ramadhan-header{
+  margin-top:10px;
+}
+body.widget-mode .toolbar,
+body.widget-mode #hasil,
+body.widget-mode .social-footer,
+body.widget-mode .wa-panel,
+body.widget-mode .sun-container,
+body.widget-mode .moon-container,
+body.widget-mode .ornament{
+  display:none !important;
+}
+
 @media (min-width:481px){
   body{
     max-width:500px;
@@ -806,9 +1277,15 @@ body{
   .tiktok-btn, .wa-btn{width:42px;height:42px}
   .tiktok-btn svg, .wa-btn img{width:20px;height:20px}
   .footer-text{font-size:8px}
-  .modal-view-content{margin:10px;max-height:95vh}
+  .modal-view-content, .modal-imsak-content{margin:10px;max-height:95vh}
   .view-patient-name{font-size:18px}
   .wa-panel{bottom:130px}
+  .imsak-time-item{padding:6px}
+  .imsak-time-name{font-size:9px}
+  .imsak-time-value{font-size:12px}
+  .countdown-time{font-size:22px}
+  .sound-btn{padding:6px;font-size:9px}
+  .sound-icon{font-size:14px}
 }
 </style>
 </head>
@@ -861,6 +1338,80 @@ body{
   </div>
 </div>
 
+<!-- IMSAKIYAH WIDGET -->
+<div class="imsakiyah-widget">
+  <div class="imsak-header">
+    <div class="imsak-title">
+      <div class="imsak-title-icon">🕌</div>
+      <span>Jadwal Imsakiyah</span>
+    </div>
+    <div class="imsak-location">
+      <span>📍</span> Malang, Jawa Timur
+    </div>
+  </div>
+  
+  <div class="imsak-countdown-box">
+    <div class="countdown-label" id="countdownLabel">Menuju Waktu Sholat</div>
+    <div class="countdown-time" id="countdownTime">--:--:--</div>
+    <div class="countdown-name" id="countdownName">-</div>
+  </div>
+  
+  <div class="imsak-times">
+    <div class="imsak-time-item" data-waktu="imsak" onclick="showTimeInfo('imsak')">
+      <div class="imsak-time-name">Imsak</div>
+      <div class="imsak-time-value" id="timeImsak">--:--</div>
+    </div>
+    <div class="imsak-time-item" data-waktu="subuh" onclick="showTimeInfo('subuh')">
+      <div class="imsak-time-name">Subuh</div>
+      <div class="imsak-time-value" id="timeSubuh">--:--</div>
+    </div>
+    <div class="imsak-time-item" data-waktu="dzuhur" onclick="showTimeInfo('dzuhur')">
+      <div class="imsak-time-name">Dzuhur</div>
+      <div class="imsak-time-value" id="timeDzuhur">--:--</div>
+    </div>
+    <div class="imsak-time-item" data-waktu="ashar" onclick="showTimeInfo('ashar')">
+      <div class="imsak-time-name">Ashar</div>
+      <div class="imsak-time-value" id="timeAshar">--:--</div>
+    </div>
+    <div class="imsak-time-item" data-waktu="maghrib" onclick="showTimeInfo('maghrib')">
+      <div class="imsak-time-name">Maghrib</div>
+      <div class="imsak-time-value" id="timeMaghrib">--:--</div>
+    </div>
+    <div class="imsak-time-item" data-waktu="isya" onclick="showTimeInfo('isya')">
+      <div class="imsak-time-name">Isya</div>
+      <div class="imsak-time-value" id="timeIsya">--:--</div>
+    </div>
+  </div>
+  
+  <div class="alarm-settings">
+    <div class="alarm-main-toggle">
+      <div class="alarm-toggle-label">
+        <span>🔔</span> Alarm Adzan
+      </div>
+      <div class="alarm-switch" id="alarmSwitch" onclick="toggleAlarm()"></div>
+    </div>
+    
+    <div class="sound-selector">
+      <button class="sound-btn active" id="soundAdzan" onclick="selectSound('adzan')">
+        <span class="sound-icon">📿</span>
+        <span>Adzan Mishari</span>
+      </button>
+      <button class="sound-btn" id="soundWeker" onclick="selectSound('weker')">
+        <span class="sound-icon">⏰</span>
+        <span>Clock Weker</span>
+      </button>
+    </div>
+  </div>
+  
+  <button class="btn-full-schedule" onclick="openImsakModal()">
+    📅 Lihat Jadwal Lengkap Ramadhan
+  </button>
+  
+  <button class="btn-widget-mode" onclick="openWidgetMode()">
+    💻 Mode Widget Desktop
+  </button>
+</div>
+
 <!-- SEARCH -->
 <div class="toolbar">
   <div class="search-box">
@@ -904,6 +1455,44 @@ body{
   <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
 </div>
 
+<!-- MODAL IMSAKIYAH -->
+<div id="modalImsak" class="modal-imsak">
+  <div class="modal-imsak-content">
+    <div class="modal-imsak-header">
+      <h4>🕌 Jadwal Imsakiyah Malang</h4>
+      <span class="modal-imsak-close" onclick="closeImsakModal()">✕</span>
+    </div>
+    <div class="modal-imsak-body">
+      <table class="imsak-table">
+        <thead>
+          <tr>
+            <th>Tgl</th>
+            <th>Imsak</th>
+            <th>Subuh</th>
+            <th>Dzuhur</th>
+            <th>Ashar</th>
+            <th>Maghrib</th>
+            <th>Isya</th>
+          </tr>
+        </thead>
+        <tbody id="imsakTableBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ALARM OVERLAY -->
+<div id="alarmOverlay" class="alarm-overlay">
+  <div class="alarm-content">
+    <div class="alarm-icon" id="alarmIcon">🕌</div>
+    <div class="alarm-title" id="alarmTitle">Waktu Sholat</div>
+    <div class="alarm-subtitle" id="alarmSubtitle">Telah masuk waktu</div>
+    <div class="alarm-time" id="alarmTimeDisplay">--:--</div>
+    <button class="alarm-btn" onclick="dismissAlarm()">Matikan Alarm</button>
+  </div>
+</div>
+
 <!-- MODAL VIEW FULLSCREEN -->
 <div id="modalView" class="modal-view">
   <div class="modal-view-content">
@@ -912,22 +1501,435 @@ body{
       <span class="modal-view-close" onclick="closeViewModal()">✕</span>
     </div>
     <div class="modal-view-body" id="modalViewBody">
-      <!-- Content akan diisi oleh JavaScript -->
     </div>
     <div class="modal-view-footer" id="modalViewFooter">
-      <!-- Buttons akan diisi oleh JavaScript -->
     </div>
   </div>
 </div>
 
 <!-- TOAST -->
-<div id="toast" class="toast">PDF berhasil disimpan!</div>
+<div id="toast" class="toast">Notifikasi</div>
+
+<!-- AUDIO ELEMENTS -->
+<audio id="audioAdzan" preload="auto">
+  <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
 let data=[];
 let currentViewData = null;
 
+// ===== JADWAL IMSAKIYAH MALANG, JAWA TIMUR (WIB) =====
+// Koordinat: -7.9666 S, 112.6326 E
+// Ramadhan 1446 H (Maret 2025)
+const jadwalImsakiyah = [
+  {tgl:1, imsak:"04:11", subuh:"04:21", dzuhur:"11:51", ashar:"15:06", maghrib:"17:53", isya:"19:01"},
+  {tgl:2, imsak:"04:11", subuh:"04:21", dzuhur:"11:51", ashar:"15:06", maghrib:"17:53", isya:"19:01"},
+  {tgl:3, imsak:"04:11", subuh:"04:21", dzuhur:"11:51", ashar:"15:06", maghrib:"17:52", isya:"19:00"},
+  {tgl:4, imsak:"04:11", subuh:"04:21", dzuhur:"11:50", ashar:"15:06", maghrib:"17:52", isya:"19:00"},
+  {tgl:5, imsak:"04:11", subuh:"04:21", dzuhur:"11:50", ashar:"15:05", maghrib:"17:52", isya:"19:00"},
+  {tgl:6, imsak:"04:11", subuh:"04:21", dzuhur:"11:50", ashar:"15:05", maghrib:"17:51", isya:"18:59"},
+  {tgl:7, imsak:"04:11", subuh:"04:21", dzuhur:"11:49", ashar:"15:05", maghrib:"17:51", isya:"18:59"},
+  {tgl:8, imsak:"04:11", subuh:"04:20", dzuhur:"11:49", ashar:"15:04", maghrib:"17:51", isya:"18:58"},
+  {tgl:9, imsak:"04:11", subuh:"04:20", dzuhur:"11:49", ashar:"15:04", maghrib:"17:50", isya:"18:58"},
+  {tgl:10, imsak:"04:11", subuh:"04:20", dzuhur:"11:48", ashar:"15:04", maghrib:"17:50", isya:"18:57"},
+  {tgl:11, imsak:"04:11", subuh:"04:20", dzuhur:"11:48", ashar:"15:03", maghrib:"17:49", isya:"18:57"},
+  {tgl:12, imsak:"04:11", subuh:"04:20", dzuhur:"11:48", ashar:"15:03", maghrib:"17:49", isya:"18:56"},
+  {tgl:13, imsak:"04:11", subuh:"04:20", dzuhur:"11:47", ashar:"15:02", maghrib:"17:48", isya:"18:56"},
+  {tgl:14, imsak:"04:11", subuh:"04:20", dzuhur:"11:47", ashar:"15:02", maghrib:"17:48", isya:"18:55"},
+  {tgl:15, imsak:"04:11", subuh:"04:19", dzuhur:"11:46", ashar:"15:01", maghrib:"17:47", isya:"18:54"},
+  {tgl:16, imsak:"04:11", subuh:"04:19", dzuhur:"11:46", ashar:"15:01", maghrib:"17:47", isya:"18:54"},
+  {tgl:17, imsak:"04:11", subuh:"04:19", dzuhur:"11:46", ashar:"15:00", maghrib:"17:46", isya:"18:53"},
+  {tgl:18, imsak:"04:11", subuh:"04:19", dzuhur:"11:45", ashar:"15:00", maghrib:"17:46", isya:"18:53"},
+  {tgl:19, imsak:"04:11", subuh:"04:19", dzuhur:"11:45", ashar:"14:59", maghrib:"17:45", isya:"18:52"},
+  {tgl:20, imsak:"04:11", subuh:"04:19", dzuhur:"11:44", ashar:"14:59", maghrib:"17:45", isya:"18:51"},
+  {tgl:21, imsak:"04:11", subuh:"04:18", dzuhur:"11:44", ashar:"14:58", maghrib:"17:44", isya:"18:51"},
+  {tgl:22, imsak:"04:11", subuh:"04:18", dzuhur:"11:44", ashar:"14:58", maghrib:"17:43", isya:"18:50"},
+  {tgl:23, imsak:"04:11", subuh:"04:18", dzuhur:"11:43", ashar:"14:57", maghrib:"17:43", isya:"18:49"},
+  {tgl:24, imsak:"04:11", subuh:"04:18", dzuhur:"11:43", ashar:"14:57", maghrib:"17:42", isya:"18:49"},
+  {tgl:25, imsak:"04:11", subuh:"04:17", dzuhur:"11:42", ashar:"14:56", maghrib:"17:41", isya:"18:48"},
+  {tgl:26, imsak:"04:11", subuh:"04:17", dzuhur:"11:42", ashar:"14:55", maghrib:"17:41", isya:"18:47"},
+  {tgl:27, imsak:"04:11", subuh:"04:17", dzuhur:"11:41", ashar:"14:55", maghrib:"17:40", isya:"18:46"},
+  {tgl:28, imsak:"04:11", subuh:"04:17", dzuhur:"11:41", ashar:"14:54", maghrib:"17:39", isya:"18:46"},
+  {tgl:29, imsak:"04:11", subuh:"04:16", dzuhur:"11:40", ashar:"14:53", maghrib:"17:38", isya:"18:45"},
+  {tgl:30, imsak:"04:11", subuh:"04:16", dzuhur:"11:40", ashar:"14:53", maghrib:"17:38", isya:"18:44"}
+];
+
+// State
+let alarmEnabled = false;
+let alarmTriggered = {};
+let selectedSound = 'adzan';
+let audioContext = null;
+
+// ===== INISIALISASI JADWAL IMSAKIYAH =====
+function initImsakiyah(){
+  const now = new Date();
+  const day = now.getDate();
+  const month = now.getMonth() + 1; // 1-indexed (Maret = 3)
+  const year = now.getFullYear();
+  
+  let todaySchedule = null;
+  
+  // Ramadhan 1446H = Maret 2025
+  if(month === 3 && year === 2025 && day >= 1 && day <= 30){
+    todaySchedule = jadwalImsakiyah[day - 1];
+  } else if(month === 3 && year === 2025 && day > 30) {
+    // Setelah Ramadhan
+    todaySchedule = jadwalImsakiyah[29];
+  } else {
+    // Default hari pertama
+    todaySchedule = jadwalImsakiyah[0];
+  }
+  
+  if(todaySchedule){
+    document.getElementById('timeImsak').textContent = todaySchedule.imsak;
+    document.getElementById('timeSubuh').textContent = todaySchedule.subuh;
+    document.getElementById('timeDzuhur').textContent = todaySchedule.dzuhur;
+    document.getElementById('timeAshar').textContent = todaySchedule.ashar;
+    document.getElementById('timeMaghrib').textContent = todaySchedule.maghrib;
+    document.getElementById('timeIsya').textContent = todaySchedule.isya;
+  }
+  
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  
+  // Load saved states
+  const savedAlarm = localStorage.getItem('alarmEnabled');
+  const savedSound = localStorage.getItem('selectedSound');
+  
+  if(savedAlarm === 'true'){
+    alarmEnabled = true;
+    document.getElementById('alarmSwitch').classList.add('active');
+    requestNotificationPermission();
+  }
+  
+  if(savedSound){
+    selectSound(savedSound, false);
+  }
+}
+
+// ===== COUNTDOWN DENGAN LOGIKA MALAM HARI =====
+function updateCountdown(){
+  const now = new Date();
+  const day = now.getDate();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+  
+  let todaySchedule = null;
+  let isRamadhan = (month === 3 && year === 2025);
+  
+  if(isRamadhan && day >= 1 && day <= 30){
+    todaySchedule = jadwalImsakiyah[day - 1];
+  } else {
+    todaySchedule = jadwalImsakiyah[0];
+  }
+  
+  if(!todaySchedule) return;
+  
+  const waktuList = [
+    {name: 'Imsak', time: todaySchedule.imsak, key: 'imsak'},
+    {name: 'Subuh', time: todaySchedule.subuh, key: 'subuh'},
+    {name: 'Dzuhur', time: todaySchedule.dzuhur, key: 'dzuhur'},
+    {name: 'Ashar', time: todaySchedule.ashar, key: 'ashar'},
+    {name: 'Maghrib', time: todaySchedule.maghrib, key: 'maghrib'},
+    {name: 'Isya', time: todaySchedule.isya, key: 'isya'}
+  ];
+  
+  // Reset styles
+  const waktuItems = document.querySelectorAll('.imsak-time-item');
+  waktuItems.forEach(item => {
+    item.classList.remove('active', 'next');
+  });
+  
+  let nextWaktu = null;
+  let foundNext = false;
+  
+  // Cek waktu hari ini
+  for(let i = 0; i < waktuList.length; i++){
+    const waktu = waktuList[i];
+    const [hours, minutes] = waktu.time.split(':').map(Number);
+    const waktuDate = new Date(now);
+    waktuDate.setHours(hours, minutes, 0, 0);
+    
+    const diff = waktuDate - now;
+    
+    if(diff > 0 && !foundNext){
+      // Waktu berikutnya hari ini
+      nextWaktu = {...waktu, diff: diff, isNextDay: false};
+      foundNext = true;
+      const item = document.querySelector(`[data-waktu="${waktu.key}"]`);
+      if(item) item.classList.add('next');
+    } else if(diff <= 0){
+      // Sudah lewat
+      const item = document.querySelector(`[data-waktu="${waktu.key}"]`);
+      if(item) item.classList.add('active');
+      
+      // Trigger alarm
+      if(alarmEnabled && !alarmTriggered[`${day}-${waktu.key}`]){
+        const absDiff = Math.abs(diff);
+        if(absDiff < 60000){
+          triggerAlarm(waktu);
+          alarmTriggered[`${day}-${waktu.key}`] = true;
+        }
+      }
+    }
+  }
+  
+  // Jika semua waktu hari ini sudah lewat, cari waktu pertama besok
+  if(!foundNext){
+    const firstWaktu = waktuList[0]; // Imsak
+    const [hours, minutes] = firstWaktu.time.split(':').map(Number);
+    const nextDay = new Date(now);
+    nextDay.setDate(nextDay.getDate() + 1);
+    nextDay.setHours(hours, minutes, 0, 0);
+    
+    const diff = nextDay - now;
+    nextWaktu = {...firstWaktu, diff: diff, isNextDay: true};
+    
+    const item = document.querySelector(`[data-waktu="${firstWaktu.key}"]`);
+    if(item) item.classList.add('next');
+  }
+  
+  // Update display
+  if(nextWaktu){
+    const hours = Math.floor(nextWaktu.diff / 3600000);
+    const minutes = Math.floor((nextWaktu.diff % 3600000) / 60000);
+    const seconds = Math.floor((nextWaktu.diff % 60000) / 1000);
+    
+    let label = 'Menuju ' + nextWaktu.name;
+    if(nextWaktu.isNextDay){
+      label = 'Menuju ' + nextWaktu.name + ' Besok';
+    }
+    
+    document.getElementById('countdownLabel').textContent = label;
+    document.getElementById('countdownTime').textContent = 
+      `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    document.getElementById('countdownName').textContent = nextWaktu.name + (nextWaktu.isNextDay ? ' (Besok)' : '');
+  }
+}
+
+// ===== TOGGLE ALARM =====
+function toggleAlarm(){
+  alarmEnabled = !alarmEnabled;
+  const switchEl = document.getElementById('alarmSwitch');
+  
+  if(alarmEnabled){
+    switchEl.classList.add('active');
+    localStorage.setItem('alarmEnabled', 'true');
+    requestNotificationPermission();
+    showToast('Alarm Adzan diaktifkan');
+  } else {
+    switchEl.classList.remove('active');
+    localStorage.setItem('alarmEnabled', 'false');
+    showToast('Alarm Adzan dinonaktifkan');
+  }
+}
+
+// ===== PILIH SUARA =====
+function selectSound(type, save = true){
+  selectedSound = type;
+  
+  document.querySelectorAll('.sound-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  
+  if(type === 'adzan'){
+    document.getElementById('soundAdzan').classList.add('active');
+  } else {
+    document.getElementById('soundWeker').classList.add('active');
+  }
+  
+  if(save){
+    localStorage.setItem('selectedSound', type);
+    showToast('Suara alarm: ' + (type === 'adzan' ? 'Adzan Mishari' : 'Clock Weker'));
+  }
+}
+
+// ===== REQUEST NOTIFICATION =====
+function requestNotificationPermission(){
+  if('Notification' in window && Notification.permission === 'default'){
+    Notification.requestPermission();
+  }
+}
+
+// ===== TRIGGER ALARM =====
+function triggerAlarm(waktu){
+  // Play sound based on selection
+  if(selectedSound === 'adzan'){
+    playAdzanAudio();
+  } else {
+    playWekerSound();
+  }
+  
+  // Show overlay
+  const overlay = document.getElementById('alarmOverlay');
+  document.getElementById('alarmIcon').textContent = waktu.key === 'imsak' ? '🍽️' : '🕌';
+  document.getElementById('alarmTitle').textContent = waktu.key === 'imsak' ? 'Waktu Imsak' : 'Waktu Adzan';
+  document.getElementById('alarmSubtitle').textContent = `Telah masuk waktu ${waktu.name}`;
+  document.getElementById('alarmTimeDisplay').textContent = waktu.time;
+  overlay.style.display = 'block';
+  
+  // Browser notification
+  if('Notification' in window && Notification.permission === 'granted'){
+    new Notification(`${waktu.key === 'imsak' ? 'Waktu Imsak' : 'Waktu Adzan ' + waktu.name}`, {
+      body: `Telah masuk waktu ${waktu.name} pukul ${waktu.time}`,
+      icon: '🕌'
+    });
+  }
+  
+  // Vibration
+  if('vibrate' in navigator){
+    navigator.vibrate([500, 200, 500, 200, 500]);
+  }
+}
+
+// ===== PLAY ADZAN AUDIO =====
+function playAdzanAudio(){
+  try{
+    const audio = document.getElementById('audioAdzan');
+    audio.currentTime = 0;
+    audio.play().catch(e => {
+      console.log('Audio play failed, using fallback');
+      playFallbackAdzan();
+    });
+  } catch(e){
+    playFallbackAdzan();
+  }
+}
+
+// ===== FALLBACK ADZAN (Web Audio API) =====
+function playFallbackAdzan(){
+  try{
+    if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    const notes = [
+      {f: 293.66, d: 0.6}, // D4
+      {f: 329.63, d: 0.5}, // E4
+      {f: 369.99, d: 0.8}, // F#4
+      {f: 392.00, d: 0.6}, // G4
+      {f: 369.99, d: 0.4}, // F#4
+      {f: 329.63, d: 0.6}, // E4
+      {f: 293.66, d: 0.8}, // D4
+    ];
+    
+    let t = audioContext.currentTime;
+    notes.forEach(n => {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.frequency.value = n.f;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(0.3, t);
+      gain.gain.exponentialRampToValueAtTime(0.01, t + n.d);
+      osc.start(t);
+      osc.stop(t + n.d);
+      t += n.d;
+    });
+  } catch(e){
+    console.log('Audio not supported');
+  }
+}
+
+// ===== PLAY WEKER SOUND =====
+function playWekerSound(){
+  try{
+    if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Beep pattern
+    for(let i = 0; i < 5; i++){
+      const t = audioContext.currentTime + (i * 0.4);
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.frequency.value = 880;
+      osc.type = 'square';
+      gain.gain.setValueAtTime(0.2, t);
+      gain.gain.exponentialRampToValueAtTime(0.01, t + 0.2);
+      osc.start(t);
+      osc.stop(t + 0.2);
+    }
+  } catch(e){
+    console.log('Audio not supported');
+  }
+}
+
+// ===== DISMISS ALARM =====
+function dismissAlarm(){
+  const audio = document.getElementById('audioAdzan');
+  audio.pause();
+  audio.currentTime = 0;
+  document.getElementById('alarmOverlay').style.display = 'none';
+}
+
+// ===== WIDGET MODE =====
+function openWidgetMode(){
+  const widgetUrl = window.location.href;
+  const widgetWindow = window.open(widgetUrl, 'HDWidget', 
+    'width=380,height=720,top=50,left=50,menubar=no,toolbar=no,location=no,status=no');
+  
+  // Add class to new window
+  if(widgetWindow){
+    setTimeout(() => {
+      widgetWindow.document.body.classList.add('widget-mode');
+    }, 500);
+    showToast('Jendela widget dibuka. Pindahkan ke lokasi yang diinginkan.');
+  }
+}
+
+// ===== MODAL IMSAKIYAH =====
+function openImsakModal(){
+  document.getElementById('modalImsak').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  renderImsakTable();
+}
+
+function closeImsakModal(){
+  document.getElementById('modalImsak').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function renderImsakTable(){
+  const tbody = document.getElementById('imsakTableBody');
+  const now = new Date();
+  const today = now.getDate();
+  const month = now.getMonth() + 1;
+  const year = now.getFullYear();
+  
+  let html = '';
+  jadwalImsakiyah.forEach((row, idx) => {
+    const isToday = (month === 3 && year === 2025 && (idx + 1) === today);
+    html += `
+      <tr class="${isToday ? 'today' : ''}">
+        <td>${row.tgl}</td>
+        <td class="waktu-imsak">${row.imsak}</td>
+        <td>${row.subuh}</td>
+        <td>${row.dzuhur}</td>
+        <td>${row.ashar}</td>
+        <td class="waktu-maghrib">${row.maghrib}</td>
+        <td>${row.isya}</td>
+      </tr>
+    `;
+  });
+  
+  tbody.innerHTML = html;
+}
+
+function showTimeInfo(waktuKey){
+  const names = {
+    imsak: 'Imsak',
+    subuh: 'Subuh',
+    dzuhur: 'Dzuhur',
+    ashar: 'Ashar',
+    maghrib: 'Maghrib',
+    isya: 'Isya'
+  };
+  showToast(`Waktu ${names[waktuKey]} - Aktifkan alarm untuk notifikasi`);
+}
+
+// ===== FETCH DATA PASIEN =====
 fetch(CSV_URL).then(r=>r.text()).then(t=>{
   const rows=t.trim().split("\n");
   rows.shift();
@@ -996,7 +1998,6 @@ function cari(){
       const selesai=new Date()>target;
       const sisa=target-new Date();
       
-      // Format Teks WhatsApp
       const waText = 
 `*JADWAL PASIEN HD*
 ====================
@@ -1014,7 +2015,6 @@ _Info Jadwal HD Malahayati_`;
 
       const waLinkSafe = `https://wa.me/?text=${encodeURIComponent(waText)}`;
       
-      // Data untuk view dan PDF
       const pData = {
         nama: r[1],
         mr: r[0],
@@ -1057,7 +2057,7 @@ _Info Jadwal HD Malahayati_`;
   hasil.innerHTML = out || "Data tidak ditemukan";
 }
 
-// ===== FUNGSI VIEW MODAL =====
+// ===== VIEW MODAL =====
 function openViewModal(dataStr){
   try {
     const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
@@ -1074,52 +2074,31 @@ function openViewModal(dataStr){
       </div>
       <div class="view-card-body">
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">🏥</span>
-            Ruang
-          </span>
+          <span class="view-label"><span class="view-label-icon">🏥</span>Ruang</span>
           <span class="view-value">${pData.ruang}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">📅</span>
-            Hari
-          </span>
+          <span class="view-label"><span class="view-label-icon">📅</span>Hari</span>
           <span class="view-value">${pData.hari}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">📆</span>
-            Tanggal
-          </span>
+          <span class="view-label"><span class="view-label-icon">📆</span>Tanggal</span>
           <span class="view-value">${pData.tanggal}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">🛏️</span>
-            Bed
-          </span>
+          <span class="view-label"><span class="view-label-icon">🛏️</span>Bed</span>
           <span class="view-value">${pData.bed}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">👥</span>
-            Tim
-          </span>
+          <span class="view-label"><span class="view-label-icon">👥</span>Tim</span>
           <span class="view-value">${pData.tim}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">⏰</span>
-            Shift
-          </span>
+          <span class="view-label"><span class="view-label-icon">⏰</span>Shift</span>
           <span class="view-badge">Shift ${pData.shift}</span>
         </div>
         <div class="view-item">
-          <span class="view-label">
-            <span class="view-label-icon">🕐</span>
-            Jam
-          </span>
+          <span class="view-label"><span class="view-label-icon">🕐</span>Jam</span>
           <span class="view-value">${pData.jam}</span>
         </div>
         <div class="view-status">
@@ -1130,7 +2109,6 @@ function openViewModal(dataStr){
     
     document.getElementById('modalViewBody').innerHTML = bodyHtml;
     
-    // Footer buttons
     const waText = `*JADWAL PASIEN HD*\n====================\n*Nama*    : ${pData.nama}\n*MR*      : XX${pData.mr.slice(-4)}\n*Ruang*   : ${pData.ruang}\n*Hari*    : ${pData.hari}\n*Tanggal* : ${pData.tanggal}\n*Bed*     : ${pData.bed}\n*Tim*     : ${pData.tim}\n*Shift*   : ${pData.shift}\n*Jam*     : ${pData.jam}\n====================\n_Info Jadwal HD Malahayati_`;
     const waLink = `https://wa.me/?text=${encodeURIComponent(waText)}`;
     
@@ -1154,7 +2132,7 @@ function closeViewModal(){
   currentViewData = null;
 }
 
-// ===== FUNGSI SIMPAN PDF =====
+// ===== PDF =====
 function saveToPDF(dataStr){
   try {
     const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
@@ -1166,16 +2144,13 @@ function saveToPDF(dataStr){
       format: 'a6'
     });
     
-    // Background header
     doc.setFillColor(46, 125, 50);
     doc.rect(0, 0, 105, 35, 'F');
     
-    // Border decoration
     doc.setDrawColor(255, 193, 7);
     doc.setLineWidth(1);
     doc.rect(3, 3, 99, 141);
     
-    // Header text
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
@@ -1185,12 +2160,10 @@ function saveToPDF(dataStr){
     doc.setFont('helvetica', 'normal');
     doc.text('RSUD MALAHAYATI', 52.5, 20, { align: 'center' });
     
-    // Gold line
     doc.setDrawColor(255, 193, 7);
     doc.setLineWidth(0.5);
     doc.line(15, 25, 90, 25);
     
-    // Patient name box
     doc.setFillColor(232, 245, 233);
     doc.roundedRect(8, 38, 89, 22, 3, 3, 'F');
     
@@ -1204,7 +2177,6 @@ function saveToPDF(dataStr){
     doc.setTextColor(102, 102, 102);
     doc.text('No. MR: XX' + pData.mr.slice(-4), 52.5, 56, { align: 'center' });
     
-    // Info section
     let yPos = 68;
     const leftCol = 12;
     
@@ -1218,25 +2190,18 @@ function saveToPDF(dataStr){
       { label: 'Jam', value: pData.jam }
     ];
     
-    infoItems.forEach((item, idx) => {
-      // Label
+    infoItems.forEach((item) => {
       doc.setTextColor(102, 102, 102);
       doc.setFontSize(9);
       doc.setFont('helvetica', 'normal');
       doc.text(item.label, leftCol, yPos);
-      
-      // Separator
       doc.text(':', leftCol + 20, yPos);
-      
-      // Value
       doc.setTextColor(27, 27, 27);
       doc.setFont('helvetica', 'bold');
       doc.text(item.value, leftCol + 23, yPos);
-      
       yPos += 9;
     });
     
-    // Footer
     doc.setDrawColor(76, 175, 80);
     doc.setLineWidth(0.3);
     doc.line(15, 132, 90, 132);
@@ -1247,15 +2212,11 @@ function saveToPDF(dataStr){
     doc.text('HD Malahayati - Jadwal Pasien', 52.5, 137, { align: 'center' });
     doc.text('Dicetak: ' + new Date().toLocaleString('id-ID'), 52.5, 142, { align: 'center' });
     
-    // Generate filename (safe)
     const safeName = pData.nama.replace(/[^a-zA-Z0-9]/g, '_');
     const safeDate = pData.tanggal.replace(/[^a-zA-Z0-9]/g, '_');
     const fileName = `JadwalHD_${safeName}_${safeDate}.pdf`;
     
-    // Save PDF
     doc.save(fileName);
-    
-    // Show toast
     showToast('PDF berhasil disimpan!');
     
   } catch(e) {
@@ -1264,7 +2225,7 @@ function saveToPDF(dataStr){
   }
 }
 
-// ===== TOAST NOTIFICATION =====
+// ===== TOAST =====
 function showToast(message){
   const toast = document.getElementById('toast');
   toast.textContent = message;
@@ -1277,21 +2238,30 @@ function showToast(message){
 
 function toggleWA(){waPanel.classList.toggle("show");}
 
-// Close modal when clicking outside
+// Close modals when clicking outside
 document.getElementById('modalView').addEventListener('click', function(e) {
-  if(e.target === this) {
-    closeViewModal();
-  }
+  if(e.target === this) closeViewModal();
 });
 
-// Close modal with Escape key
+document.getElementById('modalImsak').addEventListener('click', function(e) {
+  if(e.target === this) closeImsakModal();
+});
+
+// Close with Escape key
 document.addEventListener('keydown', function(e) {
   if(e.key === 'Escape') {
     closeViewModal();
+    closeImsakModal();
+    dismissAlarm();
   }
 });
 
-/* ===== CLOCK REALTIME ===== */
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+  initImsakiyah();
+});
+
+// ===== CLOCK REALTIME =====
 (function(){
   const c=document.getElementById('clock');
   const d=document.getElementById('clockDate');
@@ -1308,4 +2278,4 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 </body>
-</html> 
+</html>
