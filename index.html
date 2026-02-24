@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Marhaban ya Ramadhan - Pencarian Jadwal Pasien Dialisis</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- jsPDF Library untuk generate PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root{
+  --white:#fff;
+  --green:#2e7d32;
+  --green-light:#4caf50;
+  --green-dark:#1b5e20;
+  --green-main:#1b7f5f;
+  --purple-brown:#5d4037;
+  --gold:#ffc107;
+  --gold-light:#ffecb3;
+  --gold-dark:#ff8f00;
+  --orange:#ff9800;
+  --orange-light:#ffb74d;
+  --orange-dark:#e65100;
+  --card:#ffffff;
+  --border:#cfe3da;
+  --text:#1b1b1b;
+  --font:'Caveat', cursive;
+  --font-arabic:'Amiri', serif;
+  --wa-color:#25D366;
+  --print-color:#7b1fa2;
+  --danger-color:#e53935;
+  --tiktok-color:#000000;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,sans-serif;
+  background:
+    linear-gradient(180deg, 
+      rgba(46, 125, 50, 0.55) 0%, 
+      rgba(46, 125, 50, 0.35) 25%,
+      rgba(93, 64, 55, 0.45) 65%,
+      rgba(93, 64, 55, 0.65) 100%
+    ),
+    linear-gradient(135deg, 
+      #1b5e20 0%, 
+      #2e7d32 30%, 
+      #4a3728 70%, 
+      #5d4037 100%
+    );
+  color:var(--white);
+  min-height:100vh;
+  min-height:100dvh;
+  margin:0;
+  padding:16px;
+  padding-bottom:180px;
+  overflow-x:hidden;
+  position:relative;
+}
+
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle, var(--gold) 1px, transparent 2px),
+    radial-gradient(circle, var(--gold-light) 1px, transparent 2px);
+  background-size:60px 60px, 100px 100px;
+  animation:twinkle 3s ease-in-out infinite;
+  opacity:0.4;
+}
+@keyframes twinkle{
+  0%, 100%{opacity:.25}
+  50%{opacity:.5}
+}
+
+.sun-container{
+  position:fixed;
+  top:50px;
+  right:20px;
+  z-index:1;
+  pointer-events:none;
+}
+
+.sun{
+  width:60px;
+  height:60px;
+  background:radial-gradient(circle, var(--gold-light) 0%, var(--gold) 50%, var(--orange) 100%);
+  border-radius:50%;
+  box-shadow:0 0 30px var(--gold), 0 0 60px rgba(255, 193, 7, 0.4);
+  animation:sunGlow 4s ease-in-out infinite;
+}
+
+@keyframes sunGlow{
+  0%, 100%{
+    box-shadow:0 0 30px var(--gold), 0 0 60px rgba(255, 193, 7, 0.4);
+    transform:scale(1);
+  }
+  50%{
+    box-shadow:0 0 45px var(--orange), 0 0 80px rgba(255, 152, 0, 0.5);
+    transform:scale(1.03);
+  }
+}
+
+.sun-cloud{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  z-index:2;
+}
+
+.sun-cloud svg{
+  width:70px;
+  height:45px;
+  fill:rgba(255,255,255,0.8);
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,0.1));
+  animation:cloudFloat 8s ease-in-out infinite;
+}
+
+.moon-container{
+  position:fixed;
+  top:45px;
+  left:15px;
+  z-index:1;
+  pointer-events:none;
+}
+
+.moon{
+  width:55px;
+  height:55px;
+  filter:drop-shadow(0 0 12px var(--gold-light));
+  animation:moonGlow 5s ease-in-out infinite;
+}
+
+.moon svg{
+  width:100%;
+  height:100%;
+  fill:var(--gold-light);
+}
+
+@keyframes moonGlow{
+  0%, 100%{filter:drop-shadow(0 0 12px var(--gold-light));}
+  50%{filter:drop-shadow(0 0 20px var(--gold));}
+}
+
+.moon-cloud{
+  position:absolute;
+  top:12px;
+  left:-18px;
+  z-index:2;
+}
+
+.moon-cloud svg{
+  width:60px;
+  height:35px;
+  fill:rgba(255,255,255,0.7);
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  animation:cloudFloat 7s ease-in-out infinite reverse;
+}
+
+@keyframes cloudFloat{
+  0%, 100%{transform:translateX(0)}
+  50%{transform:translateX(6px)}
+}
+
+.ramadhan-header{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding:20px 15px;
+  margin:70px auto 15px;
+  max-width:320px;
+  background:linear-gradient(135deg, rgba(27,94,32,0.05) 0%, rgba(46,125,50,0.03) 100%);
+  border-radius:20px;
+  border:2px solid var(--gold);
+  box-shadow:0 4px 20px rgba(255,193,7,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  animation:fadeInDown 1.2s ease-out;
+}
+
+.ramadhan-header::before{
+  content:'';
+  position:absolute;
+  top:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:16px;
+  background:var(--gold);
+  border-radius:0 0 60px 60px;
+  box-shadow:0 0 15px rgba(255,193,7,0.5);
+}
+
+.ramadhan-header::after{
+  content:'';
+  position:absolute;
+  bottom:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:16px;
+  background:var(--gold);
+  border-radius:60px 60px 0 0;
+  box-shadow:0 0 15px rgba(255,193,7,0.5);
+}
+
+.header-corner{
+  position:absolute;
+  width:20px;
+  height:20px;
+  border:2px solid var(--gold);
+}
+.header-corner.tl{top:6px;left:6px;border-right:none;border-bottom:none;border-radius:8px 0 0 0;}
+.header-corner.tr{top:6px;right:6px;border-left:none;border-bottom:none;border-radius:0 8px 0 0;}
+.header-corner.bl{bottom:6px;left:6px;border-right:none;border-top:none;border-radius:0 0 0 8px;}
+.header-corner.br{bottom:6px;right:6px;border-left:none;border-top:none;border-radius:0 0 8px 0;}
+
+.header-title{
+  font-size:16px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:4px;
+  margin-bottom:8px;
+  text-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+
+.greeting-arabic{
+  font-family:var(--font-arabic);
+  font-size:16px;
+  color:var(--gold-light);
+  margin-bottom:4px;
+  text-shadow:0 0 8px rgba(255,193,7,0.5);
+  white-space:nowrap;
+}
+
+.greeting{
+  font-family:var(--font-arabic);
+  font-size:18px;
+  font-weight:700;
+  color:var(--gold);
+  text-shadow:0 0 10px rgba(255,193,7,0.6), 0 2px 2px rgba(0,0,0,0.3);
+  letter-spacing:1px;
+  white-space:nowrap;
+}
+
+.clock-container{
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,193,7,0.3);
+}
+.clock{
+  font-size:20px;
+  letter-spacing:2px;
+  color:var(--white);
+  text-shadow:0 0 10px rgba(255,193,7,0.5);
+}
+.clock-date{
+  font-size:11px;
+  margin-top:2px;
+  color:var(--gold-light);
+}
+
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-15px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.toolbar{
+  position:relative;
+  z-index:2;
+  max-width:480px;
+  margin:0 auto 12px;
+}
+
+.search-box{
+  display:flex;
+  align-items:center;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(8px);
+  border:2px solid var(--gold);
+  border-radius:30px;
+  padding:0 8px 0 16px;
+  position:relative;
+  box-shadow:0 4px 20px rgba(255,193,7,0.3);
+}
+
+.search-box #search{
+  flex:1;
+  border:none;
+  outline:none;
+  padding:12px 0;
+  font-size:14px;
+  background:transparent;
+  min-width:80px;
+  color:var(--text);
+}
+
+.separator{
+  width:1px;
+  height:21px;
+  background:var(--gold-light);
+  margin:0 10px;
+}
+
+.date-wrapper{
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+
+.date-placeholder{
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+  color:#999;
+  font-size:14px;
+  pointer-events:none;
+  transition:opacity 0.2s;
+  white-space:nowrap;
+}
+
+.date-wrapper.has-value .date-placeholder{
+  opacity:0;
+}
+
+.search-box #searchDate{
+  border:none;
+  outline:none;
+  padding:12px 0;
+  font-size:14px;
+  background:transparent;
+  width:120px;
+  cursor:pointer;
+  color:var(--text);
+  position:relative;
+  z-index:1;
+}
+
+.search-box button{
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border:none;
+  cursor:pointer;
+  padding:10px;
+  font-size:18px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 8px rgba(255,193,7,0.4);
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.search-box button:hover{
+  transform:scale(1.1);
+  box-shadow:0 4px 12px rgba(255,152,0,0.5);
+}
+
+#hasil{
+  position:relative;
+  z-index:2;
+  max-width:480px;
+  margin:0 auto;
+  color:var(--gold-light);
+  text-align:center;
+  font-size:14px;
+}
+
+.card{
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(8px);
+  border:1px solid var(--gold);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  position:relative;
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.card.selesai{
+  background:rgba(255,246,204,0.9);
+  border-color:var(--gold-dark);
+}
+
+.card.selesai::after{
+  content:"SELESAI";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:800;
+  color:rgba(160,120,0,.25);
+  transform:rotate(-20deg);
+  pointer-events:none;
+}
+
+.row{display:flex;justify-content:space-between;}
+.nama{font-size:16px;font-weight:700;color:var(--green-dark);}
+.mr{font-size:11px;color:#666;text-align:right;}
+.info{font-size:12px;line-height:1.6;margin-top:6px;color:var(--text);}
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  font-size:11px;
+  font-weight:700;
+  box-shadow:0 2px 6px rgba(27,127,95,0.3);
+}
+.countdown{
+  margin-top:6px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--green-dark);
+}
+
+.action-btn{
+  display:inline-block;
+  margin:4px 2px;
+  padding:5px 12px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  transition:transform 0.2s, box-shadow 0.2s;
+  text-decoration:none;
+}
+.action-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+.view-btn{
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  color:#fff;
+}
+.share-btn{
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color:#fff;
+}
+.pdf-btn{
+  background:linear-gradient(135deg, var(--print-color) 0%, #9c27b0 100%);
+  color:#fff;
+}
+
+/* ===== FLOATING SOCIAL FOOTER ===== */
+.social-footer{
+  position:fixed;
+  right:16px;
+  bottom:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  z-index:1000;
+}
+
+.tiktok-btn{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--tiktok-color);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,.4);
+  animation:pulseTiktok 2s infinite;
+  border:2px solid var(--gold);
+  transition:transform 0.2s;
+}
+.tiktok-btn:hover{
+  transform:scale(1.1);
+}
+.tiktok-btn svg{
+  width:22px;
+  height:22px;
+}
+
+@keyframes pulseTiktok{
+  0%{box-shadow:0 0 0 0 rgba(0,0,0,.6), 0 0 0 0 rgba(255,193,7,0.4);}
+  70%{box-shadow:0 0 0 10px rgba(0,0,0,0), 0 0 0 6px rgba(255,193,7,0);}
+  100%{box-shadow:0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(255,193,7,0);}
+}
+
+.wa-btn{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 20px rgba(37,211,102,.4);
+  animation:pulseWA 1.8s infinite;
+  border:2px solid var(--gold);
+  transition:transform 0.2s;
+}
+.wa-btn:hover{
+  transform:scale(1.1);
+}
+.wa-btn img{width:22px;height:22px;}
+
+.footer-text{
+  font-size:9px;
+  color:var(--gold-light);
+  text-shadow:0 1px 2px rgba(0,0,0,0.5);
+  white-space:nowrap;
+  opacity:0.8;
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  transform:rotate(180deg);
+  margin-top:4px;
+}
+
+@keyframes pulseWA{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.6), 0 0 0 0 rgba(255,193,7,0.4);}
+  70%{box-shadow:0 0 0 14px rgba(37,211,102,0), 0 0 0 8px rgba(255,193,7,0);}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0), 0 0 0 0 rgba(255,193,7,0);}
+}
+
+.wa-panel{
+  position:fixed;
+  right:16px;
+  bottom:140px;
+  width:220px;
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  border-radius:16px;
+  padding:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  border:1px solid var(--gold);
+  display:none;
+  z-index:1000;
+  animation:slideUp .25s ease;
+}
+.wa-panel.show{display:block;}
+
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+.wa-panel h4{
+  margin:0 0 8px;
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(255,193,7,0.3);
+  padding-bottom:6px;
+}
+.wa-panel a{
+  display:block;
+  text-decoration:none;
+  color:#fff;
+  font-size:12px;
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.15);
+  transition:padding-left 0.2s;
+}
+.wa-panel a:hover{padding-left:6px;}
+.wa-panel a:last-child{border:none;}
+
+/* ===== MODAL VIEW FULLSCREEN ===== */
+.modal-view{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+}
+.modal-view-content{
+  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  margin:20px auto;
+  padding:0;
+  border-radius:20px;
+  max-width:500px;
+  max-height:90vh;
+  overflow-y:auto;
+  border:3px solid var(--gold);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  animation:modalPop 0.3s ease;
+}
+
+@keyframes modalPop{
+  from{opacity:0;transform:scale(0.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.modal-view-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border-radius:17px 17px 0 0;
+  position:sticky;
+  top:0;
+  z-index:1;
+}
+.modal-view-header h4{
+  margin:0;
+  font-size:16px;
+  color:#fff;
+  text-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+.modal-view-close{
+  cursor:pointer;
+  font-size:24px;
+  font-weight:bold;
+  color:#fff;
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.2);
+  border-radius:50%;
+  transition:background 0.2s;
+}
+.modal-view-close:hover{
+  background:rgba(0,0,0,0.4);
+}
+
+.modal-view-body{
+  padding:20px;
+}
+
+.view-card{
+  background:rgba(255,255,255,0.95);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+.view-card-header{
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  padding:16px;
+  text-align:center;
+}
+
+.view-patient-name{
+  font-size:20px;
+  font-weight:700;
+  color:#fff;
+  margin:0;
+  text-shadow:0 2px 4px rgba(0,0,0,0.3);
+}
+
+.view-patient-mr{
+  font-size:12px;
+  color:rgba(255,255,255,0.9);
+  margin-top:4px;
+}
+
+.view-card-body{
+  padding:16px;
+}
+
+.view-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid rgba(0,0,0,0.08);
+}
+.view-item:last-child{
+  border-bottom:none;
+}
+
+.view-label{
+  font-size:13px;
+  color:#666;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.view-label-icon{
+  width:24px;
+  height:24px;
+  background:linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+}
+
+.view-value{
+  font-size:14px;
+  font-weight:600;
+  color:var(--green-dark);
+}
+
+.view-badge{
+  display:inline-block;
+  padding:6px 14px;
+  border-radius:20px;
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  box-shadow:0 3px 10px rgba(27,127,95,0.3);
+}
+
+.view-status{
+  text-align:center;
+  padding:12px;
+  background:linear-gradient(135deg, rgba(255,193,7,0.2) 0%, rgba(255,152,0,0.2) 100%);
+  border-radius:10px;
+  margin-top:12px;
+}
+
+.view-status-text{
+  font-size:12px;
+  font-weight:700;
+  color:var(--orange-dark);
+}
+
+.modal-view-footer{
+  padding:16px 20px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+
+.modal-view-footer .action-btn{
+  flex:1;
+  text-align:center;
+  padding:10px 16px;
+  font-size:12px;
+}
+
+/* ===== TOAST NOTIFICATION ===== */
+.toast{
+  position:fixed;
+  bottom:100px;
+  left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  padding:12px 24px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  z-index:3000;
+  opacity:0;
+  transition:all 0.3s ease;
+  border:2px solid var(--gold);
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+.ornament{
+  position:fixed;
+  bottom:90px;
+  font-size:18px;
+  opacity:0.4;
+  animation:float 4s ease-in-out infinite;
+  z-index:1;
+  pointer-events:none;
+}
+.ornament.left{left:12px; animation-delay:0s}
+.ornament.right{right:12px; animation-delay:2s}
+
+@keyframes float{
+  0%, 100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+@media (min-width:481px){
+  body{
+    max-width:500px;
+    margin:0 auto;
+    border-radius:0;
+  }
+}
+
+@media (max-width:360px){
+  .greeting{font-size:16px}
+  .greeting-arabic{font-size:14px}
+  .ramadhan-header{margin-top:60px;padding:15px 10px}
+  .header-title{font-size:13px}
+  .clock{font-size:18px}
+  .clock-date{font-size:10px}
+  .sun{width:50px;height:50px}
+  .moon{width:45px;height:45px}
+  .search-box #search{font-size:13px}
+  .search-box #searchDate{width:100px;font-size:13px}
+  .card{padding:12px}
+  .nama{font-size:15px}
+  .tiktok-btn, .wa-btn{width:42px;height:42px}
+  .tiktok-btn svg, .wa-btn img{width:20px;height:20px}
+  .footer-text{font-size:8px}
+  .modal-view-content{margin:10px;max-height:95vh}
+  .view-patient-name{font-size:18px}
+  .wa-panel{bottom:130px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- MATAHARI DENGAN AWAN -->
+<div class="sun-container">
+  <div class="sun"></div>
+  <div class="sun-cloud">
+    <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="30" cy="35" rx="25" ry="18"/>
+      <ellipse cx="55" cy="30" rx="30" ry="22"/>
+      <ellipse cx="75" cy="38" rx="20" ry="15"/>
+      <ellipse cx="45" cy="42" rx="22" ry="14"/>
+    </svg>
+  </div>
+</div>
+
+<!-- BULAN DENGAN AWAN -->
+<div class="moon-container">
+  <div class="moon">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
+    </svg>
+  </div>
+  <div class="moon-cloud">
+    <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="25" cy="32" rx="22" ry="16"/>
+      <ellipse cx="50" cy="28" rx="28" ry="20"/>
+      <ellipse cx="70" cy="35" rx="18" ry="13"/>
+    </svg>
+  </div>
+</div>
+
+<!-- HEADER RAMADHAN -->
+<div class="ramadhan-header">
+  <div class="header-corner tl"></div>
+  <div class="header-corner tr"></div>
+  <div class="header-corner bl"></div>
+  <div class="header-corner br"></div>
+  <div class="header-title">HD MALAHAYATI</div>
+  <div class="greeting-arabic">مَرْحَبًا يَا رَمَضَان</div>
+  <div class="greeting">Marhaban ya Ramadhan</div>
+  <div class="clock-container">
+    <div class="clock" id="clock">--:--:--</div>
+    <div class="clock-date" id="clockDate">--</div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="toolbar">
+  <div class="search-box">
+    <input id="search" placeholder="Cari Nama / MR / Ruang..." onkeyup="cari()">
+    <div class="separator"></div>
+    <div class="date-wrapper" id="dateWrapper">
+      <input type="date" id="searchDate" onchange="cari(); checkDate();">
+      <span class="date-placeholder">Filter Tanggal</span>
+    </div>
+    <button onclick="cari()">🔍</button>
+  </div>
+</div>
+
+<!-- HASIL -->
+<div id="hasil">Ketik minimal 2 karakter atau pilih tanggal</div>
+
+<!-- ORNAMEN -->
+<div class="ornament left">🌙</div>
+<div class="ornament right">⭐</div>
+
+<!-- FLOAT SOCIAL FOOTER -->
+<div class="social-footer">
+  <div class="footer-text">Created by Iman Waluyo</div>
+  <a href="https://www.tiktok.com/@malahayatirssa" target="_blank" class="tiktok-btn" title="TikTok Malahayati">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#fff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+    </svg>
+  </a>
+  <div class="wa-btn" onclick="toggleWA()" title="WhatsApp Perawat HD">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+  </div>
+</div>
+
+<div class="wa-panel" id="waPanel">
+  <h4>WA Perawat HD <span onclick="toggleWA()">✕</span></h4>
+  <a href="https://wa.me/6287812203039" target="_blank">Iman Waluyo</a>
+  <a href="https://wa.me/6287759964321" target="_blank">Cik Ros</a>
+  <a href="https://wa.me/6285732737585" target="_blank">Linda</a>
+  <a href="https://wa.me/6282335226625" target="_blank">Maria Wahyu</a>
+  <a href="https://wa.me/6281234028503" target="_blank">Findy A</a>
+  <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
+</div>
+
+<!-- MODAL VIEW FULLSCREEN -->
+<div id="modalView" class="modal-view">
+  <div class="modal-view-content">
+    <div class="modal-view-header">
+      <h4>Detail Jadwal Pasien</h4>
+      <span class="modal-view-close" onclick="closeViewModal()">✕</span>
+    </div>
+    <div class="modal-view-body" id="modalViewBody">
+      <!-- Content akan diisi oleh JavaScript -->
+    </div>
+    <div class="modal-view-footer" id="modalViewFooter">
+      <!-- Buttons akan diisi oleh JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">PDF berhasil disimpan!</div>
+
+<script>
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
+let data=[];
+let currentViewData = null;
+
+fetch(CSV_URL).then(r=>r.text()).then(t=>{
+  const rows=t.trim().split("\n");
+  rows.shift();
+  data=rows.map(r=>r.split(","));
+});
+
+function checkDate(){
+  const wrapper = document.getElementById('dateWrapper');
+  const input = document.getElementById('searchDate');
+  if(input.value){
+    wrapper.classList.add('has-value');
+  } else {
+    wrapper.classList.remove('has-value');
+  }
+}
+
+function parseTanggal(t){
+  const b={januari:0,februari:1,maret:2,april:3,mei:4,juni:5,juli:6,agustus:7,september:8,oktober:9,november:10,desember:11};
+  const p=t.toLowerCase().split(" ");
+  if(p.length < 3) return null;
+  return new Date(p[2],b[p[1]],p[0]);
+}
+
+function getTarget(t,s){
+  const d=parseTanggal(t);
+  if(!d) return new Date();
+  s=="1"?d.setHours(6,30,0,0):d.setHours(13,0,0,0);
+  return d;
+}
+
+function cari(){
+  const k = search.value.toLowerCase();
+  const dateInput = searchDate.value;
+  
+  checkDate();
+  
+  if(k.length < 2 && !dateInput){
+    hasil.innerHTML="Ketik minimal 2 karakter atau pilih tanggal";
+    return;
+  }
+
+  let out="";
+  
+  data.forEach((r, idx)=>{
+    let isTextMatch = true;
+    if(k.length >= 2) {
+      isTextMatch = r.join(" ").toLowerCase().includes(k);
+    }
+
+    let isDateMatch = true;
+    if(dateInput) {
+      const rowDate = parseTanggal(r[4]);
+      if(rowDate) {
+        const d = rowDate.getDate();
+        const m = rowDate.getMonth() + 1;
+        const y = rowDate.getFullYear();
+        const formattedRowDate = `${y}-${m < 10 ? '0' : ''}${m}-${d < 10 ? '0' : ''}${d}`;
+        isDateMatch = (formattedRowDate === dateInput);
+      } else {
+        isDateMatch = false;
+      }
+    }
+
+    if(isTextMatch && isDateMatch){
+      const target=getTarget(r[4],r[7]);
+      const selesai=new Date()>target;
+      const sisa=target-new Date();
+      
+      // Format Teks WhatsApp
+      const waText = 
+`*JADWAL PASIEN HD*
+====================
+*Nama*    : ${r[1]}
+*MR*      : XX${r[0].slice(-4)}
+*Ruang*   : ${r[2]}
+*Hari*    : ${r[3]}
+*Tanggal* : ${r[4]}
+*Bed*     : ${r[5]}
+*Tim*     : ${r[6]}
+*Shift*   : ${r[7]}
+*Jam*     : ${r[8]}
+====================
+_Info Jadwal HD Malahayati_`;
+
+      const waLinkSafe = `https://wa.me/?text=${encodeURIComponent(waText)}`;
+      
+      // Data untuk view dan PDF
+      const pData = {
+        nama: r[1],
+        mr: r[0],
+        ruang: r[2],
+        hari: r[3],
+        tanggal: r[4],
+        bed: r[5],
+        tim: r[6],
+        shift: r[7],
+        jam: r[8],
+        selesai: selesai,
+        sisa: sisa
+      };
+      const pDataStr = encodeURIComponent(JSON.stringify(pData));
+
+      out+=`
+      <div class="card ${selesai?'selesai':''}">
+        <div class="row">
+          <div class="nama">${r[1]}</div>
+          <div class="mr">MR<br><b>XX${r[0].slice(-4)}</b></div>
+        </div>
+        <div class="info">
+          Ruang: ${r[2]}<br>
+          Hari: ${r[3]}<br>
+          Tanggal: ${r[4]}<br>
+          Bed: ${r[5]}<br>
+          Tim: ${r[6]}<br>
+          <span class="badge">Shift ${r[7]}</span>
+          ${(!selesai && sisa>0)?`<div class="countdown">Mulai dalam ${Math.floor(sisa/3600000)} jam</div>`:""}
+          Jam: ${r[8]}<br>
+          <div style="margin-top:8px;">
+            <button class="action-btn view-btn" onclick='openViewModal(decodeURIComponent("${pDataStr}"))'>View Hasil</button>
+            <a href="${waLinkSafe}" target="_blank" class="action-btn share-btn">Share WA</a>
+            <button class="action-btn pdf-btn" onclick='saveToPDF(decodeURIComponent("${pDataStr}"))'>Simpan PDF</button>
+          </div>
+        </div>
+      </div>`;
+    }
+  });
+  hasil.innerHTML = out || "Data tidak ditemukan";
+}
+
+// ===== FUNGSI VIEW MODAL =====
+function openViewModal(dataStr){
+  try {
+    const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
+    currentViewData = pData;
+    
+    const statusText = pData.selesai ? 'Sudah Selesai' : 
+      (pData.sisa > 0 ? `Dimulai dalam ${Math.floor(pData.sisa/3600000)} jam ${Math.floor((pData.sisa%3600000)/60000)} menit` : 'Sedang Berlangsung');
+    
+    const bodyHtml = `
+    <div class="view-card">
+      <div class="view-card-header">
+        <h3 class="view-patient-name">${pData.nama}</h3>
+        <div class="view-patient-mr">MR: XX${pData.mr.slice(-4)}</div>
+      </div>
+      <div class="view-card-body">
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">🏥</span>
+            Ruang
+          </span>
+          <span class="view-value">${pData.ruang}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">📅</span>
+            Hari
+          </span>
+          <span class="view-value">${pData.hari}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">📆</span>
+            Tanggal
+          </span>
+          <span class="view-value">${pData.tanggal}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">🛏️</span>
+            Bed
+          </span>
+          <span class="view-value">${pData.bed}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">👥</span>
+            Tim
+          </span>
+          <span class="view-value">${pData.tim}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">⏰</span>
+            Shift
+          </span>
+          <span class="view-badge">Shift ${pData.shift}</span>
+        </div>
+        <div class="view-item">
+          <span class="view-label">
+            <span class="view-label-icon">🕐</span>
+            Jam
+          </span>
+          <span class="view-value">${pData.jam}</span>
+        </div>
+        <div class="view-status">
+          <div class="view-status-text">${statusText}</div>
+        </div>
+      </div>
+    </div>`;
+    
+    document.getElementById('modalViewBody').innerHTML = bodyHtml;
+    
+    // Footer buttons
+    const waText = `*JADWAL PASIEN HD*\n====================\n*Nama*    : ${pData.nama}\n*MR*      : XX${pData.mr.slice(-4)}\n*Ruang*   : ${pData.ruang}\n*Hari*    : ${pData.hari}\n*Tanggal* : ${pData.tanggal}\n*Bed*     : ${pData.bed}\n*Tim*     : ${pData.tim}\n*Shift*   : ${pData.shift}\n*Jam*     : ${pData.jam}\n====================\n_Info Jadwal HD Malahayati_`;
+    const waLink = `https://wa.me/?text=${encodeURIComponent(waText)}`;
+    
+    const footerHtml = `
+      <a href="${waLink}" target="_blank" class="action-btn share-btn">Share WA</a>
+      <button class="action-btn pdf-btn" onclick='saveToPDF(currentViewData)'>Simpan PDF</button>
+    `;
+    document.getElementById('modalViewFooter').innerHTML = footerHtml;
+    
+    document.getElementById('modalView').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+  } catch(e) {
+    console.error('Error opening view modal:', e);
+  }
+}
+
+function closeViewModal(){
+  document.getElementById('modalView').style.display = 'none';
+  document.body.style.overflow = '';
+  currentViewData = null;
+}
+
+// ===== FUNGSI SIMPAN PDF =====
+function saveToPDF(dataStr){
+  try {
+    const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a6'
+    });
+    
+    // Background header
+    doc.setFillColor(46, 125, 50);
+    doc.rect(0, 0, 105, 35, 'F');
+    
+    // Border decoration
+    doc.setDrawColor(255, 193, 7);
+    doc.setLineWidth(1);
+    doc.rect(3, 3, 99, 141);
+    
+    // Header text
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('JADWAL HEMODIALISA', 52.5, 12, { align: 'center' });
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('RSUD MALAHAYATI', 52.5, 20, { align: 'center' });
+    
+    // Gold line
+    doc.setDrawColor(255, 193, 7);
+    doc.setLineWidth(0.5);
+    doc.line(15, 25, 90, 25);
+    
+    // Patient name box
+    doc.setFillColor(232, 245, 233);
+    doc.roundedRect(8, 38, 89, 22, 3, 3, 'F');
+    
+    doc.setTextColor(27, 94, 32);
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.text(pData.nama, 52.5, 48, { align: 'center' });
+    
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(102, 102, 102);
+    doc.text('No. MR: XX' + pData.mr.slice(-4), 52.5, 56, { align: 'center' });
+    
+    // Info section
+    let yPos = 68;
+    const leftCol = 12;
+    
+    const infoItems = [
+      { label: 'Ruang', value: pData.ruang },
+      { label: 'Hari', value: pData.hari },
+      { label: 'Tanggal', value: pData.tanggal },
+      { label: 'Bed', value: pData.bed },
+      { label: 'Tim', value: pData.tim },
+      { label: 'Shift', value: 'Shift ' + pData.shift },
+      { label: 'Jam', value: pData.jam }
+    ];
+    
+    infoItems.forEach((item, idx) => {
+      // Label
+      doc.setTextColor(102, 102, 102);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.text(item.label, leftCol, yPos);
+      
+      // Separator
+      doc.text(':', leftCol + 20, yPos);
+      
+      // Value
+      doc.setTextColor(27, 27, 27);
+      doc.setFont('helvetica', 'bold');
+      doc.text(item.value, leftCol + 23, yPos);
+      
+      yPos += 9;
+    });
+    
+    // Footer
+    doc.setDrawColor(76, 175, 80);
+    doc.setLineWidth(0.3);
+    doc.line(15, 132, 90, 132);
+    
+    doc.setTextColor(136, 136, 136);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('HD Malahayati - Jadwal Pasien', 52.5, 137, { align: 'center' });
+    doc.text('Dicetak: ' + new Date().toLocaleString('id-ID'), 52.5, 142, { align: 'center' });
+    
+    // Generate filename (safe)
+    const safeName = pData.nama.replace(/[^a-zA-Z0-9]/g, '_');
+    const safeDate = pData.tanggal.replace(/[^a-zA-Z0-9]/g, '_');
+    const fileName = `JadwalHD_${safeName}_${safeDate}.pdf`;
+    
+    // Save PDF
+    doc.save(fileName);
+    
+    // Show toast
+    showToast('PDF berhasil disimpan!');
+    
+  } catch(e) {
+    console.error('Error saving PDF:', e);
+    alert('Gagal menyimpan PDF: ' + e.message);
+  }
+}
+
+// ===== TOAST NOTIFICATION =====
+function showToast(message){
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+function toggleWA(){waPanel.classList.toggle("show");}
+
+// Close modal when clicking outside
+document.getElementById('modalView').addEventListener('click', function(e) {
+  if(e.target === this) {
+    closeViewModal();
+  }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape') {
+    closeViewModal();
+  }
+});
+
+/* ===== CLOCK REALTIME ===== */
+(function(){
+  const c=document.getElementById('clock');
+  const d=document.getElementById('clockDate');
+  function tick(){
+    const n=new Date();
+    c.textContent=n.toLocaleTimeString('id-ID',{hour12:false});
+    d.textContent=n.toLocaleDateString('id-ID',{
+      weekday:'long',day:'numeric',month:'long',year:'numeric'
+    });
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+</script>
+
+</body>
+</html> 
