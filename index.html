@@ -7,6 +7,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 
 <style>
 :root{
@@ -571,6 +572,10 @@ body{
   background:linear-gradient(135deg, var(--tel-color) 0%, #2e7d32 100%);
   color:#fff;
 }
+.pdf-btn{
+  background:linear-gradient(135deg, #e53935 0%, #c62828 100%);
+  color:#fff;
+}
 
 /* ===== FLOATING SOCIAL FOOTER ===== */
 .social-footer{
@@ -926,6 +931,11 @@ body{
   font-size:14px;
 }
 
+.btn-save:disabled{
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
 /* ===== MODAL VIEW ===== */
 .modal-view{
   display:none;
@@ -1127,6 +1137,15 @@ body{
   color:var(--green-dark);
 }
 
+.history-actions{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
 .history-empty{
   text-align:center;
   padding:40px;
@@ -1171,6 +1190,21 @@ body{
 @keyframes float{
   0%, 100%{transform:translateY(0)}
   50%{transform:translateY(-6px)}
+}
+
+/* ===== LOADING ===== */
+.loading-spinner{
+  display:inline-block;
+  width:16px;
+  height:16px;
+  border:2px solid rgba(255,255,255,0.3);
+  border-radius:50%;
+  border-top-color:#fff;
+  animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
 }
 
 @media (min-width:481px){
@@ -1397,6 +1431,9 @@ body{
     <div class="modal-record-body">
       <div class="record-card">
         <h3 id="recordPatientName">-</h3>
+        <div style="text-align:center; font-size:12px; color:#666; margin-bottom:15px;">
+          MR: <span id="recordMRDisplay">-</span>
+        </div>
         <input type="hidden" id="recordMR">
         <input type="hidden" id="recordNama">
         
@@ -1434,7 +1471,7 @@ body{
           <input type="text" id="inputCatatan" placeholder="Catatan tambahan">
         </div>
         
-        <button class="btn-save" onclick="simpanRecord()">SIMPAN PENCATATAN</button>
+        <button class="btn-save" id="btnSimpanRecord" onclick="simpanRecord()">SIMPAN PENCATATAN</button>
       </div>
     </div>
   </div>
@@ -1468,6 +1505,40 @@ body{
 <script>
 // ===== VARIABEL GLOBAL =====
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
+
+// URL Google Apps Script Web App - GANTI DENGAN URL DEPLOYMENT ANDA
+// Cara: Buka Google Spreadsheet -> Extensions -> Apps Script -> Copy paste kode di bawah -> Deploy -> New Deployment -> Web App
+/*
+ * KODE GOOGLE APPS SCRIPT:
+ * 
+ * function doPost(e) {
+ *   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+ *   try {
+ *     var data = JSON.parse(e.postData.contents);
+ *     sheet.appendRow([
+ *       data.timestamp,
+ *       data.tanggal,
+ *       data.waktu,
+ *       data.mr,
+ *       data.namaPasien,
+ *       data.bbSebelum,
+ *       data.tdSebelum,
+ *       data.bbSesudah,
+ *       data.tdSesudah,
+ *       data.obat,
+ *       data.catatan,
+ *       data.petugas
+ *     ]);
+ *     return ContentService.createTextOutput(JSON.stringify({result: 'success'}))
+ *       .setMimeType(ContentService.MimeType.JSON);
+ *   } catch(error) {
+ *     return ContentService.createTextOutput(JSON.stringify({result: 'error', message: error.toString()}))
+ *       .setMimeType(ContentService.MimeType.JSON);
+ *   }
+ * }
+ */
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec"; // GANTI INI
+
 let dataPasien = [];
 let currentUser = null;
 let currentViewData = null;
@@ -1761,7 +1832,6 @@ function cari() {
             <a href="https://wa.me/?text=${shareTextEncoded}" target="_blank" class="action-btn wa-share-btn">WA</a>
             <a href="https://t.me/share/url?url=&text=${shareTextEncoded}" target="_blank" class="action-btn tg-share-btn">Telegram</a>
             <a href="sms:?body=${shareTextEncoded}" class="action-btn sms-btn">SMS</a>
-            <a href="tel:" class="action-btn tel-btn">Telepon</a>
           </div>
         </div>
       </div>`;
@@ -1777,6 +1847,7 @@ function openRecordModal(dataStr) {
     const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
     
     document.getElementById('recordPatientName').textContent = pData.nama;
+    document.getElementById('recordMRDisplay').textContent = 'XX' + pData.mr.slice(-4);
     document.getElementById('recordMR').value = pData.mr;
     document.getElementById('recordNama').value = pData.nama;
     
@@ -1801,8 +1872,12 @@ function closeRecordModal() {
 }
 
 // ===== SIMPAN RECORD =====
-function simpanRecord() {
+async function simpanRecord() {
+  const btn = document.getElementById('btnSimpanRecord');
+  const originalText = btn.innerHTML;
+  
   const record = {
+    timestamp: new Date().toISOString(),
     tanggal: new Date().toLocaleDateString('id-ID'),
     waktu: new Date().toLocaleTimeString('id-ID'),
     mr: document.getElementById('recordMR').value,
@@ -1813,8 +1888,7 @@ function simpanRecord() {
     tdSesudah: document.getElementById('inputTDSesudah').value,
     obat: document.getElementById('inputObat').value,
     catatan: document.getElementById('inputCatatan').value,
-    petugas: currentUser.name,
-    timestamp: Date.now()
+    petugas: currentUser.name
   };
   
   // Validasi minimal
@@ -1823,20 +1897,63 @@ function simpanRecord() {
     return;
   }
   
-  // Save to localStorage per user
-  const historyKey = 'hdAppHistory_' + currentUser.username;
-  let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-  history.unshift(record);
+  // Show loading
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading-spinner"></span> Menyimpan...';
   
-  // Keep only last 100 records
-  if (history.length > 100) {
-    history = history.slice(0, 100);
+  try {
+    // Kirim ke Google Spreadsheet via Apps Script
+    const response = await fetch(GAS_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Required for Apps Script
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(record)
+    });
+    
+    // Save to localStorage as backup
+    const historyKey = 'hdAppHistory_' + currentUser.username;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    history.unshift({
+      ...record,
+      localId: Date.now()
+    });
+    
+    // Keep only last 100 records
+    if (history.length > 100) {
+      history = history.slice(0, 100);
+    }
+    
+    localStorage.setItem(historyKey, JSON.stringify(history));
+    
+    closeRecordModal();
+    showToast('Pencatatan berhasil disimpan');
+    
+  } catch (error) {
+    console.error('Error saving record:', error);
+    
+    // Save to localStorage only if failed
+    const historyKey = 'hdAppHistory_' + currentUser.username;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    history.unshift({
+      ...record,
+      localId: Date.now(),
+      syncStatus: 'pending'
+    });
+    
+    if (history.length > 100) {
+      history = history.slice(0, 100);
+    }
+    
+    localStorage.setItem(historyKey, JSON.stringify(history));
+    
+    closeRecordModal();
+    showToast('Disimpan lokal (gagal sync ke server)');
   }
   
-  localStorage.setItem(historyKey, JSON.stringify(history));
-  
-  closeRecordModal();
-  showToast('Pencatatan berhasil disimpan');
+  btn.disabled = false;
+  btn.innerHTML = originalText;
 }
 
 // ===== MODAL VIEW =====
@@ -1893,7 +2010,6 @@ function openViewModal(dataStr) {
           <a href="https://wa.me/?text=${shareTextEncoded}" target="_blank" class="action-btn wa-share-btn">Share WA</a>
           <a href="https://t.me/share/url?url=&text=${shareTextEncoded}" target="_blank" class="action-btn tg-share-btn">Telegram</a>
           <a href="sms:?body=${shareTextEncoded}" class="action-btn sms-btn">SMS</a>
-          <a href="tel:" class="action-btn tel-btn">Telepon</a>
         </div>
       </div>
     </div>`;
@@ -1956,6 +2072,10 @@ function openHistoryModal() {
         </div>
         ${item.obat ? `<div style="margin-top:8px; font-size:11px; color:#666;"><strong>Obat:</strong> ${item.obat}</div>` : ''}
         ${item.catatan ? `<div style="margin-top:4px; font-size:11px; color:#666;"><strong>Catatan:</strong> ${item.catatan}</div>` : ''}
+        <div class="history-actions">
+          <button class="action-btn pdf-btn" onclick="generatePDF(${idx})">📄 Cetak PDF</button>
+          <button class="action-btn wa-share-btn" onclick="shareViaWA(${idx})">📱 Kirim WA</button>
+        </div>
       </div>`;
     });
   }
@@ -1968,6 +2088,146 @@ function openHistoryModal() {
 function closeHistoryModal() {
   document.getElementById('modalHistory').classList.remove('show');
   document.body.style.overflow = '';
+}
+
+// ===== GENERATE PDF =====
+function generatePDF(idx) {
+  const historyKey = 'hdAppHistory_' + currentUser.username;
+  const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+  
+  if (!history[idx]) {
+    showToast('Data tidak ditemukan');
+    return;
+  }
+  
+  const item = history[idx];
+  
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  
+  // Header
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('CATATAN HEMODIALISA', 105, 20, { align: 'center' });
+  
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text('RS Malahayati', 105, 28, { align: 'center' });
+  
+  // Line
+  doc.setLineWidth(0.5);
+  doc.line(20, 35, 190, 35);
+  
+  // Patient Info
+  doc.setFontSize(11);
+  let y = 45;
+  
+  doc.setFont('helvetica', 'bold');
+  doc.text('Data Pasien:', 20, y);
+  y += 8;
+  
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Nama: ${item.namaPasien}`, 25, y);
+  y += 6;
+  doc.text(`No. MR: XX${item.mr.slice(-4)}`, 25, y);
+  y += 6;
+  doc.text(`Tanggal: ${item.tanggal}`, 25, y);
+  y += 6;
+  doc.text(`Waktu: ${item.waktu}`, 25, y);
+  y += 6;
+  doc.text(`Petugas: ${item.petugas}`, 25, y);
+  y += 15;
+  
+  // Table Data
+  doc.setFont('helvetica', 'bold');
+  doc.text('Data Pencatatan:', 20, y);
+  y += 8;
+  
+  doc.autoTable({
+    startY: y,
+    head: [['Parameter', 'Sebelum HD', 'Sesudah HD']],
+    body: [
+      ['Berat Badan (kg)', item.bbSebelum || '-', item.bbSesudah || '-'],
+      ['Tekanan Darah (mmHg)', item.tdSebelum || '-', item.tdSesudah || '-']
+    ],
+    theme: 'grid',
+    headStyles: { fillColor: [46, 125, 50] },
+    margin: { left: 20, right: 20 }
+  });
+  
+  y = doc.lastAutoTable.finalY + 15;
+  
+  // Obat & Catatan
+  if (item.obat) {
+    doc.setFont('helvetica', 'bold');
+    doc.text('Obat-obatan:', 20, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    const obatLines = doc.splitTextToSize(item.obat, 170);
+    doc.text(obatLines, 25, y);
+    y += (obatLines.length * 5) + 5;
+  }
+  
+  if (item.catatan) {
+    doc.setFont('helvetica', 'bold');
+    doc.text('Catatan:', 20, y);
+    y += 6;
+    doc.setFont('helvetica', 'normal');
+    const catatanLines = doc.splitTextToSize(item.catatan, 170);
+    doc.text(catatanLines, 25, y);
+  }
+  
+  // Footer
+  const pageHeight = doc.internal.pageSize.height;
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'italic');
+  doc.text(`Dicetak pada: ${new Date().toLocaleString('id-ID')}`, 105, pageHeight - 10, { align: 'center' });
+  
+  // Save
+  const fileName = `HD_${item.namaPasien.replace(/\s+/g, '_')}_${item.tanggal.replace(/\//g, '-')}.pdf`;
+  doc.save(fileName);
+  
+  showToast('PDF berhasil diunduh');
+}
+
+// ===== SHARE VIA WA =====
+function shareViaWA(idx) {
+  const historyKey = 'hdAppHistory_' + currentUser.username;
+  const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+  
+  if (!history[idx]) {
+    showToast('Data tidak ditemukan');
+    return;
+  }
+  
+  const item = history[idx];
+  
+  const text = `*CATATAN HEMODIALISA*
+RS Malahayati
+==================
+Nama: ${item.namaPasien}
+MR: XX${item.mr.slice(-4)}
+Tanggal: ${item.tanggal}
+Waktu: ${item.waktu}
+Petugas: ${item.petugas}
+------------------
+*Sebelum HD:*
+BB: ${item.bbSebelum || '-'} kg
+TD: ${item.tdSebelum || '-'} mmHg
+
+*Sesudah HD:*
+BB: ${item.bbSesudah || '-'} kg
+TD: ${item.tdSesudah || '-'} mmHg
+------------------
+*Obat:* ${item.obat || '-'}
+*Catatan:* ${item.catatan || '-'}
+==================
+_Dicetak dari Aplikasi HD Malahayati_`;
+
+  const encodedText = encodeURIComponent(text);
+  const waUrl = `https://wa.me/?text=${encodedText}`;
+  
+  window.open(waUrl, '_blank');
 }
 
 // ===== TOAST =====
