@@ -2108,11 +2108,15 @@ function generatePDF(idx) {
   // Header
   doc.setFontSize(16);
   doc.setFont('helvetica', 'bold');
-  doc.text('CATATAN HEMODIALISA', 105, 20, { align: 'center' });
+  doc.text('CATATAN HARIAN HEMODIALISA', 105, 20, { align: 'center' });
+
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  doc.text('INSTALASI DIALISIS RSSA', 105, 28, { align: 'center' });
   
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  doc.text('RS Malahayati', 105, 28, { align: 'center' });
+  doc.text('Ruang HD Malahayati', 105, 28, { align: 'center' });
   
   // Line
   doc.setLineWidth(0.5);
