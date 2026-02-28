@@ -576,6 +576,10 @@ body{
   background:linear-gradient(135deg, #e53935 0%, #c62828 100%);
   color:#fff;
 }
+.delete-btn{
+  background:linear-gradient(135deg, #757575 0%, #424242 100%);
+  color:#fff;
+}
 
 /* ===== FLOATING SOCIAL FOOTER ===== */
 .social-footer{
@@ -751,7 +755,7 @@ body{
   margin-bottom:4px;
 }
 
-.login-form input{
+.login-form input, .login-form select{
   width:100%;
   padding:10px;
   border:2px solid var(--gold);
@@ -761,7 +765,7 @@ body{
   color:var(--text);
 }
 
-.login-form input:focus{
+.login-form input:focus, .login-form select:focus{
   outline:none;
   border-color:var(--orange);
 }
@@ -890,7 +894,7 @@ body{
   margin-bottom:4px;
 }
 
-.input-group input, .input-group textarea{
+.input-group input, .input-group textarea, .input-group select{
   width:100%;
   padding:10px;
   border:1px solid #ddd;
@@ -898,7 +902,7 @@ body{
   font-size:14px;
 }
 
-.input-group input:focus, .input-group textarea:focus{
+.input-group input:focus, .input-group textarea:focus, .input-group select:focus{
   outline:none;
   border-color:var(--gold);
 }
@@ -1124,6 +1128,10 @@ body{
   background:rgba(255,193,7,0.1);
   padding:8px;
   border-radius:8px;
+}
+
+.history-data-item.full-width{
+  grid-column: span 2;
 }
 
 .history-data-item label{
@@ -1461,6 +1469,24 @@ body{
           </div>
         </div>
         
+        <div class="section-title">Data Tambahan</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Golongan Darah</label>
+            <select id="inputGolonganDarah">
+              <option value="">- Pilih -</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="AB">AB</option>
+              <option value="O">O</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Tinggi Badan (cm)</label>
+            <input type="number" id="inputTinggiBadan" placeholder="Contoh: 165" step="0.1">
+          </div>
+        </div>
+        
         <div class="section-title">Tambahan</div>
         <div class="input-group">
           <label>Obat-obatan</label>
@@ -1506,38 +1532,8 @@ body{
 // ===== VARIABEL GLOBAL =====
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
 
-// URL Google Apps Script Web App - GANTI DENGAN URL DEPLOYMENT ANDA
-// Cara: Buka Google Spreadsheet -> Extensions -> Apps Script -> Copy paste kode di bawah -> Deploy -> New Deployment -> Web App
-/*
- * KODE GOOGLE APPS SCRIPT:
- * 
- * function doPost(e) {
- *   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
- *   try {
- *     var data = JSON.parse(e.postData.contents);
- *     sheet.appendRow([
- *       data.timestamp,
- *       data.tanggal,
- *       data.waktu,
- *       data.mr,
- *       data.namaPasien,
- *       data.bbSebelum,
- *       data.tdSebelum,
- *       data.bbSesudah,
- *       data.tdSesudah,
- *       data.obat,
- *       data.catatan,
- *       data.petugas
- *     ]);
- *     return ContentService.createTextOutput(JSON.stringify({result: 'success'}))
- *       .setMimeType(ContentService.MimeType.JSON);
- *   } catch(error) {
- *     return ContentService.createTextOutput(JSON.stringify({result: 'error', message: error.toString()}))
- *       .setMimeType(ContentService.MimeType.JSON);
- *   }
- * }
- */
-const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec"; // GANTI INI
+// URL Google Apps Script Web App
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec"; 
 
 let dataPasien = [];
 let currentUser = null;
@@ -1607,7 +1603,6 @@ function doRegister() {
   
   const errorEl = document.getElementById('registerError');
   
-  // Validasi
   if (!name || !ttl || !alamat || !username || !password || !confirm) {
     errorEl.textContent = 'Semua field harus diisi!';
     errorEl.style.display = 'block';
@@ -1626,7 +1621,6 @@ function doRegister() {
     return;
   }
   
-  // Cek username sudah ada atau belum
   const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
   
   if (registeredUsers.find(u => u.username === username)) {
@@ -1635,7 +1629,6 @@ function doRegister() {
     return;
   }
   
-  // Simpan user baru
   const newUser = {
     username: username,
     password: password,
@@ -1647,11 +1640,8 @@ function doRegister() {
   registeredUsers.push(newUser);
   localStorage.setItem('hdAppRegisteredUsers', JSON.stringify(registeredUsers));
   
-  // Sukses, kembali ke login
   showToast('Pendaftaran berhasil! Silakan login.');
   showLogin();
-  
-  // Pre-fill username
   document.getElementById('loginUsername').value = username;
 }
 
@@ -1660,11 +1650,9 @@ function doLogin() {
   const username = document.getElementById('loginUsername').value.trim().toLowerCase();
   const password = document.getElementById('loginPassword').value;
   
-  // Cek di registered users (localStorage)
   const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
   let user = registeredUsers.find(u => u.username === username && u.password === password);
   
-  // Jika tidak ketemu, cek default users
   if (!user) {
     const defaultUsers = [
       { username: "iman", password: "123456", name: "Iman Waluyo", ttl: "Bandung, 01-01-1990", alamat: "Bandung" },
@@ -1805,7 +1793,6 @@ function cari() {
       };
       const pDataStr = encodeURIComponent(JSON.stringify(pData));
       
-      // Buat teks share
       const shareText = `*JADWAL PASIEN HD*\n====================\nNama: ${r[1]}\nMR: XX${r[0].slice(-4)}\nRuang: ${r[2]}\nHari: ${r[3]}\nTanggal: ${r[4]}\nBed: ${r[5]}\nTim: ${r[6]}\nShift: ${r[7]}\nJam: ${r[8]}\n====================\n_Info Jadwal HD Malahayati_`;
       const shareTextEncoded = encodeURIComponent(shareText);
 
@@ -1856,6 +1843,8 @@ function openRecordModal(dataStr) {
     document.getElementById('inputTDSebelum').value = '';
     document.getElementById('inputBBSesudah').value = '';
     document.getElementById('inputTDSesudah').value = '';
+    document.getElementById('inputGolonganDarah').value = '';
+    document.getElementById('inputTinggiBadan').value = '';
     document.getElementById('inputObat').value = '';
     document.getElementById('inputCatatan').value = '';
     
@@ -1886,13 +1875,15 @@ async function simpanRecord() {
     tdSebelum: document.getElementById('inputTDSebelum').value,
     bbSesudah: document.getElementById('inputBBSesudah').value,
     tdSesudah: document.getElementById('inputTDSesudah').value,
+    golonganDarah: document.getElementById('inputGolonganDarah').value,
+    tinggiBadan: document.getElementById('inputTinggiBadan').value,
     obat: document.getElementById('inputObat').value,
     catatan: document.getElementById('inputCatatan').value,
     petugas: currentUser.name
   };
   
   // Validasi minimal
-  if (!record.bbSebelum && !record.tdSebelum && !record.bbSesudah && !record.tdSesudah) {
+  if (!record.bbSebelum && !record.tdSebelum && !record.bbSesudah && !record.tdSesudah && !record.golonganDarah && !record.tinggiBadan) {
     showToast('Isi minimal satu data pencatatan');
     return;
   }
@@ -1903,28 +1894,19 @@ async function simpanRecord() {
   
   try {
     // Kirim ke Google Spreadsheet via Apps Script
-    const response = await fetch(GAS_WEBAPP_URL, {
+    await fetch(GAS_WEBAPP_URL, {
       method: 'POST',
-      mode: 'no-cors', // Required for Apps Script
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(record)
     });
     
-    // Save to localStorage as backup
+    // Save to localStorage as backup/history
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({
-      ...record,
-      localId: Date.now()
-    });
+    history.unshift({ ...record, localId: Date.now() });
     
-    // Keep only last 100 records
-    if (history.length > 100) {
-      history = history.slice(0, 100);
-    }
-    
+    if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     
     closeRecordModal();
@@ -1936,16 +1918,9 @@ async function simpanRecord() {
     // Save to localStorage only if failed
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({
-      ...record,
-      localId: Date.now(),
-      syncStatus: 'pending'
-    });
+    history.unshift({ ...record, localId: Date.now(), syncStatus: 'pending' });
     
-    if (history.length > 100) {
-      history = history.slice(0, 100);
-    }
-    
+    if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     
     closeRecordModal();
@@ -2069,12 +2044,21 @@ function openHistoryModal() {
             <label>TD Sesudah</label>
             <span>${item.tdSesudah || '-'} mmHg</span>
           </div>
+          <div class="history-data-item">
+            <label>Gol. Darah</label>
+            <span>${item.golonganDarah || '-'}</span>
+          </div>
+          <div class="history-data-item">
+            <label>Tinggi Badan</label>
+            <span>${item.tinggiBadan || '-'} cm</span>
+          </div>
         </div>
         ${item.obat ? `<div style="margin-top:8px; font-size:11px; color:#666;"><strong>Obat:</strong> ${item.obat}</div>` : ''}
         ${item.catatan ? `<div style="margin-top:4px; font-size:11px; color:#666;"><strong>Catatan:</strong> ${item.catatan}</div>` : ''}
         <div class="history-actions">
           <button class="action-btn pdf-btn" onclick="generatePDF(${idx})">📄 Cetak PDF</button>
           <button class="action-btn wa-share-btn" onclick="shareViaWA(${idx})">📱 Kirim WA</button>
+          <button class="action-btn delete-btn" onclick="deleteHistory(${idx})">🗑️ Hapus</button>
         </div>
       </div>`;
     });
@@ -2088,6 +2072,21 @@ function openHistoryModal() {
 function closeHistoryModal() {
   document.getElementById('modalHistory').classList.remove('show');
   document.body.style.overflow = '';
+}
+
+// ===== DELETE HISTORY =====
+function deleteHistory(idx) {
+  if (confirm('Yakin ingin menghapus riwayat ini?')) {
+    const historyKey = 'hdAppHistory_' + currentUser.username;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    
+    if (idx > -1 && idx < history.length) {
+      history.splice(idx, 1);
+      localStorage.setItem(historyKey, JSON.stringify(history));
+      openHistoryModal(); // Refresh modal
+      showToast('Riwayat berhasil dihapus');
+    }
+  }
 }
 
 // ===== GENERATE PDF =====
@@ -2130,6 +2129,10 @@ function generatePDF(idx) {
   doc.text(`Nama: ${item.namaPasien}`, 25, y);
   y += 6;
   doc.text(`No. MR: XX${item.mr.slice(-4)}`, 25, y);
+  y += 6;
+  doc.text(`Golongan Darah: ${item.golonganDarah || '-'}`, 25, y);
+  y += 6;
+  doc.text(`Tinggi Badan: ${item.tinggiBadan || '-'} cm`, 25, y);
   y += 6;
   doc.text(`Tanggal: ${item.tanggal}`, 25, y);
   y += 6;
@@ -2207,6 +2210,8 @@ RS Malahayati
 ==================
 Nama: ${item.namaPasien}
 MR: XX${item.mr.slice(-4)}
+Golongan Darah: ${item.golonganDarah || '-'}
+Tinggi Badan: ${item.tinggiBadan || '-'} cm
 Tanggal: ${item.tanggal}
 Waktu: ${item.waktu}
 Petugas: ${item.petugas}
