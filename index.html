@@ -296,11 +296,16 @@ body{
   gap:10px;
   color:var(--gold-light);
   font-size:13px;
+  cursor:pointer;
+}
+
+.user-avatar-container{
+  position:relative;
 }
 
 .user-avatar{
-  width:36px;
-  height:36px;
+  width:40px;
+  height:40px;
   background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
   border-radius:50%;
   display:flex;
@@ -309,6 +314,40 @@ body{
   font-size:16px;
   font-weight:700;
   color:var(--green-dark);
+  overflow:hidden;
+  border:2px solid var(--gold-light);
+}
+
+.user-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.edit-avatar-btn{
+  position:absolute;
+  bottom:-2px;
+  right:-2px;
+  width:18px;
+  height:18px;
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--gold);
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+
+.edit-avatar-btn:hover{
+  transform:scale(1.1);
+}
+
+.edit-avatar-btn svg{
+  width:10px;
+  height:10px;
+  fill:#fff;
 }
 
 .user-name{
@@ -581,6 +620,11 @@ body{
   background:linear-gradient(135deg, #757575 0%, #424242 100%);
   color:#fff;
 }
+.add-btn{
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  border:1px solid var(--gold);
+}
 
 /* ===== FLOATING SOCIAL FOOTER ===== */
 .social-footer{
@@ -833,6 +877,188 @@ body{
   font-weight:700;
 }
 
+/* ===== MODAL EDIT PROFILE ===== */
+.modal-profile{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+  align-items:center;
+  justify-content:center;
+  overflow-y:auto;
+  padding:20px 0;
+}
+
+.modal-profile.show{
+  display:flex;
+}
+
+.modal-profile-content{
+  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  border-radius:20px;
+  padding:0;
+  max-width:400px;
+  width:90%;
+  border:3px solid var(--gold);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  animation:modalPop 0.3s ease;
+  margin:auto;
+}
+
+.modal-profile-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 20px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border-radius:17px 17px 0 0;
+}
+
+.modal-profile-header h4{
+  margin:0;
+  font-size:16px;
+  color:#fff;
+}
+
+.modal-profile-body{
+  padding:20px;
+}
+
+.profile-avatar-section{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.profile-avatar-preview{
+  width:100px;
+  height:100px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  border-radius:50%;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  font-weight:700;
+  color:var(--green-dark);
+  overflow:hidden;
+  border:3px solid var(--gold-light);
+  position:relative;
+}
+
+.profile-avatar-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.avatar-options{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:8px;
+  margin-top:15px;
+}
+
+.avatar-option{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  cursor:pointer;
+  border:2px solid transparent;
+  transition:all 0.2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:700;
+}
+
+.avatar-option:hover{
+  border-color:var(--gold);
+  transform:scale(1.1);
+}
+
+.avatar-option.selected{
+  border-color:var(--gold);
+  box-shadow:0 0 10px rgba(255,193,7,0.5);
+}
+
+.avatar-option.color-1{background:linear-gradient(135deg, #FF6B6B 0%, #ee5a5a 100%);}
+.avatar-option.color-2{background:linear-gradient(135deg, #4ECDC4 0%, #3dbdb5 100%);}
+.avatar-option.color-3{background:linear-gradient(135deg, #45B7D1 0%, #3aa5bf 100%);}
+.avatar-option.color-4{background:linear-gradient(135deg, #96CEB4 0%, #7fbf9f 100%);}
+.avatar-option.color-5{background:linear-gradient(135deg, #FFEAA7 0%, #fdcb6e 100%); color:#5d4e37;}
+.avatar-option.color-6{background:linear-gradient(135deg, #DDA0DD 0%, #c78dc7 100%);}
+.avatar-option.color-7{background:linear-gradient(135deg, #98D8C8 0%, #7cc9b5 100%);}
+.avatar-option.color-8{background:linear-gradient(135deg, #F7DC6F 0%, #f4d03f 100%); color:#5d4e37;}
+.avatar-option.color-9{background:linear-gradient(135deg, #BB8FCE 0%, #a573b8 100%);}
+.avatar-option.color-10{background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%); color:var(--green-dark);}
+
+.upload-photo-btn{
+  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  color:#fff;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:12px;
+  border:1px solid var(--gold);
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-top:10px;
+  transition:transform 0.2s;
+}
+
+.upload-photo-btn:hover{
+  transform:scale(1.05);
+}
+
+.profile-form .input-group{
+  margin-bottom:12px;
+}
+
+.profile-form label{
+  display:block;
+  color:var(--gold-light);
+  font-size:12px;
+  margin-bottom:4px;
+}
+
+.profile-form input{
+  width:100%;
+  padding:10px;
+  border:2px solid var(--gold);
+  border-radius:10px;
+  font-size:13px;
+  background:rgba(255,255,255,0.9);
+  color:var(--text);
+}
+
+.profile-form input:focus{
+  outline:none;
+  border-color:var(--orange);
+}
+
+.btn-save-profile{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  color:var(--green-dark);
+  border:none;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:10px;
+  transition:transform 0.2s;
+}
+
+.btn-save-profile:hover{
+  transform:scale(1.02);
+}
+
 /* ===== MODAL INPUT RECORD ===== */
 .modal-record{
   display:none;
@@ -1082,7 +1308,7 @@ body{
   font-weight:700;
 }
 
-/* ===== MODAL HISTORY ===== */
+/* ===== MODAL HISTORY / BUKU CATATAN ===== */
 .modal-history{
   display:none;
   position:fixed;
@@ -1107,6 +1333,32 @@ body{
   border:3px solid var(--gold);
   box-shadow:0 20px 60px rgba(0,0,0,0.5);
   animation:modalPop 0.3s ease;
+}
+
+.history-header-section{
+  padding:15px;
+  border-bottom:1px solid rgba(255,193,7,0.2);
+}
+
+.add-new-record-btn{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  color:var(--green-dark);
+  border:none;
+  border-radius:12px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:transform 0.2s;
+}
+
+.add-new-record-btn:hover{
+  transform:scale(1.02);
 }
 
 .history-list{
@@ -1266,6 +1518,8 @@ body{
   .footer-text{font-size:8px}
   .wa-panel{bottom:180px}
   .modal-login-content{padding:20px}
+  .profile-avatar-preview{width:80px;height:80px;font-size:32px}
+  .avatar-option{width:40px;height:40px;font-size:16px}
 }
 </style>
 </head>
@@ -1320,8 +1574,15 @@ body{
 
 <!-- USER BAR -->
 <div class="user-bar" id="userBar" style="display:none;">
-  <div class="user-info">
-    <div class="user-avatar" id="userAvatar">U</div>
+  <div class="user-info" onclick="openProfileModal()">
+    <div class="user-avatar-container">
+      <div class="user-avatar" id="userAvatar">U</div>
+      <div class="edit-avatar-btn" title="Edit Profil">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+        </svg>
+      </div>
+    </div>
     <div>
       <div class="user-name" id="displayUserName">-</div>
       <div class="user-details" id="displayUserDetails">-</div>
@@ -1346,10 +1607,10 @@ body{
 <!-- QUICK MENU -->
 <div class="quick-menu">
   <a href="https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec" target="_blank" class="quick-btn lab">
-    🔬 Cek Hasil Laborat
+    🔬 LABORAT
   </a>
   <button class="quick-btn history" onclick="openHistoryModal()">
-    📋 Riwayat Pencatatan
+    📋 BUKU CATATAN
   </button>
 </div>
 
@@ -1458,6 +1719,54 @@ body{
   </div>
 </div>
 
+<!-- MODAL EDIT PROFILE -->
+<div id="modalProfile" class="modal-profile">
+  <div class="modal-profile-content">
+    <div class="modal-profile-header">
+      <h4>Edit Profil</h4>
+      <span class="modal-close" onclick="closeProfileModal()">✕</span>
+    </div>
+    <div class="modal-profile-body">
+      <div class="profile-avatar-section">
+        <div class="profile-avatar-preview" id="profileAvatarPreview">U</div>
+        <input type="file" id="avatarInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+        <button class="upload-photo-btn" onclick="document.getElementById('avatarInput').click()">
+          📷 Upload Foto
+        </button>
+        
+        <div class="avatar-options">
+          <div class="avatar-option color-1" onclick="selectAvatarColor(1, '#FF6B6B')">A</div>
+          <div class="avatar-option color-2" onclick="selectAvatarColor(2, '#4ECDC4')">B</div>
+          <div class="avatar-option color-3" onclick="selectAvatarColor(3, '#45B7D1')">C</div>
+          <div class="avatar-option color-4" onclick="selectAvatarColor(4, '#96CEB4')">D</div>
+          <div class="avatar-option color-5" onclick="selectAvatarColor(5, '#FFEAA7')">E</div>
+          <div class="avatar-option color-6" onclick="selectAvatarColor(6, '#DDA0DD')">F</div>
+          <div class="avatar-option color-7" onclick="selectAvatarColor(7, '#98D8C8')">G</div>
+          <div class="avatar-option color-8" onclick="selectAvatarColor(8, '#F7DC6F')">H</div>
+          <div class="avatar-option color-9" onclick="selectAvatarColor(9, '#BB8FCE')">I</div>
+          <div class="avatar-option color-10" onclick="selectAvatarColor(10, '#ffc107')">J</div>
+        </div>
+      </div>
+      
+      <div class="profile-form">
+        <div class="input-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="profileName" placeholder="Nama lengkap">
+        </div>
+        <div class="input-group">
+          <label>Tempat, Tanggal Lahir</label>
+          <input type="text" id="profileTTL" placeholder="Contoh: Bandung, 01-01-1990">
+        </div>
+        <div class="input-group">
+          <label>Alamat</label>
+          <input type="text" id="profileAlamat" placeholder="Alamat lengkap">
+        </div>
+        <button class="btn-save-profile" onclick="saveProfile()">SIMPAN PROFIL</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL INPUT RECORD -->
 <div id="modalRecord" class="modal-record">
   <div class="modal-record-content">
@@ -1532,6 +1841,85 @@ body{
   </div>
 </div>
 
+<!-- MODAL NEW RECORD (dari Buku Catatan) -->
+<div id="modalNewRecord" class="modal-record">
+  <div class="modal-record-content">
+    <div class="modal-record-header">
+      <h4>Tambah Catatan Baru</h4>
+      <span class="modal-close" onclick="closeNewRecordModal()">✕</span>
+    </div>
+    <div class="modal-record-body">
+      <div class="record-card">
+        <div class="section-title">Data Pasien</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Nama Pasien</label>
+            <input type="text" id="newRecordNama" placeholder="Nama pasien">
+          </div>
+          <div class="input-group">
+            <label>No. MR</label>
+            <input type="text" id="newRecordMR" placeholder="Nomor MR">
+          </div>
+        </div>
+        
+        <div class="section-title">Sebelum Hemodialisa</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Berat Badan (kg)</label>
+            <input type="number" id="newBBSebelum" placeholder="Contoh: 65" step="0.1">
+          </div>
+          <div class="input-group">
+            <label>Tekanan Darah (mmHg)</label>
+            <input type="text" id="newTDSebelum" placeholder="Contoh: 150/90">
+          </div>
+        </div>
+        
+        <div class="section-title">Sesudah Hemodialisa</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Berat Badan (kg)</label>
+            <input type="number" id="newBBSesudah" placeholder="Contoh: 62" step="0.1">
+          </div>
+          <div class="input-group">
+            <label>Tekanan Darah (mmHg)</label>
+            <input type="text" id="newTDSesudah" placeholder="Contoh: 120/80">
+          </div>
+        </div>
+        
+        <div class="section-title">Data Tambahan</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Golongan Darah</label>
+            <select id="newGolonganDarah">
+              <option value="">- Pilih -</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="AB">AB</option>
+              <option value="O">O</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Tinggi Badan (cm)</label>
+            <input type="number" id="newTinggiBadan" placeholder="Contoh: 165" step="0.1">
+          </div>
+        </div>
+        
+        <div class="section-title">Tambahan</div>
+        <div class="input-group">
+          <label>Obat-obatan</label>
+          <textarea id="newObat" rows="2" placeholder="Input obat yang diberikan..."></textarea>
+        </div>
+        <div class="input-group">
+          <label>Catatan</label>
+          <input type="text" id="newCatatan" placeholder="Catatan tambahan">
+        </div>
+        
+        <button class="btn-save" id="btnSimpanNewRecord" onclick="simpanNewRecord()">SIMPAN CATATAN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL VIEW -->
 <div id="modalView" class="modal-view">
   <div class="modal-view-content">
@@ -1543,12 +1931,17 @@ body{
   </div>
 </div>
 
-<!-- MODAL HISTORY -->
+<!-- MODAL HISTORY / BUKU CATATAN -->
 <div id="modalHistory" class="modal-history">
   <div class="modal-history-content">
     <div class="modal-record-header">
-      <h4>Riwayat Pencatatan</h4>
+      <h4>Buku Catatan</h4>
       <span class="modal-close" onclick="closeHistoryModal()">✕</span>
+    </div>
+    <div class="history-header-section">
+      <button class="add-new-record-btn" onclick="openNewRecordModal()">
+        ➕ Tambah Catatan Baru
+      </button>
     </div>
     <div class="history-list" id="historyList"></div>
   </div>
@@ -1567,6 +1960,7 @@ const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNX
 let dataPasien = [];
 let currentUser = null;
 let currentViewData = null;
+let selectedAvatarColor = null;
 
 // ===== INISIALISASI =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -1713,10 +2107,26 @@ function doLogin() {
 function showApp() {
   document.getElementById('modalLogin').classList.remove('show');
   document.getElementById('userBar').style.display = 'flex';
+  updateUserDisplay();
+  document.getElementById('hasil').innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
+}
+
+function updateUserDisplay() {
   document.getElementById('displayUserName').textContent = currentUser.name;
   document.getElementById('displayUserDetails').textContent = currentUser.ttl + ' | ' + currentUser.alamat;
-  document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('hasil').innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
+  
+  const avatarEl = document.getElementById('userAvatar');
+  
+  // Check if user has custom avatar photo
+  if (currentUser.avatarPhoto) {
+    avatarEl.innerHTML = `<img src="${currentUser.avatarPhoto}" alt="Avatar">`;
+  } else if (currentUser.avatarColor) {
+    avatarEl.style.background = currentUser.avatarColor;
+    avatarEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
+  } else {
+    avatarEl.style.background = 'linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%)';
+    avatarEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
+  }
 }
 
 function logout() {
@@ -1726,6 +2136,97 @@ function logout() {
   document.getElementById('userBar').style.display = 'none';
   document.getElementById('hasil').innerHTML = 'Silakan login terlebih dahulu untuk mencari data pasien';
   showLogin();
+}
+
+// ===== MODAL PROFILE =====
+function openProfileModal() {
+  document.getElementById('profileName').value = currentUser.name || '';
+  document.getElementById('profileTTL').value = currentUser.ttl || '';
+  document.getElementById('profileAlamat').value = currentUser.alamat || '';
+  
+  const previewEl = document.getElementById('profileAvatarPreview');
+  
+  if (currentUser.avatarPhoto) {
+    previewEl.innerHTML = `<img src="${currentUser.avatarPhoto}" alt="Avatar">`;
+  } else if (currentUser.avatarColor) {
+    previewEl.style.background = currentUser.avatarColor;
+    previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
+  } else {
+    previewEl.style.background = 'linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%)';
+    previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
+  }
+  
+  // Clear selected avatar color
+  document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+  if (currentUser.avatarColorIndex) {
+    const selectedEl = document.querySelector(`.avatar-option.color-${currentUser.avatarColorIndex}`);
+    if (selectedEl) selectedEl.classList.add('selected');
+  }
+  
+  document.getElementById('modalProfile').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProfileModal() {
+  document.getElementById('modalProfile').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const previewEl = document.getElementById('profileAvatarPreview');
+      previewEl.innerHTML = `<img src="${e.target.result}" alt="Avatar">`;
+      currentUser.avatarPhoto = e.target.result;
+      currentUser.avatarColor = null;
+      currentUser.avatarColorIndex = null;
+      
+      // Clear color selection
+      document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function selectAvatarColor(index, color) {
+  selectedAvatarColor = { index: index, color: color };
+  
+  // Update selection UI
+  document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
+  document.querySelector(`.avatar-option.color-${index}`).classList.add('selected');
+  
+  // Update preview
+  const previewEl = document.getElementById('profileAvatarPreview');
+  previewEl.style.background = color;
+  previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
+  
+  // Clear photo if color selected
+  currentUser.avatarPhoto = null;
+  currentUser.avatarColor = color;
+  currentUser.avatarColorIndex = index;
+}
+
+function saveProfile() {
+  currentUser.name = document.getElementById('profileName').value.trim() || currentUser.name;
+  currentUser.ttl = document.getElementById('profileTTL').value.trim() || currentUser.ttl;
+  currentUser.alamat = document.getElementById('profileAlamat').value.trim() || currentUser.alamat;
+  
+  // Save to localStorage
+  localStorage.setItem('hdAppUser', JSON.stringify(currentUser));
+  
+  // Update registered users if exists
+  const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
+  const userIndex = registeredUsers.findIndex(u => u.username === currentUser.username);
+  if (userIndex > -1) {
+    registeredUsers[userIndex] = { ...registeredUsers[userIndex], ...currentUser };
+    localStorage.setItem('hdAppRegisteredUsers', JSON.stringify(registeredUsers));
+  }
+  
+  updateUserDisplay();
+  closeProfileModal();
+  showToast('Profil berhasil disimpan');
 }
 
 // ===== TOGGLE WA PANEL =====
@@ -1960,6 +2461,103 @@ async function simpanRecord() {
   btn.innerHTML = originalText;
 }
 
+// ===== MODAL NEW RECORD (dari Buku Catatan) =====
+function openNewRecordModal() {
+  // Clear all inputs
+  document.getElementById('newRecordNama').value = '';
+  document.getElementById('newRecordMR').value = '';
+  document.getElementById('newBBSebelum').value = '';
+  document.getElementById('newTDSebelum').value = '';
+  document.getElementById('newBBSesudah').value = '';
+  document.getElementById('newTDSesudah').value = '';
+  document.getElementById('newGolonganDarah').value = '';
+  document.getElementById('newTinggiBadan').value = '';
+  document.getElementById('newObat').value = '';
+  document.getElementById('newCatatan').value = '';
+  
+  document.getElementById('modalNewRecord').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeNewRecordModal() {
+  document.getElementById('modalNewRecord').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+async function simpanNewRecord() {
+  const btn = document.getElementById('btnSimpanNewRecord');
+  const originalText = btn.innerHTML;
+  
+  const namaPasien = document.getElementById('newRecordNama').value.trim();
+  const mr = document.getElementById('newRecordMR').value.trim();
+  
+  if (!namaPasien || !mr) {
+    showToast('Nama pasien dan No. MR harus diisi');
+    return;
+  }
+  
+  const record = {
+    timestamp: new Date().toISOString(),
+    tanggal: new Date().toLocaleDateString('id-ID'),
+    waktu: new Date().toLocaleTimeString('id-ID'),
+    mr: mr,
+    namaPasien: namaPasien,
+    bbSebelum: document.getElementById('newBBSebelum').value,
+    tdSebelum: document.getElementById('newTDSebelum').value,
+    bbSesudah: document.getElementById('newBBSesudah').value,
+    tdSesudah: document.getElementById('newTDSesudah').value,
+    golonganDarah: document.getElementById('newGolonganDarah').value,
+    tinggiBadan: document.getElementById('newTinggiBadan').value,
+    obat: document.getElementById('newObat').value,
+    catatan: document.getElementById('newCatatan').value,
+    petugas: currentUser.name
+  };
+  
+  // Show loading
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading-spinner"></span> Menyimpan...';
+  
+  try {
+    // Kirim ke Google Spreadsheet via Apps Script
+    await fetch(GAS_WEBAPP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(record)
+    });
+    
+    // Save to localStorage
+    const historyKey = 'hdAppHistory_' + currentUser.username;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    history.unshift({ ...record, localId: Date.now() });
+    
+    if (history.length > 100) history = history.slice(0, 100);
+    localStorage.setItem(historyKey, JSON.stringify(history));
+    
+    closeNewRecordModal();
+    openHistoryModal(); // Refresh history
+    showToast('Catatan berhasil disimpan');
+    
+  } catch (error) {
+    console.error('Error saving record:', error);
+    
+    // Save to localStorage only if failed
+    const historyKey = 'hdAppHistory_' + currentUser.username;
+    let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
+    history.unshift({ ...record, localId: Date.now(), syncStatus: 'pending' });
+    
+    if (history.length > 100) history = history.slice(0, 100);
+    localStorage.setItem(historyKey, JSON.stringify(history));
+    
+    closeNewRecordModal();
+    openHistoryModal();
+    showToast('Disimpan lokal (gagal sync ke server)');
+  }
+  
+  btn.disabled = false;
+  btn.innerHTML = originalText;
+}
+
 // ===== MODAL VIEW =====
 function openViewModal(dataStr) {
   try {
@@ -2032,7 +2630,7 @@ function closeViewModal() {
   currentViewData = null;
 }
 
-// ===== MODAL HISTORY =====
+// ===== MODAL HISTORY / BUKU CATATAN =====
 function openHistoryModal() {
   if (!currentUser) {
     showToast('Silakan login terlebih dahulu');
@@ -2045,7 +2643,7 @@ function openHistoryModal() {
   let html = '';
   
   if (history.length === 0) {
-    html = '<div class="history-empty">Belum ada riwayat pencatatan</div>';
+    html = '<div class="history-empty">Belum ada riwayat pencatatan<br><br>Klik "Tambah Catatan Baru" untuk membuat catatan</div>';
   } else {
     history.forEach((item, idx) => {
       html += `
@@ -2276,19 +2874,27 @@ function showToast(msg) {
 document.getElementById('modalRecord').addEventListener('click', function(e) {
   if (e.target === this) closeRecordModal();
 });
+document.getElementById('modalNewRecord').addEventListener('click', function(e) {
+  if (e.target === this) closeNewRecordModal();
+});
 document.getElementById('modalView').addEventListener('click', function(e) {
   if (e.target === this) closeViewModal();
 });
 document.getElementById('modalHistory').addEventListener('click', function(e) {
   if (e.target === this) closeHistoryModal();
 });
+document.getElementById('modalProfile').addEventListener('click', function(e) {
+  if (e.target === this) closeProfileModal();
+});
 
 // ===== CLOSE MODAL ON ESCAPE KEY =====
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeRecordModal();
+    closeNewRecordModal();
     closeViewModal();
     closeHistoryModal();
+    closeProfileModal();
   }
 });
 </script>
