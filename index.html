@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Aplikasi Pasien HD Malahayati - Ramadhan Kareem</title>
+<title>Aplikasi Pasien HD Malahayati - Ied 1447 H</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -45,16 +45,16 @@ body{
   font-family:Arial,sans-serif;
   background:
     linear-gradient(180deg, 
-      rgba(46, 125, 50, 0.55) 0%, 
-      rgba(46, 125, 50, 0.35) 25%,
-      rgba(93, 64, 55, 0.45) 65%,
-      rgba(93, 64, 55, 0.65) 100%
+      rgba(30, 58, 95, 0.6) 0%, 
+      rgba(30, 58, 95, 0.4) 25%,
+      rgba(45, 80, 110, 0.5) 65%,
+      rgba(35, 65, 90, 0.7) 100%
     ),
     linear-gradient(135deg, 
-      #1b5e20 0%, 
-      #2e7d32 30%, 
-      #4a3728 70%, 
-      #5d4037 100%
+      #0d2137 0%, 
+      #1e3a5f 30%, 
+      #2d4d6e 70%, 
+      #23415a 100%
     );
   color:var(--white);
   min-height:100vh;
@@ -76,11 +76,11 @@ body{
     radial-gradient(circle, var(--gold-light) 1px, transparent 2px);
   background-size:60px 60px, 100px 100px;
   animation:twinkle 3s ease-in-out infinite;
-  opacity:0.4;
+  opacity:0.5;
 }
 @keyframes twinkle{
-  0%, 100%{opacity:.25}
-  50%{opacity:.5}
+  0%, 100%{opacity:.3}
+  50%{opacity:.6}
 }
 
 .sun-container{
@@ -172,22 +172,22 @@ body{
   50%{transform:translateX(6px)}
 }
 
-/* ===== HEADER RAMADHAN ===== */
-.ramadhan-header{
+/* ===== HEADER IED ===== */
+.ied-header{
   position:relative;
   z-index:2;
   text-align:center;
-  padding:20px 15px;
+  padding:24px 15px;
   margin:70px auto 15px;
   max-width:320px;
-  background:linear-gradient(135deg, rgba(27,94,32,0.05) 0%, rgba(46,125,50,0.03) 100%);
+  background:linear-gradient(135deg, rgba(30, 58, 95, 0.08) 0%, rgba(45, 80, 110, 0.05) 100%);
   border-radius:20px;
   border:2px solid var(--gold);
-  box-shadow:0 4px 20px rgba(255,193,7,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow:0 4px 20px rgba(255,193,7,0.25), inset 0 1px 0 rgba(255,255,255,0.1);
   animation:fadeInDown 1.2s ease-out;
 }
 
-.ramadhan-header::before{
+.ied-header::before{
   content:'';
   position:absolute;
   top:-8px;
@@ -195,12 +195,12 @@ body{
   transform:translateX(-50%);
   width:120px;
   height:16px;
-  background:var(--gold);
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
   border-radius:0 0 60px 60px;
-  box-shadow:0 0 15px rgba(255,193,7,0.5);
+  box-shadow:0 0 15px rgba(255,193,7,0.6);
 }
 
-.ramadhan-header::after{
+.ied-header::after{
   content:'';
   position:absolute;
   bottom:-8px;
@@ -208,9 +208,9 @@ body{
   transform:translateX(-50%);
   width:120px;
   height:16px;
-  background:var(--gold);
+  background:linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
   border-radius:60px 60px 0 0;
-  box-shadow:0 0 15px rgba(255,193,7,0.5);
+  box-shadow:0 0 15px rgba(255,193,7,0.6);
 }
 
 .header-corner{
@@ -225,36 +225,56 @@ body{
 .header-corner.br{bottom:6px;right:6px;border-left:none;border-top:none;border-radius:0 0 8px 0;}
 
 .header-title{
-  font-size:16px;
+  font-size:15px;
   font-weight:700;
   color:var(--gold);
-  letter-spacing:4px;
-  margin-bottom:8px;
+  letter-spacing:3px;
+  margin-bottom:10px;
   text-shadow:0 2px 4px rgba(0,0,0,0.3);
 }
 
 .greeting-arabic{
   font-family:var(--font-arabic);
-  font-size:16px;
+  font-size:15px;
   color:var(--gold-light);
-  margin-bottom:4px;
+  margin-bottom:6px;
   text-shadow:0 0 8px rgba(255,193,7,0.5);
   white-space:nowrap;
 }
 
 .greeting{
   font-family:var(--font-arabic);
-  font-size:18px;
+  font-size:20px;
   font-weight:700;
   color:var(--gold);
   text-shadow:0 0 10px rgba(255,193,7,0.6), 0 2px 2px rgba(0,0,0,0.3);
   letter-spacing:1px;
   white-space:nowrap;
+  margin-bottom:8px;
+}
+
+.greeting-sub{
+  font-size:13px;
+  color:var(--gold-light);
+  font-style:italic;
+  margin-bottom:4px;
+}
+
+.maaf-text{
+  font-family:var(--font-arabic);
+  font-size:14px;
+  color:var(--white);
+  background:linear-gradient(90deg, transparent, rgba(255,193,7,0.15), transparent);
+  padding:8px 12px;
+  margin-top:10px;
+  border-radius:10px;
+  border-top:1px solid rgba(255,193,7,0.3);
+  text-shadow:0 1px 2px rgba(0,0,0,0.3);
 }
 
 .clock-container{
-  margin-top:10px;
-  padding-top:8px;
+  margin-top:12px;
+  padding-top:10px;
   border-top:1px solid rgba(255,193,7,0.3);
 }
 .clock{
@@ -548,7 +568,7 @@ body{
 }
 
 .row{display:flex;justify-content:space-between;}
-.nama{font-size:16px;font-weight:700;color:var(--green-dark);}
+.nama{font-size:16px;font-weight:700;color:#1e3a5f;}
 .mr{font-size:11px;color:#666;text-align:right;}
 .info{font-size:12px;line-height:1.6;margin-top:6px;color:var(--text);}
 
@@ -567,7 +587,7 @@ body{
   margin-top:6px;
   font-size:11px;
   font-weight:700;
-  color:var(--green-dark);
+  color:#1e3a5f;
 }
 
 .action-btn{
@@ -724,7 +744,7 @@ body{
   right:16px;
   bottom:200px;
   width:220px;
-  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   color:#fff;
   border-radius:16px;
   padding:12px;
@@ -780,7 +800,7 @@ body{
 }
 
 .modal-login-content{
-  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   border-radius:20px;
   padding:25px;
   max-width:350px;
@@ -842,7 +862,7 @@ body{
   width:100%;
   padding:12px;
   background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
-  color:var(--green-dark);
+  color:#0d2137;
   border:none;
   border-radius:20px;
   font-size:14px;
@@ -852,6 +872,25 @@ body{
 }
 
 .btn-login:hover{
+  transform:scale(1.02);
+}
+
+.btn-guest{
+  width:100%;
+  padding:12px;
+  background:transparent;
+  color:var(--gold);
+  border:2px solid var(--gold);
+  border-radius:20px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+  margin-top:10px;
+}
+
+.btn-guest:hover{
+  background:rgba(255,193,7,0.1);
   transform:scale(1.02);
 }
 
@@ -877,6 +916,24 @@ body{
   font-weight:700;
 }
 
+.guest-divider{
+  display:flex;
+  align-items:center;
+  margin:15px 0;
+  color:var(--gold-light);
+  font-size:11px;
+}
+.guest-divider::before,
+.guest-divider::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.guest-divider span{
+  padding:0 10px;
+}
+
 /* ===== MODAL EDIT PROFILE ===== */
 .modal-profile{
   display:none;
@@ -896,7 +953,7 @@ body{
 }
 
 .modal-profile-content{
-  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   border-radius:20px;
   padding:0;
   max-width:400px;
@@ -942,7 +999,7 @@ body{
   justify-content:center;
   font-size:40px;
   font-weight:700;
-  color:var(--green-dark);
+  color:#0d2137;
   overflow:hidden;
   border:3px solid var(--gold-light);
   position:relative;
@@ -994,7 +1051,7 @@ body{
 .avatar-option.color-7{background:linear-gradient(135deg, #98D8C8 0%, #7cc9b5 100%);}
 .avatar-option.color-8{background:linear-gradient(135deg, #F7DC6F 0%, #f4d03f 100%); color:#5d4e37;}
 .avatar-option.color-9{background:linear-gradient(135deg, #BB8FCE 0%, #a573b8 100%);}
-.avatar-option.color-10{background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%); color:var(--green-dark);}
+.avatar-option.color-10{background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%); color:#0d2137;}
 
 .upload-photo-btn{
   background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
@@ -1045,7 +1102,7 @@ body{
   width:100%;
   padding:12px;
   background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
-  color:var(--green-dark);
+  color:#0d2137;
   border:none;
   border-radius:20px;
   font-size:14px;
@@ -1074,7 +1131,7 @@ body{
 }
 
 .modal-record-content{
-  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   margin:20px auto;
   padding:0;
   border-radius:20px;
@@ -1128,7 +1185,7 @@ body{
 }
 
 .record-card h3{
-  color:var(--green-dark);
+  color:#1e3a5f;
   margin-bottom:15px;
   text-align:center;
 }
@@ -1176,7 +1233,7 @@ body{
   width:100%;
   padding:12px;
   background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
-  color:var(--green-dark);
+  color:#0d2137;
   border:none;
   border-radius:20px;
   font-weight:700;
@@ -1205,7 +1262,7 @@ body{
 }
 
 .modal-view-content{
-  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   margin:20px auto;
   padding:0;
   border-radius:20px;
@@ -1295,7 +1352,7 @@ body{
 .view-value{
   font-size:14px;
   font-weight:600;
-  color:var(--green-dark);
+  color:#1e3a5f;
 }
 
 .view-badge{
@@ -1323,7 +1380,7 @@ body{
 }
 
 .modal-history-content{
-  background:linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   margin:20px auto;
   padding:0;
   border-radius:20px;
@@ -1344,7 +1401,7 @@ body{
   width:100%;
   padding:12px;
   background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
-  color:var(--green-dark);
+  color:#0d2137;
   border:none;
   border-radius:12px;
   font-size:13px;
@@ -1384,7 +1441,7 @@ body{
 
 .history-date{
   font-weight:700;
-  color:var(--green-dark);
+  color:#1e3a5f;
   font-size:13px;
 }
 
@@ -1418,7 +1475,7 @@ body{
 
 .history-data-item span{
   font-weight:700;
-  color:var(--green-dark);
+  color:#1e3a5f;
 }
 
 .history-actions{
@@ -1442,7 +1499,7 @@ body{
   bottom:100px;
   left:50%;
   transform:translateX(-50%) translateY(100px);
-  background:linear-gradient(135deg, var(--green-main) 0%, var(--green-dark) 100%);
+  background:linear-gradient(135deg, #1e3a5f 0%, #0d2137 100%);
   color:#fff;
   padding:12px 24px;
   border-radius:30px;
@@ -1491,6 +1548,37 @@ body{
   to{transform:rotate(360deg)}
 }
 
+/* ===== GUEST NOTICE ===== */
+.guest-notice{
+  background:linear-gradient(135deg, rgba(255,193,7,0.2) 0%, rgba(255,152,0,0.15) 100%);
+  border:1px solid var(--gold);
+  border-radius:12px;
+  padding:10px 14px;
+  margin:0 auto 10px;
+  max-width:480px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.guest-notice-text{
+  font-size:12px;
+  color:var(--gold-light);
+}
+
+.guest-notice-btn{
+  background:linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+  color:#0d2137;
+  border:none;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
 @media (min-width:481px){
   body{
     max-width:500px;
@@ -1500,10 +1588,12 @@ body{
 }
 
 @media (max-width:360px){
-  .greeting{font-size:16px}
-  .greeting-arabic{font-size:14px}
-  .ramadhan-header{margin-top:60px;padding:15px 10px}
-  .header-title{font-size:13px}
+  .greeting{font-size:18px}
+  .greeting-arabic{font-size:13px}
+  .greeting-sub{font-size:11px}
+  .maaf-text{font-size:12px}
+  .ied-header{margin-top:60px;padding:20px 10px}
+  .header-title{font-size:12px}
   .clock{font-size:18px}
   .clock-date{font-size:10px}
   .sun{width:50px;height:50px}
@@ -1557,19 +1647,27 @@ body{
   </div>
 </div>
 
-<!-- HEADER RAMADHAN -->
-<div class="ramadhan-header">
+<!-- HEADER IED -->
+<div class="ied-header">
   <div class="header-corner tl"></div>
   <div class="header-corner tr"></div>
   <div class="header-corner bl"></div>
   <div class="header-corner br"></div>
   <div class="header-title">HD MALAHAYATI</div>
-  <div class="greeting-arabic">رَمَضَانُ كَرِيمٌ</div>
-  <div class="greeting">Ramadhan Kareem</div>
+  <div class="greeting-arabic">تَقَبَّلَ اللّٰهُ مِنَّا وَمِنْكُمْ</div>
+  <div class="greeting">Happy Ied 1447 H</div>
+  <div class="greeting-sub">Selamat Hari Raya Idul Fitri</div>
+  <div class="maaf-text">Mohon Maaf Lahir dan Bathin</div>
   <div class="clock-container">
     <div class="clock" id="clock">--:--:--</div>
     <div class="clock-date" id="clockDate">--</div>
   </div>
+</div>
+
+<!-- GUEST NOTICE -->
+<div class="guest-notice" id="guestNotice" style="display:none;">
+  <div class="guest-notice-text">Anda masuk sebagai Tamu. Beberapa fitur terbatas.</div>
+  <button class="guest-notice-btn" onclick="showLoginFromGuest()">Login</button>
 </div>
 
 <!-- USER BAR -->
@@ -1615,7 +1713,7 @@ body{
 </div>
 
 <!-- HASIL -->
-<div id="hasil">Silakan login terlebih dahulu untuk mencari data pasien</div>
+<div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
 
 <!-- ORNAMEN -->
 <div class="ornament left">🌙</div>
@@ -1671,6 +1769,8 @@ body{
         </div>
         <button class="btn-login" onclick="doLogin()">MASUK</button>
         <div class="login-error" id="loginError">Nama pengguna atau kata sandi salah!</div>
+        <div class="guest-divider"><span>atau</span></div>
+        <button class="btn-guest" onclick="loginAsGuest()">Masuk sebagai Tamu</button>
         <div class="auth-switch">
           Belum punya akun? <a onclick="showRegister()">Daftar di sini</a>
         </div>
@@ -1959,6 +2059,7 @@ const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNX
 
 let dataPasien = [];
 let currentUser = null;
+let isGuestMode = false;
 let currentViewData = null;
 let selectedAvatarColor = null;
 
@@ -1978,8 +2079,14 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Check existing session
   const savedUser = localStorage.getItem('hdAppUser');
+  const savedGuestMode = localStorage.getItem('hdAppGuestMode');
+  
   if (savedUser) {
     currentUser = JSON.parse(savedUser);
+    isGuestMode = false;
+    showApp();
+  } else if (savedGuestMode === 'true') {
+    isGuestMode = true;
     showApp();
   }
   
@@ -2013,6 +2120,26 @@ function showLogin() {
   document.getElementById('formRegister').style.display = 'none';
   document.getElementById('formLogin').style.display = 'block';
   document.getElementById('loginError').style.display = 'none';
+}
+
+function showLoginFromGuest() {
+  // Exit guest mode first
+  isGuestMode = false;
+  localStorage.removeItem('hdAppGuestMode');
+  document.getElementById('guestNotice').style.display = 'none';
+  document.getElementById('userBar').style.display = 'none';
+  document.getElementById('modalLogin').classList.add('show');
+}
+
+// ===== LOGIN AS GUEST =====
+function loginAsGuest() {
+  isGuestMode = true;
+  localStorage.setItem('hdAppGuestMode', 'true');
+  document.getElementById('modalLogin').classList.remove('show');
+  document.getElementById('guestNotice').style.display = 'flex';
+  document.getElementById('userBar').style.display = 'none';
+  document.getElementById('hasil').innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
+  showToast('Selamat datang, Tamu!');
 }
 
 // ===== REGISTER =====
@@ -2095,7 +2222,9 @@ function doLogin() {
       ttl: user.ttl || '-',
       alamat: user.alamat || '-'
     };
+    isGuestMode = false;
     localStorage.setItem('hdAppUser', JSON.stringify(currentUser));
+    localStorage.removeItem('hdAppGuestMode');
     document.getElementById('loginError').style.display = 'none';
     showApp();
   } else {
@@ -2106,8 +2235,16 @@ function doLogin() {
 
 function showApp() {
   document.getElementById('modalLogin').classList.remove('show');
-  document.getElementById('userBar').style.display = 'flex';
-  updateUserDisplay();
+  
+  if (isGuestMode) {
+    document.getElementById('guestNotice').style.display = 'flex';
+    document.getElementById('userBar').style.display = 'none';
+  } else {
+    document.getElementById('guestNotice').style.display = 'none';
+    document.getElementById('userBar').style.display = 'flex';
+    updateUserDisplay();
+  }
+  
   document.getElementById('hasil').innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
 }
 
@@ -2131,15 +2268,23 @@ function updateUserDisplay() {
 
 function logout() {
   currentUser = null;
+  isGuestMode = false;
   localStorage.removeItem('hdAppUser');
+  localStorage.removeItem('hdAppGuestMode');
   document.getElementById('modalLogin').classList.add('show');
   document.getElementById('userBar').style.display = 'none';
-  document.getElementById('hasil').innerHTML = 'Silakan login terlebih dahulu untuk mencari data pasien';
+  document.getElementById('guestNotice').style.display = 'none';
+  document.getElementById('hasil').innerHTML = 'Silakan login atau masuk sebagai tamu';
   showLogin();
 }
 
 // ===== MODAL PROFILE =====
 function openProfileModal() {
+  if (!currentUser || isGuestMode) {
+    showToast('Silakan login terlebih dahulu');
+    return;
+  }
+  
   document.getElementById('profileName').value = currentUser.name || '';
   document.getElementById('profileTTL').value = currentUser.ttl || '';
   document.getElementById('profileAlamat').value = currentUser.alamat || '';
@@ -2266,11 +2411,6 @@ function getTarget(t, s) {
 
 // ===== CARI PASIEN =====
 function cari() {
-  if (!currentUser) {
-    showToast('Silakan login terlebih dahulu');
-    return;
-  }
-  
   const k = document.getElementById('search').value.toLowerCase();
   const dateInput = document.getElementById('searchDate').value;
   
@@ -2360,6 +2500,16 @@ function cari() {
 
 // ===== MODAL RECORD =====
 function openRecordModal(dataStr) {
+  if (isGuestMode) {
+    showToast('Silakan login untuk menggunakan fitur pencatatan');
+    return;
+  }
+  
+  if (!currentUser) {
+    showToast('Silakan login terlebih dahulu');
+    return;
+  }
+  
   try {
     const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
     
@@ -2392,6 +2542,11 @@ function closeRecordModal() {
 
 // ===== SIMPAN RECORD =====
 async function simpanRecord() {
+  if (isGuestMode || !currentUser) {
+    showToast('Silakan login terlebih dahulu');
+    return;
+  }
+  
   const btn = document.getElementById('btnSimpanRecord');
   const originalText = btn.innerHTML;
   
@@ -2463,6 +2618,16 @@ async function simpanRecord() {
 
 // ===== MODAL NEW RECORD (dari Buku Catatan) =====
 function openNewRecordModal() {
+  if (isGuestMode) {
+    showToast('Silakan login untuk menggunakan fitur ini');
+    return;
+  }
+  
+  if (!currentUser) {
+    showToast('Silakan login terlebih dahulu');
+    return;
+  }
+  
   // Clear all inputs
   document.getElementById('newRecordNama').value = '';
   document.getElementById('newRecordMR').value = '';
@@ -2485,6 +2650,11 @@ function closeNewRecordModal() {
 }
 
 async function simpanNewRecord() {
+  if (isGuestMode || !currentUser) {
+    showToast('Silakan login terlebih dahulu');
+    return;
+  }
+  
   const btn = document.getElementById('btnSimpanNewRecord');
   const originalText = btn.innerHTML;
   
@@ -2632,6 +2802,11 @@ function closeViewModal() {
 
 // ===== MODAL HISTORY / BUKU CATATAN =====
 function openHistoryModal() {
+  if (isGuestMode) {
+    showToast('Silakan login untuk mengakses buku catatan');
+    return;
+  }
+  
   if (!currentUser) {
     showToast('Silakan login terlebih dahulu');
     return;
@@ -2703,6 +2878,8 @@ function closeHistoryModal() {
 
 // ===== DELETE HISTORY =====
 function deleteHistory(idx) {
+  if (isGuestMode || !currentUser) return;
+  
   if (confirm('Yakin ingin menghapus riwayat ini?')) {
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
@@ -2718,6 +2895,8 @@ function deleteHistory(idx) {
 
 // ===== GENERATE PDF =====
 function generatePDF(idx) {
+  if (isGuestMode || !currentUser) return;
+  
   const historyKey = 'hdAppHistory_' + currentUser.username;
   const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
   
@@ -2781,7 +2960,7 @@ function generatePDF(idx) {
       ['Tekanan Darah (mmHg)', item.tdSebelum || '-', item.tdSesudah || '-']
     ],
     theme: 'grid',
-    headStyles: { fillColor: [46, 125, 50] },
+    headStyles: { fillColor: [30, 58, 95] },
     margin: { left: 20, right: 20 }
   });
   
@@ -2822,6 +3001,8 @@ function generatePDF(idx) {
 
 // ===== SHARE VIA WA =====
 function shareViaWA(idx) {
+  if (isGuestMode || !currentUser) return;
+  
   const historyKey = 'hdAppHistory_' + currentUser.username;
   const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
   
