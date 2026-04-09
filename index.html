@@ -37,6 +37,7 @@
   --tel-color:#4caf50;
   --youtube-color:#FF0000;
   --accent:#26a69a;
+  --hd-red:#d32f2f;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -491,10 +492,10 @@ body{
   fill:#fff;
 }
 
-/* ===== QUICK MENU ===== */
+/* ===== QUICK MENU - UPDATED ===== */
 .quick-menu{
   display:flex;
-  gap:10px;
+  gap:6px;
   margin:10px auto 15px;
   max-width:480px;
   position:relative;
@@ -505,23 +506,40 @@ body{
   flex:1;
   text-decoration:none;
   text-align:center;
-  padding:12px 16px;
-  border-radius:14px;
-  font-size:12px;
+  padding:8px 6px;
+  border-radius:10px;
+  font-size:10px;
   font-weight:700;
   color:#fff;
-  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+  box-shadow:0 3px 10px rgba(0,0,0,0.15);
   transition:transform 0.2s, box-shadow 0.2s;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:6px;
+  gap:4px;
   border:none;
   cursor:pointer;
+  flex-direction:column;
+  min-width:0;
 }
 .quick-btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 6px 20px rgba(0,0,0,0.2);
+  transform:translateY(-2px);
+  box-shadow:0 4px 14px rgba(0,0,0,0.2);
+}
+.quick-btn .btn-icon{
+  font-size:16px;
+  margin-bottom:2px;
+}
+.quick-btn .btn-text{
+  font-size:9px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+
+.quick-btn.hd{
+  background:linear-gradient(135deg, #ef5350 0%, #c62828 100%);
 }
 .quick-btn.lab{
   background:linear-gradient(135deg, var(--sky-main) 0%, var(--sky-dark) 100%);
@@ -1674,8 +1692,9 @@ body{
   .search-box #searchDate{width:100px;font-size:13px}
   .card{padding:14px}
   .nama{font-size:15px}
-  .quick-menu{flex-direction:column}
-  .quick-btn{padding:10px}
+  .quick-btn{padding:6px 4px}
+  .quick-btn .btn-icon{font-size:14px}
+  .quick-btn .btn-text{font-size:8px}
   .youtube-btn, .tiktok-btn, .wa-btn{width:44px;height:44px}
   .footer-text{font-size:8px}
   .wa-panel{bottom:180px;width:200px}
@@ -1760,13 +1779,19 @@ body{
   </div>
 </div>
 
-<!-- QUICK MENU -->
+<!-- QUICK MENU - UPDATED WITH 3 BUTTONS -->
 <div class="quick-menu">
+  <a href="https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec" target="_blank" class="quick-btn hd">
+    <span class="btn-icon">🏥</span>
+    <span class="btn-text">Akses HD</span>
+  </a>
   <a href="https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec" target="_blank" class="quick-btn lab">
-    🔬 Laborat
+    <span class="btn-icon">🔬</span>
+    <span class="btn-text">Laborat</span>
   </a>
   <button class="quick-btn history" onclick="openHistoryModal()">
-    📋 Buku Catatan
+    <span class="btn-icon">📋</span>
+    <span class="btn-text">Catatan</span>
   </button>
 </div>
 
