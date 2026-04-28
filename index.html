@@ -61,7 +61,6 @@ body{
   position:relative;
 }
 
-/* Subtle batik-inspired dot pattern overlay */
 body::before{
   content:'';
   position:fixed;
@@ -75,7 +74,6 @@ body::before{
   pointer-events:none;
 }
 
-/* Clouds - warm cream tones */
 .clouds-container{
   position:fixed;
   inset:0;
@@ -144,7 +142,6 @@ body::before{
   to{transform:translateX(calc(-100vw - 200px))}
 }
 
-/* ===== FLOWER PETALS (replaces rain) ===== */
 .rain-container{
   position:fixed;
   inset:0;
@@ -159,105 +156,23 @@ body::before{
   animation:petalFall linear infinite;
 }
 
-/* Pink petals */
 .rain-drop:nth-child(3n+1){
   width:9px;
   height:12px;
   background:linear-gradient(135deg, rgba(233,30,99,0.55), rgba(244,143,177,0.35));
 }
 
-/* Purple petals */
 .rain-drop:nth-child(3n+2){
   width:7px;
   height:10px;
   background:linear-gradient(135deg, rgba(156,39,176,0.5), rgba(206,147,216,0.35));
 }
 
-/* Gold petals */
 .rain-drop:nth-child(3n){
   width:6px;
   height:9px;
   background:linear-gradient(135deg, rgba(255,183,77,0.55), rgba(255,224,178,0.35));
 }
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-<!DOCTYPE html>
-
 
 @keyframes petalFall{
   0%{transform:translateY(-20px) rotate(0deg);opacity:0;}
@@ -269,7 +184,6 @@ body::before{
   100%{transform:translateY(100vh) rotate(400deg) translateX(5px);opacity:0;}
 }
 
-/* Golden glow (replaces sun) */
 .sun-glow{
   position:fixed;
   top:20px;
@@ -288,7 +202,6 @@ body::before{
   50%{transform:scale(1.25);opacity:0.85;}
 }
 
-/* ===== HEADER ===== */
 .app-header{
   position:relative;
   z-index:2;
@@ -296,7 +209,6 @@ body::before{
   padding:24px 20px;
   margin:20px auto 15px;
   max-width:360px;
-  /* Menggunakan gambar kartini.png sebagai background */
   background: url('kartini.png') center center / cover no-repeat;
   border-radius:24px;
   border:2px solid var(--sky-main);
@@ -357,7 +269,6 @@ body::before{
   to{opacity:1;transform:translateY(0);}
 }
 
-/* ===== USER INFO BAR ===== */
 .user-bar{
   position:relative;z-index:2;
   max-width:480px;margin:0 auto 10px;
@@ -413,7 +324,6 @@ body::before{
 }
 .btn-logout:hover{background:var(--sky-main);color:#fff;}
 
-/* ===== TOOLBAR ===== */
 .toolbar{
   position:relative;z-index:2;
   max-width:480px;margin:0 auto 12px;
@@ -470,36 +380,140 @@ body::before{
 
 /* ===== QUICK MENU ===== */
 .quick-menu{
-  display:flex;gap:6px;
+  display:flex;gap:8px;
   margin:10px auto 15px;max-width:480px;
   position:relative;z-index:2;
 }
 
-.quick-btn{
-  flex:1;text-decoration:none;text-align:center;
-  padding:8px 6px;border-radius:10px;
-  font-size:10px;font-weight:700;color:#fff;
-  box-shadow:0 3px 10px rgba(0,0,0,0.15);
+.quick-btn-mona{
+  flex:1.5;
+  text-decoration:none;text-align:center;
+  padding:10px 8px;border-radius:14px;
+  color:#fff;
+  box-shadow:0 4px 18px rgba(106,27,154,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
   transition:transform 0.2s, box-shadow 0.2s;
   display:flex;align-items:center;justify-content:center;
-  gap:4px;border:none;cursor:pointer;
+  gap:3px;border:none;cursor:pointer;
   flex-direction:column;min-width:0;
+  position:relative;overflow:hidden;
+  min-height:82px;
+  background:url('mona.png') center center / cover no-repeat;
+  border:2px solid rgba(255,255,255,0.35);
 }
-.quick-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 4px 14px rgba(0,0,0,0.2);
+.quick-btn-mona::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(160deg, rgba(106,27,154,0.6) 0%, rgba(233,30,99,0.5) 100%);
+  border-radius:inherit;z-index:0;
+  transition:background 0.2s;
 }
-.quick-btn .btn-icon{font-size:16px;margin-bottom:2px;}
-.quick-btn .btn-text{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.quick-btn-mona::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:50%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
+  border-radius:14px 14px 0 0;pointer-events:none;z-index:0;
+}
+.quick-btn-mona:hover::before{
+  background:linear-gradient(160deg, rgba(106,27,154,0.75) 0%, rgba(233,30,99,0.65) 100%);
+}
+.quick-btn-mona:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(106,27,154,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.quick-btn-mona .btn-text{
+  font-size:clamp(14px,4vw,18px);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:100%;position:relative;z-index:1;
+  font-weight:800;letter-spacing:1px;
+}
+.quick-btn-mona .btn-subtitle{
+  font-size:clamp(6px,1.6vw,8px);white-space:normal;
+  line-height:1.3;max-width:100%;position:relative;z-index:1;
+  opacity:0.92;font-weight:600;margin-top:3px;
+  text-shadow:0 1px 3px rgba(0,0,0,0.35);
+}
 
-.quick-btn.hd{
-  background:linear-gradient(135deg, #ef5350 0%, #c62828 100%);
+.quick-btn-lab{
+  flex:1.2;
+  text-decoration:none;text-align:center;
+  padding:10px 4px;border-radius:14px;
+  color:#fff;
+  box-shadow:0 4px 18px rgba(2,136,209,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition:transform 0.2s, box-shadow 0.2s;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;min-width:0;
+  min-height:82px;border:none;cursor:pointer;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg, #01579b 0%, #0288d1 30%, #03a9f4 65%, #4fc3f7 100%);
 }
-.quick-btn.lab{
-  background:linear-gradient(135deg, var(--sky-main) 0%, var(--sky-dark) 100%);
+.quick-btn-lab::before{
+  content:'✚';
+  position:absolute;
+  font-size:70px;
+  right:-12px;bottom:-14px;
+  opacity:0.07;
+  transform:rotate(-20deg);
+  pointer-events:none;
+  color:#fff;
 }
-.quick-btn.history{
-  background:linear-gradient(135deg, var(--leaf-main) 0%, var(--leaf-dark) 100%);
+.quick-btn-lab::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  border-radius:14px 14px 0 0;pointer-events:none;
+}
+.quick-btn-lab:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(2,136,209,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.quick-btn-lab .btn-line{
+  font-size:clamp(20px,7vw,40px);
+  font-weight:800;
+  line-height:1.15;
+  letter-spacing:1.5px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.35);
+  position:relative;z-index:1;
+}
+
+.quick-btn-notes{
+  flex:1.2;
+  text-decoration:none;text-align:center;
+  padding:10px 4px;border-radius:14px;
+  color:#fff;
+  box-shadow:0 4px 18px rgba(46,125,50,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition:transform 0.2s, box-shadow 0.2s;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;min-width:0;
+  min-height:82px;border:none;cursor:pointer;
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg, #1b5e20 0%, #2e7d32 30%, #388e3c 65%, #66bb6a 100%);
+}
+.quick-btn-notes::before{
+  content:'✚';
+  position:absolute;
+  font-size:70px;
+  left:-12px;bottom:-14px;
+  opacity:0.07;
+  transform:rotate(20deg);
+  pointer-events:none;
+  color:#fff;
+}
+.quick-btn-notes::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:45%;
+  background:linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  border-radius:14px 14px 0 0;pointer-events:none;
+}
+.quick-btn-notes:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 28px rgba(46,125,50,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.quick-btn-notes .btn-line{
+  font-size:clamp(20px,7vw,40px);
+  font-weight:800;
+  line-height:1.15;
+  letter-spacing:1.5px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.35);
+  position:relative;z-index:1;
 }
 
 /* ===== KONTEN ===== */
@@ -578,7 +592,6 @@ body::before{
 .delete-btn{background:linear-gradient(135deg, #90a4ae 0%, #607d8b 100%);color:#fff;}
 .add-btn{background:linear-gradient(135deg, var(--accent) 0%, var(--leaf-dark) 100%);color:#fff;}
 
-/* ===== FLOATING SOCIAL FOOTER ===== */
 .social-footer{
   position:fixed;right:16px;bottom:20px;
   display:flex;flex-direction:column;align-items:center;
@@ -675,7 +688,6 @@ body::before{
 .wa-panel a:hover{padding-left:8px;color:var(--sky-deep);}
 .wa-panel a:last-child{border:none;}
 
-/* ===== MODAL LOGIN & REGISTER ===== */
 .modal-login{
   display:none;position:fixed;z-index:2000;inset:0;
   background:rgba(106,27,154,0.85);
@@ -755,7 +767,6 @@ body::before{
 }
 .guest-divider span{padding:0 12px;}
 
-/* ===== MODAL EDIT PROFILE ===== */
 .modal-profile{
   display:none;position:fixed;z-index:2000;inset:0;
   background:rgba(106,27,154,0.85);
@@ -854,7 +865,6 @@ body::before{
   box-shadow:0 5px 20px rgba(156,39,176,0.4);
 }
 
-/* ===== MODAL INPUT RECORD ===== */
 .modal-record{
   display:none;position:fixed;z-index:2000;inset:0;
   background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
@@ -914,7 +924,6 @@ body::before{
 .btn-save:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(156,39,176,0.4);}
 .btn-save:disabled{opacity:0.6;cursor:not-allowed;}
 
-/* ===== MODAL VIEW ===== */
 .modal-view{
   display:none;position:fixed;z-index:2000;inset:0;
   background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
@@ -973,7 +982,6 @@ body::before{
   color:#fff;font-size:13px;font-weight:700;
 }
 
-/* ===== MODAL HISTORY / BUKU CATATAN ===== */
 .modal-history{
   display:none;position:fixed;z-index:2000;inset:0;
   background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
@@ -1032,7 +1040,6 @@ body::before{
 
 .history-empty{text-align:center;padding:50px 20px;color:var(--sky-dark);font-size:14px;}
 
-/* ===== GUEST NOTICE ===== */
 .guest-notice{
   background:linear-gradient(135deg, var(--sky-light) 0%, var(--leaf-light) 100%);
   border:2px solid var(--sky-main);border-radius:14px;
@@ -1048,7 +1055,6 @@ body::before{
 }
 .guest-notice-btn:hover{transform:scale(1.05);}
 
-/* ===== TOAST ===== */
 .toast{
   position:fixed;bottom:100px;left:50%;
   transform:translateX(-50%) translateY(100px);
@@ -1060,7 +1066,6 @@ body::before{
 }
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* ===== LOADING ===== */
 .loading-spinner{
   display:inline-block;width:16px;height:16px;
   border:2px solid rgba(255,255,255,0.3);border-radius:50%;
@@ -1068,7 +1073,6 @@ body::before{
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ===== DECORATIVE ELEMENTS - Kartini themed ===== */
 .ornament{
   position:fixed;bottom:100px;font-size:26px;opacity:0.5;
   animation:floatKartini 5s ease-in-out infinite;
@@ -1082,51 +1086,6 @@ body::before{
   50%{transform:translateY(-10px) rotate(8deg)}
 }
 
-/* ===== MONA BUTTON ===== */
-.quick-btn-mona{
-  flex:1.8;
-  text-decoration:none;text-align:center;
-  padding:10px 8px;border-radius:10px;
-  color:#fff;
-  box-shadow:0 3px 10px rgba(0,0,0,0.15);
-  transition:transform 0.2s, box-shadow 0.2s;
-  display:flex;align-items:center;justify-content:center;
-  gap:3px;border:none;cursor:pointer;
-  flex-direction:column;min-width:0;
-  position:relative;overflow:hidden;
-  min-height:58px;
-  background:url('mona.png') center center / cover no-repeat;
-  border:2px solid rgba(255,255,255,0.4);
-}
-.quick-btn-mona::before{
-  content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg, rgba(106,27,154,0.55) 0%, rgba(233,30,99,0.45) 100%);
-  border-radius:inherit;z-index:0;
-  transition:background 0.2s;
-}
-.quick-btn-mona:hover::before{
-  background:linear-gradient(135deg, rgba(106,27,154,0.7) 0%, rgba(233,30,99,0.6) 100%);
-}
-.quick-btn-mona:hover{
-  transform:translateY(-2px);
-  box-shadow:0 4px 14px rgba(0,0,0,0.25);
-}
-.quick-btn-mona .btn-icon{
-  font-size:16px;margin-bottom:1px;position:relative;z-index:1;
-}
-.quick-btn-mona .btn-text{
-  font-size:13px;white-space:nowrap;overflow:hidden;
-  text-overflow:ellipsis;max-width:100%;position:relative;z-index:1;
-  font-weight:800;letter-spacing:0.5px;
-}
-.quick-btn-mona .btn-subtitle{
-  font-size:7px;white-space:normal;
-  line-height:1.3;max-width:100%;position:relative;z-index:1;
-  opacity:0.95;font-weight:600;margin-top:2px;
-  text-shadow:0 1px 2px rgba(0,0,0,0.3);
-}
-  
 @media (min-width:481px){
   body{max-width:520px;margin:0 auto;border-radius:0;}
 }
@@ -1141,25 +1100,25 @@ body::before{
   .search-box #searchDate{width:100px;font-size:13px}
   .card{padding:14px}
   .nama{font-size:15px}
-  .quick-btn{padding:6px 4px}
-  .quick-btn .btn-icon{font-size:14px}
-  .quick-btn .btn-text{font-size:8px}
   .youtube-btn, .tiktok-btn, .wa-btn{width:44px;height:44px}
   .footer-text{font-size:8px}
   .wa-panel{bottom:180px;width:200px}
   .modal-login-content{padding:0}
   .profile-avatar-preview{width:80px;height:80px;font-size:32px}
   .avatar-option{width:40px;height:40px;font-size:16px}
-  .quick-btn-mona{flex:1.5;min-height:50px;padding:8px 6px;}
-  .quick-btn-mona .btn-text{font-size:11px;}
-  .quick-btn-mona .btn-subtitle{font-size:6px;}
+  .quick-btn-mona{flex:1.3;min-height:72px;padding:8px 6px;}
+  .quick-btn-mona .btn-text{font-size:12px;}
+  .quick-btn-mona .btn-subtitle{font-size:5.5px;}
+  .quick-btn-lab,
+  .quick-btn-notes{flex:1.1;min-height:72px;padding:8px 3px;}
+  .quick-btn-lab .btn-line,
+  .quick-btn-notes .btn-line{font-size:clamp(16px,6vw,32px);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Clouds -->
 <div class="clouds-container">
   <div class="cloud cloud-1"></div>
   <div class="cloud cloud-2"></div>
@@ -1168,13 +1127,10 @@ body::before{
   <div class="cloud cloud-5"></div>
 </div>
 
-<!-- Flower Petals Container -->
 <div class="rain-container" id="rainContainer"></div>
 
-<!-- Golden Glow -->
 <div class="sun-glow"></div>
 
-<!-- HEADER -->
 <div class="app-header">
   <div class="header-icon">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1189,13 +1145,11 @@ body::before{
   </div>
 </div>
 
-<!-- GUEST NOTICE -->
 <div class="guest-notice" id="guestNotice" style="display:none;">
   <div class="guest-notice-text">Anda masuk sebagai Tamu. Beberapa fitur terbatas.</div>
   <button class="guest-notice-btn" onclick="showLoginFromGuest()">Login</button>
 </div>
 
-<!-- USER BAR -->
 <div class="user-bar" id="userBar" style="display:none;">
   <div class="user-info" onclick="openProfileModal()">
     <div class="user-avatar-container">
@@ -1214,7 +1168,6 @@ body::before{
   <button class="btn-logout" onclick="logout()">Keluar</button>
 </div>
 
-<!-- SEARCH -->
 <div class="toolbar">
   <div class="search-box">
     <input id="search" placeholder="Cari Nama / MR / Ruang..." onkeyup="cari()">
@@ -1231,30 +1184,26 @@ body::before{
   </div>
 </div>
 
-<!-- QUICK MENU -->
 <div class="quick-menu">
   <a href="https://bumimadinahdb26-cloud.github.io/asahginjal/" target="_blank" class="quick-btn-mona">
     <span class="btn-text">Mona</span>
     <span class="btn-subtitle">Monitoring Akses Pembuluh Darah untuk Cuci Darah</span>
   </a>
-  <a href="https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec" target="_blank" class="quick-btn lab">
-    <span class="btn-icon">🔬</span>
-    <span class="btn-text">Laborat</span>
+  <a href="https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec" target="_blank" class="quick-btn-lab">
+    <span class="btn-line">HASIL</span>
+    <span class="btn-line">LABORAT</span>
   </a>
-  <button class="quick-btn history" onclick="openHistoryModal()">
-    <span class="btn-icon">📋</span>
-    <span class="btn-text">Catatan</span>
+  <button class="quick-btn-notes" onclick="openHistoryModal()">
+    <span class="btn-line">BUKU</span>
+    <span class="btn-line">CATATAN</span>
   </button>
 </div>
-  
-<!-- HASIL -->
+
 <div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
 
-<!-- ORNAMEN - Kartini themed -->
 <div class="ornament left">🌸</div>
 <div class="ornament right">🌺</div>
 
-<!-- FLOAT SOCIAL FOOTER -->
 <div class="social-footer">
   <div class="footer-text">Created by Iman Waluyo</div>
   <a href="https://www.youtube.com/watch?v=nogsTKtyu84" target="_blank" class="youtube-btn" title="YouTube Malahayati">
@@ -1272,7 +1221,6 @@ body::before{
   </div>
 </div>
 
-<!-- PANEL WHATSAPP -->
 <div class="wa-panel" id="waPanel">
   <h4>WA Perawat HD <span onclick="toggleWA()">✕</span></h4>
   <a href="https://wa.me/6287812203039" target="_blank">Iman Waluyo</a>
@@ -1283,7 +1231,6 @@ body::before{
   <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
 </div>
 
-<!-- MODAL LOGIN -->
 <div id="modalLogin" class="modal-login show">
   <div class="modal-login-content">
     <div id="formLogin">
@@ -1349,7 +1296,6 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL EDIT PROFILE -->
 <div id="modalProfile" class="modal-profile">
   <div class="modal-profile-content">
     <div class="modal-profile-header">
@@ -1395,7 +1341,6 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL INPUT RECORD -->
 <div id="modalRecord" class="modal-record">
   <div class="modal-record-content">
     <div class="modal-record-header">
@@ -1464,7 +1409,6 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL NEW RECORD -->
 <div id="modalNewRecord" class="modal-record">
   <div class="modal-record-content">
     <div class="modal-record-header">
@@ -1538,7 +1482,6 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL VIEW -->
 <div id="modalView" class="modal-view">
   <div class="modal-view-content">
     <div class="modal-view-header">
@@ -1549,7 +1492,6 @@ body::before{
   </div>
 </div>
 
-<!-- MODAL HISTORY / BUKU CATATAN -->
 <div id="modalHistory" class="modal-history">
   <div class="modal-history-content">
     <div class="modal-record-header">
@@ -1565,13 +1507,11 @@ body::before{
   </div>
 </div>
 
-<!-- TOAST -->
 <div id="toast" class="toast">Berhasil!</div>
 
 <script>
-// ===== VARIABEL GLOBAL =====
 const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
-const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec"; 
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec";
 
 let dataPasien = [];
 let currentUser = null;
@@ -1579,11 +1519,9 @@ let isGuestMode = false;
 let currentViewData = null;
 let selectedAvatarColor = null;
 
-// ===== CREATE FLOWER PETALS =====
 function createRainDrops() {
   const container = document.getElementById('rainContainer');
   const dropCount = 50;
-  
   for (let i = 0; i < dropCount; i++) {
     const drop = document.createElement('div');
     drop.className = 'rain-drop';
@@ -1595,10 +1533,9 @@ function createRainDrops() {
   }
 }
 
-// ===== INISIALISASI =====
 document.addEventListener('DOMContentLoaded', function() {
   createRainDrops();
-  
+
   fetch(CSV_URL)
     .then(r => r.text())
     .then(t => {
@@ -1609,10 +1546,10 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(err => {
       console.error('Error loading data:', err);
     });
-  
+
   const savedUser = localStorage.getItem('hdAppUser');
   const savedGuestMode = localStorage.getItem('hdAppGuestMode');
-  
+
   if (savedUser) {
     currentUser = JSON.parse(savedUser);
     isGuestMode = false;
@@ -1621,12 +1558,11 @@ document.addEventListener('DOMContentLoaded', function() {
     isGuestMode = true;
     showApp();
   }
-  
+
   tick();
   setInterval(tick, 1000);
 });
 
-// ===== CLOCK =====
 function tick() {
   const c = document.getElementById('clock');
   const d = document.getElementById('clockDate');
@@ -1640,7 +1576,6 @@ function tick() {
   });
 }
 
-// ===== TOGGLE FORM LOGIN / REGISTER =====
 function showRegister() {
   document.getElementById('formLogin').style.display = 'none';
   document.getElementById('formRegister').style.display = 'block';
@@ -1661,7 +1596,6 @@ function showLoginFromGuest() {
   document.getElementById('modalLogin').classList.add('show');
 }
 
-// ===== LOGIN AS GUEST =====
 function loginAsGuest() {
   isGuestMode = true;
   localStorage.setItem('hdAppGuestMode', 'true');
@@ -1672,7 +1606,6 @@ function loginAsGuest() {
   showToast('Selamat datang, Tamu!');
 }
 
-// ===== REGISTER =====
 function doRegister() {
   const name = document.getElementById('registerName').value.trim();
   const ttl = document.getElementById('registerTTL').value.trim();
@@ -1680,35 +1613,35 @@ function doRegister() {
   const username = document.getElementById('registerUsername').value.trim().toLowerCase();
   const password = document.getElementById('registerPassword').value;
   const confirm = document.getElementById('registerConfirm').value;
-  
+
   const errorEl = document.getElementById('registerError');
-  
+
   if (!name || !ttl || !alamat || !username || !password || !confirm) {
     errorEl.textContent = 'Semua field harus diisi!';
     errorEl.style.display = 'block';
     return;
   }
-  
+
   if (password.length < 4) {
     errorEl.textContent = 'Kata sandi minimal 4 karakter!';
     errorEl.style.display = 'block';
     return;
   }
-  
+
   if (password !== confirm) {
     errorEl.textContent = 'Konfirmasi kata sandi tidak cocok!';
     errorEl.style.display = 'block';
     return;
   }
-  
+
   const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
-  
+
   if (registeredUsers.find(u => u.username === username)) {
     errorEl.textContent = 'Nama pengguna sudah digunakan!';
     errorEl.style.display = 'block';
     return;
   }
-  
+
   const newUser = {
     username: username,
     password: password,
@@ -1716,23 +1649,22 @@ function doRegister() {
     ttl: ttl,
     alamat: alamat
   };
-  
+
   registeredUsers.push(newUser);
   localStorage.setItem('hdAppRegisteredUsers', JSON.stringify(registeredUsers));
-  
+
   showToast('Pendaftaran berhasil! Silakan login.');
   showLogin();
   document.getElementById('loginUsername').value = username;
 }
 
-// ===== LOGIN =====
 function doLogin() {
   const username = document.getElementById('loginUsername').value.trim().toLowerCase();
   const password = document.getElementById('loginPassword').value;
-  
+
   const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
   let user = registeredUsers.find(u => u.username === username && u.password === password);
-  
+
   if (!user) {
     const defaultUsers = [
       { username: "iman", password: "123456", name: "Iman Waluyo", ttl: "Bandung, 01-01-1990", alamat: "Bandung" },
@@ -1744,7 +1676,7 @@ function doLogin() {
     ];
     user = defaultUsers.find(u => u.username === username && u.password === password);
   }
-  
+
   if (user) {
     currentUser = {
       username: user.username,
@@ -1765,7 +1697,7 @@ function doLogin() {
 
 function showApp() {
   document.getElementById('modalLogin').classList.remove('show');
-  
+
   if (isGuestMode) {
     document.getElementById('guestNotice').style.display = 'flex';
     document.getElementById('userBar').style.display = 'none';
@@ -1774,18 +1706,18 @@ function showApp() {
     document.getElementById('userBar').style.display = 'flex';
     updateUserDisplay();
   }
-  
+
   document.getElementById('hasil').innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
 }
 
 function updateUserDisplay() {
   document.getElementById('displayUserName').textContent = currentUser.name;
   document.getElementById('displayUserDetails').textContent = currentUser.ttl + ' | ' + currentUser.alamat;
-  
+
   const avatarEl = document.getElementById('userAvatar');
-  
+
   if (currentUser.avatarPhoto) {
-    avatarEl.innerHTML = `<img src="${currentUser.avatarPhoto}" alt="Avatar">`;
+    avatarEl.innerHTML = '<img src="' + currentUser.avatarPhoto + '" alt="Avatar">';
   } else if (currentUser.avatarColor) {
     avatarEl.style.background = currentUser.avatarColor;
     avatarEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
@@ -1807,21 +1739,20 @@ function logout() {
   showLogin();
 }
 
-// ===== MODAL PROFILE =====
 function openProfileModal() {
   if (!currentUser || isGuestMode) {
     showToast('Silakan login terlebih dahulu');
     return;
   }
-  
+
   document.getElementById('profileName').value = currentUser.name || '';
   document.getElementById('profileTTL').value = currentUser.ttl || '';
   document.getElementById('profileAlamat').value = currentUser.alamat || '';
-  
+
   const previewEl = document.getElementById('profileAvatarPreview');
-  
+
   if (currentUser.avatarPhoto) {
-    previewEl.innerHTML = `<img src="${currentUser.avatarPhoto}" alt="Avatar">`;
+    previewEl.innerHTML = '<img src="' + currentUser.avatarPhoto + '" alt="Avatar">';
   } else if (currentUser.avatarColor) {
     previewEl.style.background = currentUser.avatarColor;
     previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
@@ -1829,13 +1760,13 @@ function openProfileModal() {
     previewEl.style.background = 'linear-gradient(135deg, #CE93D8 0%, #FFB74D 100%)';
     previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
   }
-  
+
   document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
   if (currentUser.avatarColorIndex) {
-    const selectedEl = document.querySelector(`.avatar-option.color-${currentUser.avatarColorIndex}`);
+    const selectedEl = document.querySelector('.avatar-option.color-' + currentUser.avatarColorIndex);
     if (selectedEl) selectedEl.classList.add('selected');
   }
-  
+
   document.getElementById('modalProfile').classList.add('show');
   document.body.style.overflow = 'hidden';
 }
@@ -1851,7 +1782,7 @@ function handleAvatarUpload(event) {
     const reader = new FileReader();
     reader.onload = function(e) {
       const previewEl = document.getElementById('profileAvatarPreview');
-      previewEl.innerHTML = `<img src="${e.target.result}" alt="Avatar">`;
+      previewEl.innerHTML = '<img src="' + e.target.result + '" alt="Avatar">';
       currentUser.avatarPhoto = e.target.result;
       currentUser.avatarColor = null;
       currentUser.avatarColorIndex = null;
@@ -1864,7 +1795,7 @@ function handleAvatarUpload(event) {
 function selectAvatarColor(index, color) {
   selectedAvatarColor = { index: index, color: color };
   document.querySelectorAll('.avatar-option').forEach(el => el.classList.remove('selected'));
-  document.querySelector(`.avatar-option.color-${index}`).classList.add('selected');
+  document.querySelector('.avatar-option.color-' + index).classList.add('selected');
   const previewEl = document.getElementById('profileAvatarPreview');
   previewEl.style.background = color;
   previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
@@ -1877,27 +1808,25 @@ function saveProfile() {
   currentUser.name = document.getElementById('profileName').value.trim() || currentUser.name;
   currentUser.ttl = document.getElementById('profileTTL').value.trim() || currentUser.ttl;
   currentUser.alamat = document.getElementById('profileAlamat').value.trim() || currentUser.alamat;
-  
+
   localStorage.setItem('hdAppUser', JSON.stringify(currentUser));
-  
+
   const registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
   const userIndex = registeredUsers.findIndex(u => u.username === currentUser.username);
   if (userIndex > -1) {
-    registeredUsers[userIndex] = { ...registeredUsers[userIndex], ...currentUser };
+    registeredUsers[userIndex] = Object.assign({}, registeredUsers[userIndex], currentUser);
     localStorage.setItem('hdAppRegisteredUsers', JSON.stringify(registeredUsers));
   }
-  
+
   updateUserDisplay();
   closeProfileModal();
   showToast('Profil berhasil disimpan');
 }
 
-// ===== TOGGLE WA PANEL =====
 function toggleWA() {
   document.getElementById('waPanel').classList.toggle("show");
 }
 
-// ===== CHECK DATE INPUT =====
 function checkDate() {
   const wrapper = document.getElementById('dateWrapper');
   const input = document.getElementById('searchDate');
@@ -1908,7 +1837,6 @@ function checkDate() {
   }
 }
 
-// ===== PARSE TANGGAL =====
 function parseTanggal(t) {
   const b = {
     januari: 0, februari: 1, maret: 2, april: 3, mei: 4, juni: 5,
@@ -1919,7 +1847,6 @@ function parseTanggal(t) {
   return new Date(p[2], b[p[1]], p[0]);
 }
 
-// ===== GET TARGET TIME =====
 function getTarget(t, s) {
   const d = parseTanggal(t);
   if (!d) return new Date();
@@ -1927,21 +1854,20 @@ function getTarget(t, s) {
   return d;
 }
 
-// ===== CARI PASIEN =====
 function cari() {
   const k = document.getElementById('search').value.toLowerCase();
   const dateInput = document.getElementById('searchDate').value;
-  
+
   checkDate();
-  
+
   if (k.length < 2 && !dateInput) {
     document.getElementById('hasil').innerHTML = "Ketik minimal 2 karakter atau pilih tanggal";
     return;
   }
 
   let out = "";
-  
-  dataPasien.forEach((r, idx) => {
+
+  dataPasien.forEach(function(r, idx) {
     let isTextMatch = true;
     if (k.length >= 2) {
       isTextMatch = r.join(" ").toLowerCase().includes(k);
@@ -1954,7 +1880,7 @@ function cari() {
         const d = rowDate.getDate();
         const m = rowDate.getMonth() + 1;
         const y = rowDate.getFullYear();
-        const formattedRowDate = `${y}-${m < 10 ? '0' : ''}${m}-${d < 10 ? '0' : ''}${d}`;
+        const formattedRowDate = y + '-' + (m < 10 ? '0' : '') + m + '-' + (d < 10 ? '0' : '') + d;
         isDateMatch = (formattedRowDate === dateInput);
       } else {
         isDateMatch = false;
@@ -1965,7 +1891,7 @@ function cari() {
       const target = getTarget(r[4], r[7]);
       const selesai = new Date() > target;
       const sisa = target - new Date();
-      
+
       const pData = {
         nama: r[1],
         mr: r[0],
@@ -1980,43 +1906,46 @@ function cari() {
         sisa: sisa
       };
       const pDataStr = encodeURIComponent(JSON.stringify(pData));
-      
-      const shareText = `*JADWAL PASIEN HD*\n====================\nNama: ${r[1]}\nMR: XX${r[0].slice(-4)}\nRuang: ${r[2]}\nHari: ${r[3]}\nTanggal: ${r[4]}\nBed: ${r[5]}\nTim: ${r[6]}\nShift: ${r[7]}\nJam: ${r[8]}\n====================\n_Info Jadwal HD Malahayati_`;
+
+      const shareText = '*JADWAL PASIEN HD*\n====================\nNama: ' + r[1] + '\nMR: XX' + r[0].slice(-4) + '\nRuang: ' + r[2] + '\nHari: ' + r[3] + '\nTanggal: ' + r[4] + '\nBed: ' + r[5] + '\nTim: ' + r[6] + '\nShift: ' + r[7] + '\nJam: ' + r[8] + '\n====================\n_Info Jadwal HD Malahayati_';
       const shareTextEncoded = encodeURIComponent(shareText);
 
-      out += `
-      <div class="card ${selesai ? 'selesai' : ''}">
-        <div class="row">
-          <div class="nama">${r[1]}</div>
-          <div class="mr">MR<br><b>XX${r[0].slice(-4)}</b></div>
-        </div>
-        <div class="info">
-          Ruang: ${r[2]}<br>
-          Hari: ${r[3]}<br>
-          Tanggal: ${r[4]}<br>
-          Bed: ${r[5]}<br>
-          Tim: ${r[6]}<br>
-          <span class="badge">Shift ${r[7]}</span>
-          ${(!selesai && sisa > 0) ? `<div class="countdown">Mulai dalam ${Math.floor(sisa / 3600000)} jam</div>` : ""}
-          Jam: ${r[8]}<br>
-          <div style="margin-top:12px;">
-            <button class="action-btn record-btn" onclick='openRecordModal(decodeURIComponent("${pDataStr}"))'>Pencatatan</button>
-            <button class="action-btn view-btn" onclick='openViewModal(decodeURIComponent("${pDataStr}"))'>View</button>
-          </div>
-          <div style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;">
-            <a href="https://wa.me/?text=${shareTextEncoded}" target="_blank" class="action-btn wa-share-btn">WhatsApp</a>
-            <a href="https://t.me/share/url?url=&text=${shareTextEncoded}" target="_blank" class="action-btn tg-share-btn">Telegram</a>
-            <a href="sms:?body=${shareTextEncoded}" class="action-btn sms-btn">SMS</a>
-          </div>
-        </div>
-      </div>`;
+      let countdownHtml = '';
+      if (!selesai && sisa > 0) {
+        countdownHtml = '<div class="countdown">Mulai dalam ' + Math.floor(sisa / 3600000) + ' jam</div>';
+      }
+
+      out += '<div class="card ' + (selesai ? 'selesai' : '') + '">' +
+        '<div class="row">' +
+        '<div class="nama">' + r[1] + '</div>' +
+        '<div class="mr">MR<br><b>XX' + r[0].slice(-4) + '</b></div>' +
+        '</div>' +
+        '<div class="info">' +
+        'Ruang: ' + r[2] + '<br>' +
+        'Hari: ' + r[3] + '<br>' +
+        'Tanggal: ' + r[4] + '<br>' +
+        'Bed: ' + r[5] + '<br>' +
+        'Tim: ' + r[6] + '<br>' +
+        '<span class="badge">Shift ' + r[7] + '</span>' +
+        countdownHtml +
+        'Jam: ' + r[8] + '<br>' +
+        '<div style="margin-top:12px;">' +
+        '<button class="action-btn record-btn" onclick="openRecordModal(decodeURIComponent(\'' + pDataStr + '\'))">Pencatatan</button>' +
+        '<button class="action-btn view-btn" onclick="openViewModal(decodeURIComponent(\'' + pDataStr + '\'))">View</button>' +
+        '</div>' +
+        '<div style="margin-top:10px; display:flex; gap:6px; flex-wrap:wrap;">' +
+        '<a href="https://wa.me/?text=' + shareTextEncoded + '" target="_blank" class="action-btn wa-share-btn">WhatsApp</a>' +
+        '<a href="https://t.me/share/url?url=&text=' + shareTextEncoded + '" target="_blank" class="action-btn tg-share-btn">Telegram</a>' +
+        '<a href="sms:?body=' + shareTextEncoded + '" class="action-btn sms-btn">SMS</a>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
     }
   });
-  
+
   document.getElementById('hasil').innerHTML = out || "Data tidak ditemukan";
 }
 
-// ===== MODAL RECORD =====
 function openRecordModal(dataStr) {
   if (isGuestMode) {
     showToast('Silakan login untuk menggunakan fitur pencatatan');
@@ -2052,7 +1981,6 @@ function closeRecordModal() {
   document.body.style.overflow = '';
 }
 
-// ===== SIMPAN RECORD =====
 async function simpanRecord() {
   if (isGuestMode || !currentUser) {
     showToast('Silakan login terlebih dahulu');
@@ -2090,7 +2018,7 @@ async function simpanRecord() {
     });
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({ ...record, localId: Date.now() });
+    history.unshift(Object.assign({}, record, { localId: Date.now() }));
     if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     closeRecordModal();
@@ -2099,7 +2027,7 @@ async function simpanRecord() {
     console.error('Error saving record:', error);
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({ ...record, localId: Date.now(), syncStatus: 'pending' });
+    history.unshift(Object.assign({}, record, { localId: Date.now(), syncStatus: 'pending' }));
     if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     closeRecordModal();
@@ -2109,7 +2037,6 @@ async function simpanRecord() {
   btn.innerHTML = originalText;
 }
 
-// ===== MODAL NEW RECORD =====
 function openNewRecordModal() {
   if (isGuestMode) { showToast('Silakan login untuk menggunakan fitur ini'); return; }
   if (!currentUser) { showToast('Silakan login terlebih dahulu'); return; }
@@ -2164,7 +2091,7 @@ async function simpanNewRecord() {
     });
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({ ...record, localId: Date.now() });
+    history.unshift(Object.assign({}, record, { localId: Date.now() }));
     if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     closeNewRecordModal();
@@ -2174,7 +2101,7 @@ async function simpanNewRecord() {
     console.error('Error saving record:', error);
     const historyKey = 'hdAppHistory_' + currentUser.username;
     let history = JSON.parse(localStorage.getItem(historyKey) || '[]');
-    history.unshift({ ...record, localId: Date.now(), syncStatus: 'pending' });
+    history.unshift(Object.assign({}, record, { localId: Date.now(), syncStatus: 'pending' }));
     if (history.length > 100) history = history.slice(0, 100);
     localStorage.setItem(historyKey, JSON.stringify(history));
     closeNewRecordModal();
@@ -2185,60 +2112,33 @@ async function simpanNewRecord() {
   btn.innerHTML = originalText;
 }
 
-// ===== MODAL VIEW =====
 function openViewModal(dataStr) {
   try {
     const pData = typeof dataStr === 'string' ? JSON.parse(dataStr) : dataStr;
     currentViewData = pData;
-    const statusText = pData.selesai ? 'Sudah Selesai' : 
-      (pData.sisa > 0 ? `Dimulai dalam ${Math.floor(pData.sisa / 3600000)} jam ${Math.floor((pData.sisa % 3600000) / 60000)} menit` : 'Sedang Berlangsung');
-    const shareText = `*JADWAL PASIEN HD*\n====================\nNama: ${pData.nama}\nMR: XX${pData.mr.slice(-4)}\nRuang: ${pData.ruang}\nHari: ${pData.hari}\nTanggal: ${pData.tanggal}\nBed: ${pData.bed}\nTim: ${pData.tim}\nShift: ${pData.shift}\nJam: ${pData.jam}\n====================\n_Info Jadwal HD Malahayati_`;
+    const statusText = pData.selesai ? 'Sudah Selesai' :
+      (pData.sisa > 0 ? 'Dimulai dalam ' + Math.floor(pData.sisa / 3600000) + ' jam ' + Math.floor((pData.sisa % 3600000) / 60000) + ' menit' : 'Sedang Berlangsung');
+    const shareText = '*JADWAL PASIEN HD*\n====================\nNama: ' + pData.nama + '\nMR: XX' + pData.mr.slice(-4) + '\nRuang: ' + pData.ruang + '\nHari: ' + pData.hari + '\nTanggal: ' + pData.tanggal + '\nBed: ' + pData.bed + '\nTim: ' + pData.tim + '\nShift: ' + pData.shift + '\nJam: ' + pData.jam + '\n====================\n_Info Jadwal HD Malahayati_';
     const shareTextEncoded = encodeURIComponent(shareText);
-    const bodyHtml = `
-    <div class="view-card">
-      <div class="view-card-header">
-        <h3 class="view-patient-name">${pData.nama}</h3>
-        <div class="view-patient-mr">MR: XX${pData.mr.slice(-4)}</div>
-      </div>
-      <div class="view-card-body">
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">🏥</span>Ruang</span>
-          <span class="view-value">${pData.ruang}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">📅</span>Hari</span>
-          <span class="view-value">${pData.hari}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">📆</span>Tanggal</span>
-          <span class="view-value">${pData.tanggal}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">🛏️</span>Bed</span>
-          <span class="view-value">${pData.bed}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">👥</span>Tim</span>
-          <span class="view-value">${pData.tim}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">⏰</span>Shift</span>
-          <span class="view-badge">Shift ${pData.shift}</span>
-        </div>
-        <div class="view-item">
-          <span class="view-label"><span class="view-label-icon">🕐</span>Jam</span>
-          <span class="view-value">${pData.jam}</span>
-        </div>
-        <div style="text-align:center; padding:14px; background:linear-gradient(135deg, var(--sky-light) 0%, var(--leaf-light) 100%); border-radius:12px; margin-top:14px;">
-          <div style="font-size:13px; font-weight:700; color:var(--sky-deep);">${statusText}</div>
-        </div>
-        <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-          <a href="https://wa.me/?text=${shareTextEncoded}" target="_blank" class="action-btn wa-share-btn">Share WA</a>
-          <a href="https://t.me/share/url?url=&text=${shareTextEncoded}" target="_blank" class="action-btn tg-share-btn">Telegram</a>
-          <a href="sms:?body=${shareTextEncoded}" class="action-btn sms-btn">SMS</a>
-        </div>
-      </div>
-    </div>`;
+    const bodyHtml = '<div class="view-card">' +
+      '<div class="view-card-header">' +
+      '<h3 class="view-patient-name">' + pData.nama + '</h3>' +
+      '<div class="view-patient-mr">MR: XX' + pData.mr.slice(-4) + '</div>' +
+      '</div>' +
+      '<div class="view-card-body">' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">🏥</span>Ruang</span><span class="view-value">' + pData.ruang + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">📅</span>Hari</span><span class="view-value">' + pData.hari + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">📆</span>Tanggal</span><span class="view-value">' + pData.tanggal + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">🛏️</span>Bed</span><span class="view-value">' + pData.bed + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">👥</span>Tim</span><span class="view-value">' + pData.tim + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">⏰</span>Shift</span><span class="view-badge">Shift ' + pData.shift + '</span></div>' +
+      '<div class="view-item"><span class="view-label"><span class="view-label-icon">🕐</span>Jam</span><span class="view-value">' + pData.jam + '</span></div>' +
+      '<div style="text-align:center; padding:14px; background:linear-gradient(135deg, var(--sky-light) 0%, var(--leaf-light) 100%); border-radius:12px; margin-top:14px;"><div style="font-size:13px; font-weight:700; color:var(--sky-deep);">' + statusText + '</div></div>' +
+      '<div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">' +
+      '<a href="https://wa.me/?text=' + shareTextEncoded + '" target="_blank" class="action-btn wa-share-btn">Share WA</a>' +
+      '<a href="https://t.me/share/url?url=&text=' + shareTextEncoded + '" target="_blank" class="action-btn tg-share-btn">Telegram</a>' +
+      '<a href="sms:?body=' + shareTextEncoded + '" class="action-btn sms-btn">SMS</a>' +
+      '</div></div></div>';
     document.getElementById('modalViewBody').innerHTML = bodyHtml;
     document.getElementById('modalView').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -2253,7 +2153,6 @@ function closeViewModal() {
   currentViewData = null;
 }
 
-// ===== MODAL HISTORY =====
 function openHistoryModal() {
   if (isGuestMode) { showToast('Silakan login untuk mengakses buku catatan'); return; }
   if (!currentUser) { showToast('Silakan login terlebih dahulu'); return; }
@@ -2263,31 +2162,27 @@ function openHistoryModal() {
   if (history.length === 0) {
     html = '<div class="history-empty">Belum ada riwayat pencatatan<br><br>Klik "Tambah Catatan Baru" untuk membuat catatan</div>';
   } else {
-    history.forEach((item, idx) => {
-      html += `
-      <div class="history-item">
-        <div class="history-item-header">
-          <div>
-            <div class="history-date">${item.tanggal} - ${item.waktu}</div>
-            <div class="history-patient">${item.namaPasien} (MR: XX${item.mr.slice(-4)})</div>
-          </div>
-        </div>
-        <div class="history-data">
-          <div class="history-data-item"><label>BB Sebelum</label><span>${item.bbSebelum || '-'} kg</span></div>
-          <div class="history-data-item"><label>TD Sebelum</label><span>${item.tdSebelum || '-'} mmHg</span></div>
-          <div class="history-data-item"><label>BB Sesudah</label><span>${item.bbSesudah || '-'} kg</span></div>
-          <div class="history-data-item"><label>TD Sesudah</label><span>${item.tdSesudah || '-'} mmHg</span></div>
-          <div class="history-data-item"><label>Gol. Darah</label><span>${item.golonganDarah || '-'}</span></div>
-          <div class="history-data-item"><label>Tinggi Badan</label><span>${item.tinggiBadan || '-'} cm</span></div>
-        </div>
-        ${item.obat ? `<div style="margin-top:10px; font-size:12px; color:var(--sky-dark);"><strong>Obat:</strong> ${item.obat}</div>` : ''}
-        ${item.catatan ? `<div style="margin-top:4px; font-size:12px; color:var(--sky-dark);"><strong>Catatan:</strong> ${item.catatan}</div>` : ''}
-        <div class="history-actions">
-          <button class="action-btn pdf-btn" onclick="generatePDF(${idx})">📄 Cetak PDF</button>
-          <button class="action-btn wa-share-btn" onclick="shareViaWA(${idx})">📱 Kirim WA</button>
-          <button class="action-btn delete-btn" onclick="deleteHistory(${idx})">🗑️ Hapus</button>
-        </div>
-      </div>`;
+    history.forEach(function(item, idx) {
+      html += '<div class="history-item">' +
+        '<div class="history-item-header"><div>' +
+        '<div class="history-date">' + item.tanggal + ' - ' + item.waktu + '</div>' +
+        '<div class="history-patient">' + item.namaPasien + ' (MR: XX' + item.mr.slice(-4) + ')</div>' +
+        '</div></div>' +
+        '<div class="history-data">' +
+        '<div class="history-data-item"><label>BB Sebelum</label><span>' + (item.bbSebelum || '-') + ' kg</span></div>' +
+        '<div class="history-data-item"><label>TD Sebelum</label><span>' + (item.tdSebelum || '-') + ' mmHg</span></div>' +
+        '<div class="history-data-item"><label>BB Sesudah</label><span>' + (item.bbSesudah || '-') + ' kg</span></div>' +
+        '<div class="history-data-item"><label>TD Sesudah</label><span>' + (item.tdSesudah || '-') + ' mmHg</span></div>' +
+        '<div class="history-data-item"><label>Gol. Darah</label><span>' + (item.golonganDarah || '-') + '</span></div>' +
+        '<div class="history-data-item"><label>Tinggi Badan</label><span>' + (item.tinggiBadan || '-') + ' cm</span></div>' +
+        '</div>' +
+        (item.obat ? '<div style="margin-top:10px; font-size:12px; color:var(--sky-dark);"><strong>Obat:</strong> ' + item.obat + '</div>' : '') +
+        (item.catatan ? '<div style="margin-top:4px; font-size:12px; color:var(--sky-dark);"><strong>Catatan:</strong> ' + item.catatan + '</div>' : '') +
+        '<div class="history-actions">' +
+        '<button class="action-btn pdf-btn" onclick="generatePDF(' + idx + ')">📄 Cetak PDF</button>' +
+        '<button class="action-btn wa-share-btn" onclick="shareViaWA(' + idx + ')">📱 Kirim WA</button>' +
+        '<button class="action-btn delete-btn" onclick="deleteHistory(' + idx + ')">🗑️ Hapus</button>' +
+        '</div></div>';
     });
   }
   document.getElementById('historyList').innerHTML = html;
@@ -2300,7 +2195,6 @@ function closeHistoryModal() {
   document.body.style.overflow = '';
 }
 
-// ===== DELETE HISTORY =====
 function deleteHistory(idx) {
   if (isGuestMode || !currentUser) return;
   if (confirm('Yakin ingin menghapus riwayat ini?')) {
@@ -2315,7 +2209,6 @@ function deleteHistory(idx) {
   }
 }
 
-// ===== GENERATE PDF =====
 function generatePDF(idx) {
   if (isGuestMode || !currentUser) return;
   const historyKey = 'hdAppHistory_' + currentUser.username;
@@ -2337,13 +2230,13 @@ function generatePDF(idx) {
   doc.setFont('helvetica', 'bold');
   doc.text('Data Pasien:', 20, y); y += 8;
   doc.setFont('helvetica', 'normal');
-  doc.text(`Nama: ${item.namaPasien}`, 25, y); y += 6;
-  doc.text(`No. MR: XX${item.mr.slice(-4)}`, 25, y); y += 6;
-  doc.text(`Golongan Darah: ${item.golonganDarah || '-'}`, 25, y); y += 6;
-  doc.text(`Tinggi Badan: ${item.tinggiBadan || '-'} cm`, 25, y); y += 6;
-  doc.text(`Tanggal: ${item.tanggal}`, 25, y); y += 6;
-  doc.text(`Waktu: ${item.waktu}`, 25, y); y += 6;
-  doc.text(`Petugas: ${item.petugas}`, 25, y); y += 15;
+  doc.text('Nama: ' + item.namaPasien, 25, y); y += 6;
+  doc.text('No. MR: XX' + item.mr.slice(-4), 25, y); y += 6;
+  doc.text('Golongan Darah: ' + (item.golonganDarah || '-'), 25, y); y += 6;
+  doc.text('Tinggi Badan: ' + (item.tinggiBadan || '-') + ' cm', 25, y); y += 6;
+  doc.text('Tanggal: ' + item.tanggal, 25, y); y += 6;
+  doc.text('Waktu: ' + item.waktu, 25, y); y += 6;
+  doc.text('Petugas: ' + item.petugas, 25, y); y += 15;
   doc.setFont('helvetica', 'bold');
   doc.text('Data Pencatatan:', 20, y); y += 8;
   doc.autoTable({
@@ -2376,33 +2269,30 @@ function generatePDF(idx) {
   const pageHeight = doc.internal.pageSize.height;
   doc.setFontSize(8);
   doc.setFont('helvetica', 'italic');
-  doc.text(`Dicetak pada: ${new Date().toLocaleString('id-ID')}`, 105, pageHeight - 10, { align: 'center' });
-  const fileName = `HD_${item.namaPasien.replace(/\s+/g, '_')}_${item.tanggal.replace(/\//g, '-')}.pdf`;
+  doc.text('Dicetak pada: ' + new Date().toLocaleString('id-ID'), 105, pageHeight - 10, { align: 'center' });
+  const fileName = 'HD_' + item.namaPasien.replace(/\s+/g, '_') + '_' + item.tanggal.replace(/\//g, '-') + '.pdf';
   doc.save(fileName);
   showToast('PDF berhasil diunduh');
 }
 
-// ===== SHARE VIA WA =====
 function shareViaWA(idx) {
   if (isGuestMode || !currentUser) return;
   const historyKey = 'hdAppHistory_' + currentUser.username;
   const history = JSON.parse(localStorage.getItem(historyKey) || '[]');
   if (!history[idx]) { showToast('Data tidak ditemukan'); return; }
   const item = history[idx];
-  const text = `*CATATAN HEMODIALISA*\nRS Malahayati\n==================\nNama: ${item.namaPasien}\nMR: XX${item.mr.slice(-4)}\nGolongan Darah: ${item.golonganDarah || '-'}\nTinggi Badan: ${item.tinggiBadan || '-'} cm\nTanggal: ${item.tanggal}\nWaktu: ${item.waktu}\nPetugas: ${item.petugas}\n------------------\n*Sebelum HD:*\nBB: ${item.bbSebelum || '-'} kg\nTD: ${item.tdSebelum || '-'} mmHg\n\n*Sesudah HD:*\nBB: ${item.bbSesudah || '-'} kg\nTD: ${item.tdSesudah || '-'} mmHg\n------------------\n*Obat:* ${item.obat || '-'}\n*Catatan:* ${item.catatan || '-'}\n==================\n_Dicetak dari Aplikasi HD Malahayati_`;
+  const text = '*CATATAN HEMODIALISA*\nRS Malahayati\n==================\nNama: ' + item.namaPasien + '\nMR: XX' + item.mr.slice(-4) + '\nGolongan Darah: ' + (item.golonganDarah || '-') + '\nTinggi Badan: ' + (item.tinggiBadan || '-') + ' cm\nTanggal: ' + item.tanggal + '\nWaktu: ' + item.waktu + '\nPetugas: ' + item.petugas + '\n------------------\n*Sebelum HD:*\nBB: ' + (item.bbSebelum || '-') + ' kg\nTD: ' + (item.tdSebelum || '-') + ' mmHg\n\n*Sesudah HD:*\nBB: ' + (item.bbSesudah || '-') + ' kg\nTD: ' + (item.tdSesudah || '-') + ' mmHg\n------------------\n*Obat:* ' + (item.obat || '-') + '\n*Catatan:* ' + (item.catatan || '-') + '\n==================\n_Dicetak dari Aplikasi HD Malahayati_';
   const encodedText = encodeURIComponent(text);
-  window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+  window.open('https://wa.me/?text=' + encodedText, '_blank');
 }
 
-// ===== TOAST =====
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
 }
 
-// ===== CLOSE MODAL ON OUTSIDE CLICK =====
 document.getElementById('modalRecord').addEventListener('click', function(e) {
   if (e.target === this) closeRecordModal();
 });
@@ -2419,7 +2309,6 @@ document.getElementById('modalProfile').addEventListener('click', function(e) {
   if (e.target === this) closeProfileModal();
 });
 
-// ===== CLOSE MODAL ON ESCAPE KEY =====
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeRecordModal();
