@@ -12,23 +12,23 @@
 <style>
 :root{
   --white:#fff;
-  --sky-light:#F3E5F5;
-  --sky-main:#CE93D8;
-  --sky-dark:#9C27B0;
-  --sky-deep:#6A1B9A;
+  --sky-light:#E8F5E9;
+  --sky-main:#4CAF50;
+  --sky-dark:#2E7D32;
+  --sky-deep:#1B5E20;
   --leaf-light:#FFF8E1;
   --leaf-main:#FFB74D;
   --leaf-dark:#FF8F00;
   --leaf-deep:#E65100;
-  --cloud:#FFF8F0;
-  --rain:#F48FB1;
+  --cloud:#FFFDE7;
+  --rain:#FFD54F;
   --card:#ffffff;
-  --border:#E1BEE7;
+  --border:#A5D6A7;
   --text:#1b1b1b;
   --font:'Nunito', sans-serif;
   --font-display:'Quicksand', sans-serif;
   --wa-color:#25D366;
-  --print-color:#7b1fa2;
+  --print-color:#2E7D32;
   --danger-color:#e53935;
   --tiktok-color:#000000;
   --lab-color:#0288d1;
@@ -36,7 +36,7 @@
   --sms-color:#ff9800;
   --tel-color:#4caf50;
   --youtube-color:#FF0000;
-  --accent:#AB47BC;
+  --accent:#43A047;
   --hd-red:#d32f2f;
 }
 
@@ -45,11 +45,11 @@
 body{
   font-family:var(--font);
   background:linear-gradient(180deg,
-    #E1BEE7 0%,
-    #F8BBD0 25%,
-    #FCE4EC 50%,
-    #FFF8E1 78%,
-    #FFF3E0 100%
+    #C8E6C9 0%,
+    #E8F5E9 25%,
+    #FFF8E1 50%,
+    #FFFDE7 78%,
+    #FFF8E1 100%
   );
   color:var(--text);
   min-height:100vh;
@@ -67,8 +67,8 @@ body::before{
   inset:0;
   z-index:0;
   background-image:
-    radial-gradient(circle, rgba(156,39,176,0.04) 1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(233,30,99,0.03) 1px, transparent 1px);
+    radial-gradient(circle, rgba(27,94,32,0.04) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,143,0,0.03) 1px, transparent 1px);
   background-size:24px 24px, 16px 16px;
   background-position:0 0, 8px 8px;
   pointer-events:none;
@@ -84,7 +84,7 @@ body::before{
 
 .cloud{
   position:absolute;
-  background:rgba(255,248,240,0.92);
+  background:rgba(255,253,231,0.88);
   border-radius:100px;
   filter:blur(1px);
 }
@@ -152,36 +152,39 @@ body::before{
 
 .rain-drop{
   position:absolute;
-  border-radius:50% 0 50% 50%;
-  animation:petalFall linear infinite;
+  border-radius:50%;
+  animation:sparkleFall linear infinite;
 }
 
 .rain-drop:nth-child(3n+1){
-  width:9px;
-  height:12px;
-  background:linear-gradient(135deg, rgba(233,30,99,0.55), rgba(244,143,177,0.35));
+  width:8px;
+  height:8px;
+  background:radial-gradient(circle, rgba(255,183,77,0.7) 0%, rgba(255,143,0,0.2) 100%);
+  box-shadow:0 0 4px rgba(255,183,77,0.3);
 }
 
 .rain-drop:nth-child(3n+2){
-  width:7px;
-  height:10px;
-  background:linear-gradient(135deg, rgba(156,39,176,0.5), rgba(206,147,216,0.35));
+  width:6px;
+  height:6px;
+  background:radial-gradient(circle, rgba(76,175,80,0.65) 0%, rgba(46,125,50,0.2) 100%);
+  box-shadow:0 0 4px rgba(76,175,80,0.3);
 }
 
 .rain-drop:nth-child(3n){
-  width:6px;
-  height:9px;
-  background:linear-gradient(135deg, rgba(255,183,77,0.55), rgba(255,224,178,0.35));
+  width:7px;
+  height:7px;
+  background:radial-gradient(circle, rgba(255,193,7,0.7) 0%, rgba(255,160,0,0.2) 100%);
+  box-shadow:0 0 4px rgba(255,193,7,0.3);
 }
 
-@keyframes petalFall{
-  0%{transform:translateY(-20px) rotate(0deg);opacity:0;}
-  8%{opacity:0.75;}
-  25%{transform:translateY(25vh) rotate(100deg) translateX(12px);}
-  50%{transform:translateY(50vh) rotate(200deg) translateX(-8px);}
-  75%{transform:translateY(75vh) rotate(300deg) translateX(15px);}
-  92%{opacity:0.5;}
-  100%{transform:translateY(100vh) rotate(400deg) translateX(5px);opacity:0;}
+@keyframes sparkleFall{
+  0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:0;}
+  8%{opacity:0.8;}
+  25%{transform:translateY(25vh) rotate(90deg) translateX(10px) scale(0.8);}
+  50%{transform:translateY(50vh) rotate(180deg) translateX(-6px) scale(1.1);}
+  75%{transform:translateY(75vh) rotate(270deg) translateX(12px) scale(0.7);}
+  92%{opacity:0.4;}
+  100%{transform:translateY(100vh) rotate(360deg) translateX(4px) scale(0.5);opacity:0;}
 }
 
 .sun-glow{
@@ -190,7 +193,7 @@ body::before{
   right:20px;
   width:90px;
   height:90px;
-  background:radial-gradient(circle, rgba(255,183,77,0.35) 0%, rgba(255,143,0,0.12) 40%, transparent 70%);
+  background:radial-gradient(circle, rgba(255,183,77,0.4) 0%, rgba(255,143,0,0.15) 40%, transparent 70%);
   border-radius:50%;
   z-index:1;
   pointer-events:none;
@@ -212,7 +215,7 @@ body::before{
   background: url('kartini.png') center center / cover no-repeat;
   border-radius:24px;
   border:2px solid var(--sky-main);
-  box-shadow:0 8px 32px rgba(156,39,176,0.15), 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow:0 8px 32px rgba(46,125,50,0.15), 0 2px 8px rgba(0,0,0,0.08);
   animation:fadeInDown 0.8s ease-out;
   overflow:hidden;
 }
@@ -222,16 +225,16 @@ body::before{
   position:absolute;
   top:0;left:0;right:0;
   height:4px;
-  background:linear-gradient(90deg, var(--sky-main), var(--leaf-main), #E91E63, var(--sky-main));
+  background:linear-gradient(90deg, var(--sky-main), var(--leaf-main), #C62828, var(--sky-main));
 }
 
 .header-icon{
   width:60px;height:60px;
   margin:0 auto 12px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-main) 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   border-radius:16px;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 15px rgba(156,39,176,0.4);
+  box-shadow:0 4px 15px rgba(46,125,50,0.4);
 }
 
 .header-icon svg{width:32px;height:32px;fill:#fff;}
@@ -277,7 +280,7 @@ body::before{
   backdrop-filter:blur(8px);
   border-radius:16px;padding:12px 16px;
   border:2px solid var(--sky-main);
-  box-shadow:0 4px 15px rgba(156,39,176,0.1);
+  box-shadow:0 4px 15px rgba(46,125,50,0.1);
 }
 
 .user-info{
@@ -291,7 +294,7 @@ body::before{
 
 .user-avatar{
   width:44px;height:44px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-main) 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   font-size:18px;font-weight:700;color:#fff;
@@ -336,7 +339,7 @@ body::before{
   border:2px solid var(--sky-main);
   border-radius:30px;padding:0 8px 0 18px;
   position:relative;
-  box-shadow:0 4px 20px rgba(156,39,176,0.15);
+  box-shadow:0 4px 20px rgba(46,125,50,0.15);
 }
 
 .search-box #search{
@@ -369,12 +372,12 @@ body::before{
   border:none;cursor:pointer;padding:12px;
   font-size:18px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 3px 12px rgba(156,39,176,0.3);
+  box-shadow:0 3px 12px rgba(46,125,50,0.3);
   transition:transform 0.2s, box-shadow 0.2s;
 }
 .search-box button:hover{
   transform:scale(1.1);
-  box-shadow:0 5px 18px rgba(156,39,176,0.4);
+  box-shadow:0 5px 18px rgba(46,125,50,0.4);
 }
 .search-box button svg{width:20px;height:20px;fill:#fff;}
 
@@ -390,7 +393,7 @@ body::before{
   text-decoration:none;text-align:center;
   padding:10px 8px;border-radius:14px;
   color:#fff;
-  box-shadow:0 4px 18px rgba(106,27,154,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow:0 4px 18px rgba(27,94,32,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
   transition:transform 0.2s, box-shadow 0.2s;
   display:flex;align-items:center;justify-content:center;
   gap:3px;border:none;cursor:pointer;
@@ -403,7 +406,7 @@ body::before{
 .quick-btn-mona::before{
   content:'';
   position:absolute;inset:0;
-  background:linear-gradient(160deg, rgba(106,27,154,0.6) 0%, rgba(233,30,99,0.5) 100%);
+  background:linear-gradient(160deg, rgba(27,94,32,0.65) 0%, rgba(198,40,40,0.5) 100%);
   border-radius:inherit;z-index:0;
   transition:background 0.2s;
 }
@@ -414,11 +417,11 @@ body::before{
   border-radius:14px 14px 0 0;pointer-events:none;z-index:0;
 }
 .quick-btn-mona:hover::before{
-  background:linear-gradient(160deg, rgba(106,27,154,0.75) 0%, rgba(233,30,99,0.65) 100%);
+  background:linear-gradient(160deg, rgba(27,94,32,0.8) 0%, rgba(198,40,40,0.65) 100%);
 }
 .quick-btn-mona:hover{
   transform:translateY(-3px);
-  box-shadow:0 8px 28px rgba(106,27,154,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  box-shadow:0 8px 28px rgba(27,94,32,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .quick-btn-mona .btn-text{
   font-size:clamp(14px,4vw,18px);white-space:nowrap;overflow:hidden;
@@ -485,7 +488,7 @@ body::before{
   flex-direction:column;min-width:0;
   min-height:82px;border:none;cursor:pointer;
   position:relative;overflow:hidden;
-  background:linear-gradient(160deg, #1b5e20 0%, #2e7d32 30%, #388e3c 65%, #66bb6a 100%);
+  background:linear-gradient(160deg, #1B5E20 0%, #2E7D32 30%, #388E3C 65%, #66BB6A 100%);
 }
 .quick-btn-notes::before{
   content:'✚';
@@ -530,13 +533,13 @@ body::before{
   border:2px solid var(--sky-main);
   border-radius:18px;padding:16px;
   margin-bottom:14px;position:relative;
-  box-shadow:0 4px 20px rgba(156,39,176,0.1);
+  box-shadow:0 4px 20px rgba(46,125,50,0.1);
   text-align:left;
   transition:transform 0.2s, box-shadow 0.2s;
 }
 .card:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 25px rgba(156,39,176,0.15);
+  box-shadow:0 6px 25px rgba(46,125,50,0.15);
 }
 
 .card.selesai{
@@ -559,9 +562,9 @@ body::before{
 
 .badge{
   display:inline-block;padding:5px 12px;border-radius:20px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;font-size:11px;font-weight:700;
-  box-shadow:0 2px 8px rgba(156,39,176,0.3);
+  box-shadow:0 2px 8px rgba(46,125,50,0.3);
 }
 
 .countdown{
@@ -659,7 +662,7 @@ body::before{
 
 .wa-panel{
   position:fixed;right:16px;bottom:200px;width:220px;
-  background:linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(243,229,245,0.95) 100%);
+  background:linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(232,245,233,0.95) 100%);
   color:var(--text);border-radius:18px;padding:14px;
   box-shadow:0 10px 35px rgba(0,0,0,.2);
   border:2px solid var(--sky-main);
@@ -682,7 +685,7 @@ body::before{
 .wa-panel a{
   display:block;text-decoration:none;color:var(--sky-dark);
   font-size:13px;padding:8px 0;
-  border-bottom:1px solid rgba(156,39,176,0.15);
+  border-bottom:1px solid rgba(46,125,50,0.15);
   transition:padding-left 0.2s, color 0.2s;font-weight:600;
 }
 .wa-panel a:hover{padding-left:8px;color:var(--sky-deep);}
@@ -690,7 +693,7 @@ body::before{
 
 .modal-login{
   display:none;position:fixed;z-index:2000;inset:0;
-  background:rgba(106,27,154,0.85);
+  background:rgba(27,94,32,0.85);
   backdrop-filter:blur(10px);
   align-items:center;justify-content:center;
   overflow-y:auto;padding:20px 0;
@@ -713,7 +716,7 @@ body::before{
 
 .login-header{
   text-align:center;padding:24px 20px 16px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
 }
 .login-header h3{color:#fff;font-size:20px;margin-bottom:6px;}
 .login-header p{color:rgba(255,255,255,0.9);font-size:13px;}
@@ -730,14 +733,14 @@ body::before{
 
 .btn-login{
   width:100%;padding:14px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;border:none;border-radius:14px;
   font-size:15px;font-weight:700;cursor:pointer;
   transition:transform 0.2s, box-shadow 0.2s;
 }
 .btn-login:hover{
   transform:scale(1.02);
-  box-shadow:0 5px 20px rgba(156,39,176,0.4);
+  box-shadow:0 5px 20px rgba(46,125,50,0.4);
 }
 
 .btn-guest{
@@ -769,7 +772,7 @@ body::before{
 
 .modal-profile{
   display:none;position:fixed;z-index:2000;inset:0;
-  background:rgba(106,27,154,0.85);
+  background:rgba(27,94,32,0.85);
   backdrop-filter:blur(10px);
   align-items:center;justify-content:center;
   overflow-y:auto;padding:20px 0;
@@ -788,7 +791,7 @@ body::before{
 .modal-profile-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:18px 22px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
 }
 .modal-profile-header h4{margin:0;font-size:17px;color:#fff;}
 
@@ -805,12 +808,12 @@ body::before{
 
 .profile-avatar-preview{
   width:100px;height:100px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-main) 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   border-radius:50%;margin:0 auto 16px;
   display:flex;align-items:center;justify-content:center;
   font-size:40px;font-weight:700;color:#fff;overflow:hidden;
   border:4px solid var(--sky-light);
-  box-shadow:0 4px 20px rgba(156,39,176,0.25);
+  box-shadow:0 4px 20px rgba(46,125,50,0.25);
 }
 .profile-avatar-preview img{width:100%;height:100%;object-fit:cover;}
 
@@ -823,18 +826,18 @@ body::before{
   font-size:18px;font-weight:700;
 }
 .avatar-option:hover{border-color:var(--sky-main);transform:scale(1.1);}
-.avatar-option.selected{border-color:var(--sky-dark);box-shadow:0 0 12px rgba(156,39,176,0.5);}
+.avatar-option.selected{border-color:var(--sky-dark);box-shadow:0 0 12px rgba(46,125,50,0.5);}
 
-.avatar-option.color-1{background:linear-gradient(135deg, #CE93D8 0%, #9C27B0 100%);}
-.avatar-option.color-2{background:linear-gradient(135deg, #F48FB1 0%, #E91E63 100%);}
+.avatar-option.color-1{background:linear-gradient(135deg, #A5D6A7 0%, #2E7D32 100%);}
+.avatar-option.color-2{background:linear-gradient(135deg, #81C784 0%, #1B5E20 100%);}
 .avatar-option.color-3{background:linear-gradient(135deg, #FFB74D 0%, #FF8F00 100%); color:#5d4e37;}
-.avatar-option.color-4{background:linear-gradient(135deg, #EF9A9A 0%, #E53935 100%);}
-.avatar-option.color-5{background:linear-gradient(135deg, #A5D6A7 0%, #43A047 100%);}
-.avatar-option.color-6{background:linear-gradient(135deg, #90CAF9 0%, #1E88E5 100%);}
-.avatar-option.color-7{background:linear-gradient(135deg, #FFCC80 0%, #FB8C00 100%); color:#5d4e37;}
-.avatar-option.color-8{background:linear-gradient(135deg, #B39DDB 0%, #5E35B1 100%);}
-.avatar-option.color-9{background:linear-gradient(135deg, #F48FB1 0%, #AD1457 100%);}
-.avatar-option.color-10{background:linear-gradient(135deg, #CE93D8 0%, #FFB74D 100%);}
+.avatar-option.color-4{background:linear-gradient(135deg, #EF9A9A 0%, #C62828 100%);}
+.avatar-option.color-5{background:linear-gradient(135deg, #FFD54F 0%, #F9A825 100%); color:#5d4e37;}
+.avatar-option.color-6{background:linear-gradient(135deg, #90CAF9 0%, #1565C0 100%);}
+.avatar-option.color-7{background:linear-gradient(135deg, #FFCC80 0%, #E65100 100%); color:#5d4e37;}
+.avatar-option.color-8{background:linear-gradient(135deg, #CE93D8 0%, #6A1B9A 100%);}
+.avatar-option.color-9{background:linear-gradient(135deg, #80CBC4 0%, #00695C 100%);}
+.avatar-option.color-10{background:linear-gradient(135deg, #A5D6A7 0%, #FFB74D 100%);}
 
 .upload-photo-btn{
   background:linear-gradient(135deg, var(--leaf-main) 0%, var(--leaf-dark) 100%);
@@ -855,19 +858,19 @@ body::before{
 
 .btn-save-profile{
   width:100%;padding:14px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;border:none;border-radius:14px;
   font-size:15px;font-weight:700;cursor:pointer;
   margin-top:12px;transition:transform 0.2s, box-shadow 0.2s;
 }
 .btn-save-profile:hover{
   transform:scale(1.02);
-  box-shadow:0 5px 20px rgba(156,39,176,0.4);
+  box-shadow:0 5px 20px rgba(46,125,50,0.4);
 }
 
 .modal-record{
   display:none;position:fixed;z-index:2000;inset:0;
-  background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
+  background:rgba(27,94,32,0.85);backdrop-filter:blur(10px);
 }
 .modal-record.show{display:block;}
 
@@ -883,7 +886,7 @@ body::before{
 .modal-record-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:18px 22px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   border-radius:21px 21px 0 0;
   position:sticky;top:0;z-index:10;
 }
@@ -916,17 +919,17 @@ body::before{
 
 .btn-save{
   width:100%;padding:14px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;border:none;border-radius:14px;
   font-weight:700;cursor:pointer;margin-top:18px;
   font-size:15px;transition:transform 0.2s, box-shadow 0.2s;
 }
-.btn-save:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(156,39,176,0.4);}
+.btn-save:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(46,125,50,0.4);}
 .btn-save:disabled{opacity:0.6;cursor:not-allowed;}
 
 .modal-view{
   display:none;position:fixed;z-index:2000;inset:0;
-  background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
+  background:rgba(27,94,32,0.85);backdrop-filter:blur(10px);
 }
 .modal-view.show{display:block;}
 
@@ -942,7 +945,7 @@ body::before{
 .modal-view-header{
   display:flex;justify-content:space-between;align-items:center;
   padding:18px 22px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   border-radius:21px 21px 0 0;
   position:sticky;top:0;z-index:10;
 }
@@ -951,7 +954,7 @@ body::before{
 .view-card{background:#fff;border-radius:18px;overflow:hidden;margin:20px;}
 
 .view-card-header{
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 50%, var(--leaf-main) 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, #C62828 50%, var(--leaf-main) 100%);
   padding:20px;text-align:center;
 }
 .view-patient-name{font-size:22px;font-weight:700;color:#fff;margin:0;}
@@ -978,13 +981,13 @@ body::before{
 
 .view-badge{
   display:inline-block;padding:8px 18px;border-radius:20px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;font-size:13px;font-weight:700;
 }
 
 .modal-history{
   display:none;position:fixed;z-index:2000;inset:0;
-  background:rgba(106,27,154,0.85);backdrop-filter:blur(10px);
+  background:rgba(27,94,32,0.85);backdrop-filter:blur(10px);
 }
 .modal-history.show{display:block;}
 
@@ -1001,13 +1004,13 @@ body::before{
 
 .add-new-record-btn{
   width:100%;padding:14px;
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;border:none;border-radius:14px;
   font-size:14px;font-weight:700;cursor:pointer;
   display:flex;align-items:center;justify-content:center;gap:8px;
   transition:transform 0.2s, box-shadow 0.2s;
 }
-.add-new-record-btn:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(156,39,176,0.4);}
+.add-new-record-btn:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(46,125,50,0.4);}
 
 .history-list{padding:18px;}
 
@@ -1048,7 +1051,7 @@ body::before{
 }
 .guest-notice-text{font-size:13px;color:var(--sky-dark);font-weight:600;}
 .guest-notice-btn{
-  background:linear-gradient(135deg, var(--sky-main) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%);
   color:#fff;border:none;padding:8px 16px;border-radius:10px;
   font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;
   transition:transform 0.2s;
@@ -1058,7 +1061,7 @@ body::before{
 .toast{
   position:fixed;bottom:100px;left:50%;
   transform:translateX(-50%) translateY(100px);
-  background:linear-gradient(135deg, var(--sky-deep) 0%, #E91E63 100%);
+  background:linear-gradient(135deg, var(--sky-deep) 0%, var(--leaf-dark) 100%);
   color:#fff;padding:14px 28px;border-radius:30px;
   font-size:14px;font-weight:700;
   box-shadow:0 8px 30px rgba(0,0,0,0.3);z-index:3000;opacity:0;
@@ -1075,13 +1078,13 @@ body::before{
 
 .ornament{
   position:fixed;bottom:100px;font-size:26px;opacity:0.5;
-  animation:floatKartini 5s ease-in-out infinite;
+  animation:floatEdu 5s ease-in-out infinite;
   z-index:1;pointer-events:none;
 }
 .ornament.left{left:16px;animation-delay:0s}
 .ornament.right{right:100px;animation-delay:2.5s}
 
-@keyframes floatKartini{
+@keyframes floatEdu{
   0%, 100%{transform:translateY(0) rotate(0deg)}
   50%{transform:translateY(-10px) rotate(8deg)}
 }
@@ -1134,7 +1137,7 @@ body::before{
 <div class="app-header">
   <div class="header-icon">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+      <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
     </svg>
   </div>
   <div class="header-title">HD MALAHAYATI</div>
@@ -1201,8 +1204,8 @@ body::before{
 
 <div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
 
-<div class="ornament left">🌸</div>
-<div class="ornament right">🌺</div>
+<div class="ornament left">📚</div>
+<div class="ornament right">🎓</div>
 
 <div class="social-footer">
   <div class="footer-text">Created by Iman Waluyo</div>
@@ -1310,16 +1313,16 @@ body::before{
           📷 Upload Foto
         </button>
         <div class="avatar-options">
-          <div class="avatar-option color-1" onclick="selectAvatarColor(1, 'linear-gradient(135deg, #CE93D8 0%, #9C27B0 100%)')">A</div>
-          <div class="avatar-option color-2" onclick="selectAvatarColor(2, 'linear-gradient(135deg, #F48FB1 0%, #E91E63 100%)')">B</div>
+          <div class="avatar-option color-1" onclick="selectAvatarColor(1, 'linear-gradient(135deg, #A5D6A7 0%, #2E7D32 100%)')">A</div>
+          <div class="avatar-option color-2" onclick="selectAvatarColor(2, 'linear-gradient(135deg, #81C784 0%, #1B5E20 100%)')">B</div>
           <div class="avatar-option color-3" onclick="selectAvatarColor(3, 'linear-gradient(135deg, #FFB74D 0%, #FF8F00 100%)')">C</div>
-          <div class="avatar-option color-4" onclick="selectAvatarColor(4, 'linear-gradient(135deg, #EF9A9A 0%, #E53935 100%)')">D</div>
-          <div class="avatar-option color-5" onclick="selectAvatarColor(5, 'linear-gradient(135deg, #A5D6A7 0%, #43A047 100%)')">E</div>
-          <div class="avatar-option color-6" onclick="selectAvatarColor(6, 'linear-gradient(135deg, #90CAF9 0%, #1E88E5 100%)')">F</div>
-          <div class="avatar-option color-7" onclick="selectAvatarColor(7, 'linear-gradient(135deg, #FFCC80 0%, #FB8C00 100%)')">G</div>
-          <div class="avatar-option color-8" onclick="selectAvatarColor(8, 'linear-gradient(135deg, #B39DDB 0%, #5E35B1 100%)')">H</div>
-          <div class="avatar-option color-9" onclick="selectAvatarColor(9, 'linear-gradient(135deg, #F48FB1 0%, #AD1457 100%)')">I</div>
-          <div class="avatar-option color-10" onclick="selectAvatarColor(10, 'linear-gradient(135deg, #CE93D8 0%, #FFB74D 100%)')">J</div>
+          <div class="avatar-option color-4" onclick="selectAvatarColor(4, 'linear-gradient(135deg, #EF9A9A 0%, #C62828 100%)')">D</div>
+          <div class="avatar-option color-5" onclick="selectAvatarColor(5, 'linear-gradient(135deg, #FFD54F 0%, #F9A825 100%)')">E</div>
+          <div class="avatar-option color-6" onclick="selectAvatarColor(6, 'linear-gradient(135deg, #90CAF9 0%, #1565C0 100%)')">F</div>
+          <div class="avatar-option color-7" onclick="selectAvatarColor(7, 'linear-gradient(135deg, #FFCC80 0%, #E65100 100%)')">G</div>
+          <div class="avatar-option color-8" onclick="selectAvatarColor(8, 'linear-gradient(135deg, #CE93D8 0%, #6A1B9A 100%)')">H</div>
+          <div class="avatar-option color-9" onclick="selectAvatarColor(9, 'linear-gradient(135deg, #80CBC4 0%, #00695C 100%)')">I</div>
+          <div class="avatar-option color-10" onclick="selectAvatarColor(10, 'linear-gradient(135deg, #A5D6A7 0%, #FFB74D 100%)')">J</div>
         </div>
       </div>
       <div class="profile-form">
@@ -1722,7 +1725,7 @@ function updateUserDisplay() {
     avatarEl.style.background = currentUser.avatarColor;
     avatarEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
   } else {
-    avatarEl.style.background = 'linear-gradient(135deg, #CE93D8 0%, #FFB74D 100%)';
+    avatarEl.style.background = 'linear-gradient(135deg, #A5D6A7 0%, #FFB74D 100%)';
     avatarEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
   }
 }
@@ -1757,7 +1760,7 @@ function openProfileModal() {
     previewEl.style.background = currentUser.avatarColor;
     previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
   } else {
-    previewEl.style.background = 'linear-gradient(135deg, #CE93D8 0%, #FFB74D 100%)';
+    previewEl.style.background = 'linear-gradient(135deg, #A5D6A7 0%, #FFB74D 100%)';
     previewEl.innerHTML = currentUser.name.charAt(0).toUpperCase();
   }
 
@@ -2247,7 +2250,7 @@ function generatePDF(idx) {
       ['Tekanan Darah (mmHg)', item.tdSebelum || '-', item.tdSesudah || '-']
     ],
     theme: 'grid',
-    headStyles: { fillColor: [156, 39, 176] },
+    headStyles: { fillColor: [46, 125, 50] },
     margin: { left: 20, right: 20 }
   });
   y = doc.lastAutoTable.finalY + 15;
