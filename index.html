@@ -336,31 +336,31 @@ body::before{
 
 /* ===== QUICK MENU ===== */
 .quick-menu{display:flex;gap:8px;margin:10px auto 15px;max-width:480px;position:relative;z-index:2;}
-.quick-btn-mona{
+.quick-btn-monalisa{
   flex:1.5;text-decoration:none;text-align:center;padding:10px 8px;border-radius:14px;
   color:#fff;box-shadow:0 4px 18px rgba(27,94,32,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
   transition:transform 0.2s, box-shadow 0.2s;display:flex;align-items:center;justify-content:center;
   gap:3px;border:none;cursor:pointer;flex-direction:column;min-width:0;
   position:relative;overflow:hidden;min-height:82px;
-  background:url('mona.png') center center / cover no-repeat;border:2px solid rgba(255,255,255,0.35);
+  background:url('monalisa.png') center center / cover no-repeat;border:2px solid rgba(255,255,255,0.35);
 }
-.quick-btn-mona::before{
+.quick-btn-monalisa::before{
   content:'';position:absolute;inset:0;
   background:linear-gradient(160deg, rgba(27,94,32,0.65) 0%, rgba(198,40,40,0.5) 100%);
   border-radius:inherit;z-index:0;transition:background 0.2s;
 }
-.quick-btn-mona::after{
+.quick-btn-monalisa::after{
   content:'';position:absolute;top:0;left:0;right:0;height:50%;
   background:linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
   border-radius:14px 14px 0 0;pointer-events:none;z-index:0;
 }
-.quick-btn-mona:hover::before{background:linear-gradient(160deg, rgba(27,94,32,0.8) 0%, rgba(198,40,40,0.65) 100%);}
-.quick-btn-mona:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,94,32,0.4), inset 0 1px 0 rgba(255,255,255,0.15);}
-.quick-btn-mona .btn-text{
+.quick-btn-monalisa:hover::before{background:linear-gradient(160deg, rgba(27,94,32,0.8) 0%, rgba(198,40,40,0.65) 100%);}
+.quick-btn-monalisa:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,94,32,0.4), inset 0 1px 0 rgba(255,255,255,0.15);}
+.quick-btn-monalisa .btn-text{
   font-size:clamp(14px,4vw,18px);white-space:nowrap;overflow:hidden;
   text-overflow:ellipsis;max-width:100%;position:relative;z-index:1;font-weight:800;letter-spacing:1px;
 }
-.quick-btn-mona .btn-subtitle{
+.quick-btn-monalisa .btn-subtitle{
   font-size:clamp(6px,1.6vw,8px);white-space:normal;line-height:1.3;max-width:100%;
   position:relative;z-index:1;opacity:0.92;font-weight:600;margin-top:3px;
   text-shadow:0 1px 3px rgba(0,0,0,0.35);
@@ -920,9 +920,9 @@ body::before{
   .modal-login-content{padding:0}
   .profile-avatar-preview{width:80px;height:80px;font-size:32px}
   .avatar-option{width:40px;height:40px;font-size:16px}
-  .quick-btn-mona{flex:1.3;min-height:72px;padding:8px 6px;}
-  .quick-btn-mona .btn-text{font-size:12px;}
-  .quick-btn-mona .btn-subtitle{font-size:5.5px;}
+  .quick-btn-monalisa{flex:1.3;min-height:72px;padding:8px 6px;}
+  .quick-btn-monalisa .btn-text{font-size:12px;}
+  .quick-btn-monalisa .btn-subtitle{font-size:5.5px;}
   .quick-btn-lab, .quick-btn-notes{flex:1.1;min-height:72px;padding:8px 3px;}
   .quick-btn-lab .btn-line, .quick-btn-notes .btn-line{font-size:clamp(8px,3vw,16px);}
   .offline-bar{font-size:10px;padding:6px 12px;}
@@ -1028,8 +1028,8 @@ body::before{
 
 <!-- QUICK MENU -->
 <div class="quick-menu">
-  <a href="https://bumimadinahdb26-cloud.github.io/asahginjal/" target="_blank" class="quick-btn-mona">
-    <span class="btn-text">Mona</span>
+  <a href="https://bumimadinahdb26-cloud.github.io/asahginjal/" target="_blank" class="quick-btn-monalisa">
+    <span class="btn-text">monalisa</span>
     <span class="btn-subtitle">Monitoring Akses Pembuluh Darah untuk Cuci Darah</span>
   </a>
   <a href="https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec" target="_blank" class="quick-btn-lab">
