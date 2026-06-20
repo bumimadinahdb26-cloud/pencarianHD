@@ -38,15 +38,11 @@
   --hd-red:#d32f2f;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+
+/* ===== DYNAMIC SKY (TRANSISI SMOOTH) ===== */
 body{
   font-family:var(--font);
-  background:linear-gradient(180deg,
-    #B3E5FC 0%,
-    #E1F5FE 25%,
-    #FFF8E1 50%,
-    #FFFDE7 78%,
-    #FFF8E1 100%
-  );
+  background: linear-gradient(180deg, #FFAB91 0%, #FFE082 20%, #81D4FA 60%, #E1F5FE 100%);
   color:var(--text);
   min-height:100vh;
   min-height:100dvh;
@@ -55,7 +51,21 @@ body{
   padding-bottom:180px;
   overflow-x:hidden;
   position:relative;
+  transition: background 2.5s ease-in-out;
 }
+body.sky-pagi {
+  background: linear-gradient(180deg, #FFAB91 0%, #FFE082 20%, #81D4FA 60%, #E1F5FE 100%);
+}
+body.sky-siang {
+  background: linear-gradient(180deg, #0288D1 0%, #03A9F4 30%, #4FC3F7 60%, #B3E5FC 100%);
+}
+body.sky-sore {
+  background: linear-gradient(180deg, #4A148C 0%, #D84315 25%, #FF8F00 60%, #FFD54F 100%);
+}
+body.sky-malam {
+  background: linear-gradient(180deg, #000000 0%, #0D47A1 30%, #1A237E 70%, #283593 100%);
+}
+
 body::before{
   content:'';
   position:fixed;
@@ -67,6 +77,33 @@ body::before{
   background-size:24px 24px, 16px 16px;
   background-position:0 0, 8px 8px;
   pointer-events:none;
+  transition: opacity 2.5s ease;
+}
+body.sky-malam::before {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.04) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+}
+
+/* Stars Container */
+.stars-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2.5s ease-in-out;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+  box-shadow: 0 0 6px rgba(255,255,255,0.8);
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 .clouds-container{
@@ -75,6 +112,7 @@ body::before{
   z-index:1;
   pointer-events:none;
   overflow:hidden;
+  transition: opacity 2.5s ease-in-out, filter 2.5s ease-in-out;
 }
 .cloud{
   position:absolute;
@@ -128,6 +166,10 @@ body::before{
   to{transform:translateX(calc(-100vw - 200px))}
 }
 
+/* Cloud color adjust by time */
+body.sky-sore .clouds-container { filter: brightness(0.8) sepia(0.3); }
+body.sky-malam .clouds-container { opacity: 0.1; }
+
 .rain-container{
   position:fixed;
   inset:0;
@@ -165,18 +207,36 @@ body::before{
   100%{transform:translateY(100vh) rotate(360deg) translateX(4px) scale(0.5);opacity:0;}
 }
 
+/* Sun / Moon */
 .sun-glow{
   position:fixed;
   top:20px;right:20px;
   width:90px;height:90px;
-  background:radial-gradient(circle, rgba(255,183,77,0.4) 0%, rgba(255,143,0,0.15) 40%, transparent 70%);
   border-radius:50%;
   z-index:1;pointer-events:none;
   animation:sunPulse 6s ease-in-out infinite;
+  transition: background 2.5s ease-in-out, top 2.5s ease-in-out, right 2.5s ease-in-out, transform 2.5s ease-in-out, box-shadow 2.5s ease-in-out;
+}
+body.sky-pagi .sun-glow {
+  background: radial-gradient(circle, rgba(255,224,130,0.6) 0%, rgba(255,143,0,0.2) 40%, transparent 70%);
+  top: 60px; right: 60px; transform: scale(1);
+}
+body.sky-siang .sun-glow {
+  background: radial-gradient(circle, rgba(255,236,179,0.7) 0%, rgba(255,160,0,0.2) 40%, transparent 70%);
+  top: 20px; right: 20px; transform: scale(1.2);
+}
+body.sky-sore .sun-glow {
+  background: radial-gradient(circle, rgba(255,112,67,0.7) 0%, rgba(198,40,40,0.2) 40%, transparent 70%);
+  top: 150px; right: 30px; transform: scale(1.5);
+}
+body.sky-malam .sun-glow {
+  background: radial-gradient(circle, rgba(225,245,254,0.6) 0%, rgba(130,177,255,0.1) 40%, transparent 70%);
+  top: 80px; right: 50px; transform: scale(0.9);
+  box-shadow: 0 0 25px rgba(225,245,254,0.5);
 }
 @keyframes sunPulse{
-  0%,100%{transform:scale(1);opacity:0.6;}
-  50%{transform:scale(1.25);opacity:0.85;}
+  0%,100%{opacity:0.7;}
+  50%{opacity:1;}
 }
 
 /* ===== OFFLINE BAR ===== */
@@ -413,7 +473,8 @@ body::before{
 /* ===== HASIL PENCARIAN ===== */
 #hasil{
   position:relative;z-index:2;max-width:480px;margin:0 auto;
-  color:var(--sky-dark);text-align:center;font-size:14px;font-weight:600;
+  color:#ffffff;text-align:center;font-size:14px;font-weight:600;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 .card{
   background:rgba(255,255,255,0.98);backdrop-filter:blur(8px);
@@ -509,7 +570,7 @@ body::before{
 .wa-btn:hover{transform:scale(1.1);}
 .wa-btn img{width:24px;height:24px;}
 .footer-text{
-  font-size:9px;color:var(--sky-dark);text-shadow:0 1px 2px rgba(255,255,255,0.8);
+  font-size:9px;color:#ffffff;text-shadow:0 1px 3px rgba(0,0,0,0.5);
   white-space:nowrap;opacity:0.9;writing-mode:vertical-rl;text-orientation:mixed;
   transform:rotate(180deg);margin-top:4px;font-weight:600;
 }
@@ -939,6 +1000,9 @@ body::before{
   <button class="retry-btn" id="retryBtn" onclick="retryFetch()" style="display:none">Coba Lagi</button>
 </div>
 
+<!-- STARS (Untuk Malam) -->
+<div class="stars-container" id="stars-container"></div>
+
 <!-- CLOUDS -->
 <div class="clouds-container">
   <div class="cloud cloud-1"></div>
@@ -951,7 +1015,7 @@ body::before{
 <!-- RAIN -->
 <div class="rain-container" id="rainContainer"></div>
 
-<!-- SUN -->
+<!-- SUN / MOON -->
 <div class="sun-glow"></div>
 
 <!-- HEADER -->
@@ -1276,9 +1340,43 @@ var currentViewData = null;
 var menggunakanCache = false;
 
 /* ===========================================================
-   OFFLINE CACHE — localStorage (simpel, pasti jalan)
-   Menyimpan data CSV terakhir ke localStorage agar bisa
-   dipakai saat offline untuk pencarian.
+   DYNAMIC SKY CONTROLLER
+   =========================================================== */
+function createStars() {
+    var container = document.getElementById('stars-container');
+    for(var i=0; i<120; i++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        var size = Math.random() * 2 + 1;
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(star);
+    }
+}
+
+var skyPhases = ['pagi', 'siang', 'sore', 'malam'];
+var currentSky = 0;
+function updateSky() {
+    var phase = skyPhases[currentSky];
+    skyPhases.forEach(p => document.body.classList.remove('sky-' + p));
+    document.body.classList.add('sky-' + phase);
+    
+    var stars = document.getElementById('stars-container');
+    if (phase === 'malam') {
+        stars.style.opacity = '1';
+    } else {
+        stars.style.opacity = '0';
+    }
+    
+    currentSky = (currentSky + 1) % skyPhases.length;
+}
+
+/* ===========================================================
+   OFFLINE CACHE — localStorage
    =========================================================== */
 function simpanCache(data) {
   try {
@@ -1334,8 +1432,6 @@ function updateCacheUI(count, isCache) {
 
 /* ===========================================================
    SYNC QUEUE — localStorage
-   Menyimpan pencatatan yang belum berhasil dikirim ke server.
-   Saat kembali online, otomatis dikirim ulang.
    =========================================================== */
 function getSyncQueue() {
   try { return JSON.parse(localStorage.getItem('hd_sync_queue') || '[]'); }
@@ -1437,7 +1533,6 @@ async function fetchData() {
       rows.shift();
       dataPasien = rows.map(function(r) { return r.split(","); });
 
-      // Simpan ke cache untuk offline nanti
       simpanCache(dataPasien);
       console.log('Data dimuat dari server:', dataPasien.length, 'baris');
       return;
@@ -1446,7 +1541,6 @@ async function fetchData() {
     }
   }
 
-  // Offline atau fetch gagal → pakai cache
   var cacheData = muatCache();
   if (cacheData) {
     dataPasien = cacheData;
@@ -1469,7 +1563,6 @@ function retryFetch() {
     if (!menggunakanCache) {
       showToast('Data diperbarui dari server (' + dataPasien.length + ' pasien)');
       hideOfflineBar();
-      // Juga sync queue pencatatan yang pending
       if (getSyncQueue().length > 0) {
         setTimeout(prosesSyncQueue, 1000);
       }
@@ -1537,12 +1630,14 @@ function tick() {
 
 document.addEventListener('DOMContentLoaded', async function() {
   createRainDrops();
+  createStars(); // Buat bintang
+  updateSky(); // Set langit awal
+  setInterval(updateSky, 3000); // Siklus langit tiap 3 detik
+
   updateSyncBadge();
 
-  // Muat data pasien (server atau cache)
   await fetchData();
 
-  // Restore sesi login sebelumnya
   var savedUser = localStorage.getItem('hdAppUser');
   var savedGuest = localStorage.getItem('hdAppGuestMode');
 
@@ -1555,7 +1650,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     showApp();
   }
 
-  // Jam berjalan
   tick();
   setInterval(tick, 1000);
 });
@@ -1642,7 +1736,6 @@ function doLogin() {
   var user = registeredUsers.find(function(u) { return u.username === username && u.password === password; });
 
   if (!user) {
-    // Cek default users
     var defaultUsers = [
       { username: "iman", password: "123456", name: "Iman Waluyo", ttl: "Bandung, 01-01-1990", alamat: "Bandung" },
       { username: "ros", password: "123456", name: "Cik Ros", ttl: "Bandung, 02-02-1990", alamat: "Bandung" },
@@ -1667,7 +1760,6 @@ function doLogin() {
     document.getElementById('loginError').style.display = 'none';
     showApp();
 
-    // Setelah login, cek apakah ada pencatatan pending sync
     if (getSyncQueue().length > 0 && navigator.onLine) {
       setTimeout(prosesSyncQueue, 2000);
     }
@@ -1787,7 +1879,6 @@ function saveProfile() {
 
   localStorage.setItem('hdAppUser', JSON.stringify(currentUser));
 
-  // Update juga di registered users jika ada
   var registeredUsers = JSON.parse(localStorage.getItem('hdAppRegisteredUsers') || '[]');
   var idx = registeredUsers.findIndex(function(u) { return u.username === currentUser.username; });
   if (idx > -1) {
@@ -1850,13 +1941,11 @@ function cari() {
   var fromCache = menggunakanCache;
 
   dataPasien.forEach(function(r) {
-    // Filter teks
     var textMatch = true;
     if (keyword.length >= 2) {
       textMatch = r.join(" ").toLowerCase().includes(keyword);
     }
 
-    // Filter tanggal
     var dateMatch = true;
     if (dateInput) {
       var rowDate = parseTanggal(r[4]);
@@ -1877,7 +1966,6 @@ function cari() {
     var selesai = new Date() > target;
     var sisa = target - new Date();
 
-    // Data pasien untuk modal
     var pData = {
       nama: r[1], mr: r[0], ruang: r[2], hari: r[3],
       tanggal: r[4], bed: r[5], tim: r[6], shift: r[7],
@@ -1885,7 +1973,6 @@ function cari() {
     };
     var pDataStr = encodeURIComponent(JSON.stringify(pData));
 
-    // Teks share
     var shareText = '*JADWAL PASIEN HD*\n====================\nNama: ' + r[1] +
       '\nMR: XX' + r[0].slice(-4) + '\nRuang: ' + r[2] + '\nHari: ' + r[3] +
       '\nTanggal: ' + r[4] + '\nBed: ' + r[5] + '\nTim: ' + r[6] +
@@ -1893,7 +1980,6 @@ function cari() {
       '\n====================\n_Info Jadwal HD Malahayati_';
     var shareEncoded = encodeURIComponent(shareText);
 
-    // Countdown
     var countdownHtml = '';
     if (!selesai && sisa > 0) {
       countdownHtml = '<div class="countdown">Mulai dalam ' + Math.floor(sisa / 3600000) + ' jam</div>';
@@ -1930,7 +2016,6 @@ function cari() {
     out = "Data tidak ditemukan";
   }
 
-  // Tambah indikator offline di atas hasil
   if (fromCache && out !== "Data tidak ditemukan") {
     out = '<div style="max-width:480px;margin:0 auto 10px;position:relative;z-index:2;font-size:11px;color:var(--leaf-dark);font-weight:600;background:var(--leaf-light);padding:6px 14px;border-radius:10px;text-align:center;">Hasil dari data cache lokal (offline)</div>' + out;
   }
@@ -1950,7 +2035,6 @@ function openRecordModal(dataStr) {
     document.getElementById('recordMRDisplay').textContent = 'XX' + pData.mr.slice(-4);
     document.getElementById('recordMR').value = pData.mr;
     document.getElementById('recordNama').value = pData.nama;
-    // Reset semua input
     ['inputBBSebelum','inputTDSebelum','inputBBSesudah','inputTDSesudah','inputObat','inputCatatan'].forEach(function(id) {
       document.getElementById(id).value = '';
     });
@@ -1999,7 +2083,6 @@ async function simpanRecord() {
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span> Menyimpan...';
 
-  // SELALU simpan ke localStorage dulu (ini yang pasti berhasil)
   var historyKey = 'hdAppHistory_' + currentUser.username;
   var history = JSON.parse(localStorage.getItem(historyKey) || '[]');
   var localId = Date.now();
@@ -2008,7 +2091,6 @@ async function simpanRecord() {
   localStorage.setItem(historyKey, JSON.stringify(history));
 
   if (navigator.onLine) {
-    // Online: coba kirim ke server
     try {
       await fetch(GAS_URL, {
         method: 'POST', mode: 'no-cors',
@@ -2018,13 +2100,11 @@ async function simpanRecord() {
       closeRecordModal();
       showToast('Pencatatan berhasil disimpan & tersinkronisasi');
     } catch (error) {
-      // Gagal kirim → masukkan ke sync queue
       addToSyncQueue(record);
       closeRecordModal();
       showToast('Disimpan lokal — akan otomatis sync saat online');
     }
   } else {
-    // Offline → langsung ke sync queue
     addToSyncQueue(record);
     closeRecordModal();
     showToast('Disimpan offline — akan sync saat kembali online');
@@ -2041,7 +2121,6 @@ function openNewRecordModal() {
   if (isGuestMode) { showToast('Silakan login untuk menggunakan fitur ini'); return; }
   if (!currentUser) { showToast('Silakan login terlebih dahulu'); return; }
 
-  // Reset semua input
   ['newRecordNama','newRecordMR','newBBSebelum','newTDSebelum','newBBSesudah','newTDSesudah','newObat','newCatatan'].forEach(function(id) {
     document.getElementById(id).value = '';
   });
@@ -2090,7 +2169,6 @@ async function simpanNewRecord() {
   btn.disabled = true;
   btn.innerHTML = '<span class="loading-spinner"></span> Menyimpan...';
 
-  // SELALU simpan ke localStorage
   var historyKey = 'hdAppHistory_' + currentUser.username;
   var history = JSON.parse(localStorage.getItem(historyKey) || '[]');
   var localId = Date.now();
@@ -2106,7 +2184,7 @@ async function simpanNewRecord() {
         body: JSON.stringify(record)
       });
       closeNewRecordModal();
-      openHistoryModal(); // refresh list
+      openHistoryModal();
       showToast('Catatan berhasil disimpan & tersinkronisasi');
     } catch (error) {
       addToSyncQueue(record);
@@ -2187,7 +2265,6 @@ function openHistoryModal() {
   var historyKey = 'hdAppHistory_' + currentUser.username;
   var history = JSON.parse(localStorage.getItem(historyKey) || '[]');
 
-  // Cek mana yang masih pending sync
   var syncQueue = getSyncQueue();
   var pendingTimestamps = syncQueue.map(function(q) { return q.data.timestamp; });
 
@@ -2242,7 +2319,7 @@ function deleteHistory(idx) {
   if (idx > -1 && idx < history.length) {
     history.splice(idx, 1);
     localStorage.setItem(historyKey, JSON.stringify(history));
-    openHistoryModal(); // refresh
+    openHistoryModal();
     showToast('Riwayat berhasil dihapus');
   }
 }
