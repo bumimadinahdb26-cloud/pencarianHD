@@ -862,6 +862,45 @@ body::before{
   0%, 100%{transform:translateY(0) rotate(0deg)}
   50%{transform:translateY(-10px) rotate(8deg)}
 }
+/* Gaya Dasar Ornamen */
+.ornament {
+  font-size: 24px;
+  display: inline-block;
+  cursor: pointer;
+  
+  /* Hubungkan ke Animasi Fade-In */
+  animation: fadeIn 1.2s ease-out forwards;
+  
+  /* Efek Transisi Halus Saat Hover */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Animasi Fade-In (Muncul Perlahan) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Muncul sedikit dari bawah */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Efek Hover (Saat Kursor Menyentuh Ornamen) */
+.ornament:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6)); /* Efek kilau emas */
+}
+
+/* Efek Hover Khusus Ornamen Kiri (Goyang ke Kiri) */
+.ornament.left:hover {
+  transform: scale(1.2) rotate(-15deg);
+}
+
+/* Efek Hover Khusus Ornamen Kanan (Goyang ke Kanan) */
+.ornament.right:hover {
+  transform: scale(1.2) rotate(15deg);
+}
 
 /* ===== RESPONSIVE ===== */
 @media (min-width:481px){body{max-width:520px;margin:0 auto;border-radius:0;}}
@@ -1007,8 +1046,8 @@ body::before{
 <div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
 
 <!-- ORNAMENTS -->
-<div class="ornament left">📚</div>
-<div class="ornament right">🎓</div>
+<div class="ornament left">💻</div> 
+<div class="ornament right">🚀</div> 
 
 <!-- SOCIAL FOOTER -->
 <div class="social-footer">
