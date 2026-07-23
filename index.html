@@ -9,64 +9,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
 <style>
 :root{
-  --white:#fff;
-  --sky-light:#E1F5FE;
-  --sky-main:#03A9F4;
-  --sky-dark:#0288D1;
-  --sky-deep:#01579B;
-  --leaf-light:#FFF8E1;
-  --leaf-main:#FFB74D;
-  --leaf-dark:#FF8F00;
-  --leaf-deep:#E65100;
-  --cloud:#FFFDE7;
-  --rain:#FFD54F;
-  --card:#ffffff;
-  --border:#81D4FA;
-  --text:#1b1b1b;
-  --font:'Nunito', sans-serif;
-  --font-display:'Quicksand', sans-serif;
-  --wa-color:#25D366;
-  --print-color:#0288D1;
-  --danger-color:#e53935;
-  --tiktok-color:#000000;
-  --accent:#039BE5;
-  --hd-red:#d32f2f;
+  --white:#fff;--sky-light:#E1F5FE;--sky-main:#03A9F4;--sky-dark:#0288D1;--sky-deep:#01579B;
+  --leaf-light:#FFF8E1;--leaf-main:#FFB74D;--leaf-dark:#FF8F00;--leaf-deep:#E65100;
+  --cloud:#FFFDE7;--rain:#FFD54F;--card:#ffffff;--border:#81D4FA;--text:#1b1b1b;
+  --font:'Nunito', sans-serif;--font-display:'Quicksand', sans-serif;
+  --wa-color:#25D366;--danger-color:#e53935;--tiktok-color:#000000;--accent:#039BE5;--hd-red:#d32f2f;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-
 body{
   font-family:var(--font);
   background:linear-gradient(180deg,#FFAB91 0%,#FFE082 20%,#81D4FA 60%,#E1F5FE 100%);
-  color:var(--text);
-  min-height:100vh;min-height:100dvh;
+  color:var(--text);min-height:100vh;min-height:100dvh;
   margin:0;padding:16px;padding-bottom:180px;
-  overflow-x:hidden;position:relative;
-  transition:background 4s ease-in-out;
+  overflow-x:hidden;position:relative;transition:background 4s ease-in-out;
 }
 body.sky-pagi{background:linear-gradient(180deg,#FFAB91 0%,#FFE082 20%,#81D4FA 60%,#E1F5FE 100%)}
 body.sky-siang{background:linear-gradient(180deg,#0288D1 0%,#03A9F4 30%,#4FC3F7 60%,#B3E5FC 100%)}
 body.sky-sore{background:linear-gradient(180deg,#4A148C 0%,#D84315 25%,#FF8F00 60%,#FFD54F 100%)}
 body.sky-malam{background:linear-gradient(180deg,#000000 0%,#0D47A1 30%,#1A237E 70%,#283593 100%)}
-
 body::before{
   content:'';position:fixed;inset:0;z-index:0;
-  background-image:
-    radial-gradient(circle,rgba(1,87,155,.04) 1.5px,transparent 1.5px),
-    radial-gradient(circle,rgba(255,143,0,.03) 1px,transparent 1px);
-  background-size:24px 24px,16px 16px;
-  background-position:0 0,8px 8px;
-  pointer-events:none;transition:opacity 2.5s ease;
+  background-image:radial-gradient(circle,rgba(1,87,155,.04) 1.5px,transparent 1.5px),radial-gradient(circle,rgba(255,143,0,.03) 1px,transparent 1px);
+  background-size:24px 24px,16px 16px;background-position:0 0,8px 8px;pointer-events:none;transition:opacity 2.5s ease;
 }
-body.sky-malam::before{
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.04) 1.5px,transparent 1.5px),
-    radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px);
-}
-
+body.sky-malam::before{background-image:radial-gradient(circle,rgba(255,255,255,.04) 1.5px,transparent 1.5px),radial-gradient(circle,rgba(255,255,255,.03) 1px,transparent 1px)}
 .stars-container{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity 4s ease-in-out}
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle 3s infinite ease-in-out;box-shadow:0 0 6px rgba(255,255,255,.8)}
 @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.6)}50%{opacity:1;transform:scale(1.1)}}
-
 .clouds-container{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;transition:opacity 4s ease-in-out,filter 4s ease-in-out}
 .cloud{position:absolute;background:rgba(255,253,231,.88);border-radius:100px;filter:blur(1px)}
 .cloud::before,.cloud::after{content:'';position:absolute;background:inherit;border-radius:50%}
@@ -89,27 +58,13 @@ body.sky-malam::before{
 @keyframes cloudMoveReverse{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 200px))}}
 body.sky-sore .clouds-container{filter:brightness(.8) sepia(.3)}
 body.sky-malam .clouds-container{opacity:.1}
-
 .rain-container{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .rain-drop{position:absolute;border-radius:50%;animation:sparkleFall linear infinite}
 .rain-drop:nth-child(3n+1){width:8px;height:8px;background:radial-gradient(circle,rgba(255,183,77,.7) 0%,rgba(255,143,0,.2) 100%);box-shadow:0 0 4px rgba(255,183,77,.3)}
 .rain-drop:nth-child(3n+2){width:6px;height:6px;background:radial-gradient(circle,rgba(3,169,244,.65) 0%,rgba(2,136,209,.2) 100%);box-shadow:0 0 4px rgba(3,169,244,.3)}
 .rain-drop:nth-child(3n){width:7px;height:7px;background:radial-gradient(circle,rgba(255,193,7,.7) 0%,rgba(255,160,0,.2) 100%);box-shadow:0 0 4px rgba(255,193,7,.3)}
-@keyframes sparkleFall{
-  0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:0}
-  8%{opacity:.8}
-  25%{transform:translateY(25vh) rotate(90deg) translateX(10px) scale(.8)}
-  50%{transform:translateY(50vh) rotate(180deg) translateX(-6px) scale(1.1)}
-  75%{transform:translateY(75vh) rotate(270deg) translateX(12px) scale(.7)}
-  92%{opacity:.4}
-  100%{transform:translateY(100vh) rotate(360deg) translateX(4px) scale(.5);opacity:0}
-}
-
-.sun-glow{
-  position:fixed;top:20px;right:20px;width:90px;height:90px;border-radius:50%;
-  z-index:1;pointer-events:none;animation:sunPulse 6s ease-in-out infinite;
-  transition:background 4s ease-in-out,top 4s ease-in-out,right 4s ease-in-out,transform 4s ease-in-out,box-shadow 4s ease-in-out;
-}
+@keyframes sparkleFall{0%{transform:translateY(-20px) rotate(0deg) scale(1);opacity:0}8%{opacity:.8}25%{transform:translateY(25vh) rotate(90deg) translateX(10px) scale(.8)}50%{transform:translateY(50vh) rotate(180deg) translateX(-6px) scale(1.1)}75%{transform:translateY(75vh) rotate(270deg) translateX(12px) scale(.7)}92%{opacity:.4}100%{transform:translateY(100vh) rotate(360deg) translateX(4px) scale(.5);opacity:0}}
+.sun-glow{position:fixed;top:20px;right:20px;width:90px;height:90px;border-radius:50%;z-index:1;pointer-events:none;animation:sunPulse 6s ease-in-out infinite;transition:background 4s ease-in-out,top 4s ease-in-out,right 4s ease-in-out,transform 4s ease-in-out,box-shadow 4s ease-in-out}
 body.sky-pagi .sun-glow{background:radial-gradient(circle,rgba(255,224,130,.6) 0%,rgba(255,143,0,.2) 40%,transparent 70%);top:60px;right:60px;transform:scale(1)}
 body.sky-siang .sun-glow{background:radial-gradient(circle,rgba(255,236,179,.7) 0%,rgba(255,160,0,.2) 40%,transparent 70%);top:20px;right:20px;transform:scale(1.2)}
 body.sky-sore .sun-glow{background:radial-gradient(circle,rgba(255,112,67,.7) 0%,rgba(198,40,40,.2) 40%,transparent 70%);top:150px;right:30px;transform:scale(1.5)}
@@ -120,7 +75,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .offline-bar.show{transform:translateY(0)}
 .offline-bar.is-offline{background:linear-gradient(90deg,#e53935,#c62828);color:#fff;box-shadow:0 4px 16px rgba(229,57,53,.4)}
 .offline-bar.is-back{background:linear-gradient(90deg,var(--sky-main),var(--sky-dark));color:#fff;box-shadow:0 4px 16px rgba(3,169,244,.3)}
-.offline-bar.is-syncing{background:linear-gradient(90deg,var(--leaf-dark),var(--leaf-deep));color:#fff;box-shadow:0 4px 16px rgba(255,143,0,.3)}
 .offline-bar .dot{width:8px;height:8px;border-radius:50%;background:#fff;flex-shrink:0;animation:blink 1s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .offline-bar .retry-btn{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.5);color:#fff;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s}
@@ -178,15 +132,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .search-box button svg{width:20px;height:20px;fill:#fff}
 
 .quick-menu{display:flex;gap:8px;margin:10px auto 15px;max-width:480px;position:relative;z-index:2}
-
-.quick-btn-monalisa{
-  flex:1.5;text-decoration:none;text-align:center;padding:10px 8px;border-radius:14px;
-  color:#fff;box-shadow:0 4px 18px rgba(1,87,155,.3),inset 0 1px 0 rgba(255,255,255,.15);
-  transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;
-  gap:3px;border:none;cursor:pointer;flex-direction:column;min-width:0;
-  position:relative;overflow:hidden;min-height:82px;
-  background:url('monalisa.png') center center/cover no-repeat;border:2px solid rgba(255,255,255,.35);
-}
+.quick-btn-monalisa{flex:1.5;text-decoration:none;text-align:center;padding:10px 8px;border-radius:14px;color:#fff;box-shadow:0 4px 18px rgba(1,87,155,.3),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:3px;border:none;cursor:pointer;flex-direction:column;min-width:0;position:relative;overflow:hidden;min-height:82px;background:url('monalisa.png') center center/cover no-repeat;border:2px solid rgba(255,255,255,.35)}
 .quick-btn-monalisa::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(1,87,155,.65) 0%,rgba(198,40,40,.5) 100%);border-radius:inherit;z-index:0;transition:background .2s}
 .quick-btn-monalisa::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.18) 0%,transparent 100%);border-radius:14px 14px 0 0;pointer-events:none;z-index:0}
 .quick-btn-monalisa:hover::before{background:linear-gradient(160deg,rgba(1,87,155,.8) 0%,rgba(198,40,40,.65) 100%)}
@@ -194,42 +140,21 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .quick-btn-monalisa .btn-text{font-size:clamp(14px,4vw,18px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;position:relative;z-index:1;font-weight:800;letter-spacing:1px}
 .quick-btn-monalisa .btn-subtitle{font-size:clamp(6px,1.6vw,8px);white-space:normal;line-height:1.3;max-width:100%;position:relative;z-index:1;opacity:.92;font-weight:600;margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.35)}
 
-.quick-btn-tiktok{
-  flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
-  color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15);
-  transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,#1a1a2e 0%,#16213e 40%,#0f3460 70%,#000 100%);
-}
+.quick-btn-tiktok{flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(160deg,#1a1a2e 0%,#16213e 40%,#0f3460 70%,#000 100%)}
 .quick-btn-tiktok::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.12) 0%,transparent 100%);border-radius:14px 14px 0 0;pointer-events:none}
 .quick-btn-tiktok:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.15)}
 .quick-btn-tiktok .btn-icon{position:relative;z-index:1;margin-bottom:4px}
 .quick-btn-tiktok .btn-icon svg{width:28px;height:28px}
 .quick-btn-tiktok .btn-label{font-size:clamp(9px,2.8vw,12px);font-weight:800;letter-spacing:.5px;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 
-.quick-btn-wa{
-  flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
-  color:#fff;box-shadow:0 4px 18px rgba(37,211,102,.3),inset 0 1px 0 rgba(255,255,255,.2);
-  transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,#128C7E 0%,#25D366 50%,#4CAF50 100%);
-}
+.quick-btn-wa{flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;color:#fff;box-shadow:0 4px 18px rgba(37,211,102,.3),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(160deg,#128C7E 0%,#25D366 50%,#4CAF50 100%)}
 .quick-btn-wa::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.2) 0%,transparent 100%);border-radius:14px 14px 0 0;pointer-events:none}
 .quick-btn-wa:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,.45),inset 0 1px 0 rgba(255,255,255,.2)}
 .quick-btn-wa .btn-icon{position:relative;z-index:1;margin-bottom:4px}
 .quick-btn-wa .btn-icon svg{width:28px;height:28px}
 .quick-btn-wa .btn-label{font-size:clamp(9px,2.8vw,12px);font-weight:800;letter-spacing:.5px;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.3)}
 
-.quick-btn-note{
-  flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
-  color:#fff;box-shadow:0 4px 18px rgba(230,81,0,.3),inset 0 1px 0 rgba(255,255,255,.2);
-  transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;
-  flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,#BF360C 0%,#E65100 35%,#FF8F00 70%,#FFB74D 100%);
-}
+.quick-btn-note{flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;color:#fff;box-shadow:0 4px 18px rgba(230,81,0,.3),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;flex-direction:column;min-width:0;min-height:82px;border:none;cursor:pointer;position:relative;overflow:hidden;background:linear-gradient(160deg,#BF360C 0%,#E65100 35%,#FF8F00 70%,#FFB74D 100%)}
 .quick-btn-note::before{content:'';position:absolute;top:0;left:0;right:0;height:45%;background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,transparent 100%);border-radius:14px 14px 0 0;pointer-events:none}
 .quick-btn-note:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(230,81,0,.45),inset 0 1px 0 rgba(255,255,255,.2)}
 .quick-btn-note .btn-icon{position:relative;z-index:1;margin-bottom:4px}
@@ -248,7 +173,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .mr{font-size:11px;color:#78909c;text-align:right}
 .info{font-size:13px;line-height:1.7;margin-top:8px;color:var(--text)}
 .badge{display:inline-block;padding:5px 12px;border-radius:20px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 8px rgba(2,136,209,.3)}
-.countdown{margin-top:8px;font-size:12px;font-weight:700;color:var(--sky-dark);background:var(--sky-light);padding:6px 12px;border-radius:8px;display:inline-block}
 .action-btn{display:inline-block;margin:4px 3px;padding:8px 14px;border-radius:12px;font-size:12px;font-weight:700;border:none;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.12);transition:transform .2s,box-shadow .2s;text-decoration:none}
 .action-btn:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(0,0,0,.18)}
 .view-btn{background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);color:#fff}
@@ -413,22 +337,16 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 
 @media(min-width:481px){body{max-width:520px;margin:0 auto;border-radius:0}}
 @media(max-width:360px){
-  .header-title{font-size:18px}
-  .clock{font-size:18px}
-  .clock-date{font-size:11px}
+  .header-title{font-size:18px}.clock{font-size:18px}.clock-date{font-size:11px}
   .app-header{margin-top:15px;padding:20px 15px}
-  .search-box #search{font-size:13px}
-  .search-box #searchDate{width:100px;font-size:13px}
-  .card{padding:14px}
-  .nama{font-size:15px}
-  .youtube-btn,.wa-btn{width:44px;height:44px}
-  .footer-text{font-size:8px}
+  .search-box #search{font-size:13px}.search-box #searchDate{width:100px;font-size:13px}
+  .card{padding:14px}.nama{font-size:15px}
+  .youtube-btn,.wa-btn{width:44px;height:44px}.footer-text{font-size:8px}
   .wa-panel{bottom:180px;width:200px}
   .profile-avatar-preview{width:80px;height:80px;font-size:32px}
   .avatar-option{width:40px;height:40px;font-size:16px}
   .quick-btn-monalisa{flex:1.3;min-height:72px;padding:8px 6px}
-  .quick-btn-monalisa .btn-text{font-size:12px}
-  .quick-btn-monalisa .btn-subtitle{font-size:5.5px}
+  .quick-btn-monalisa .btn-text{font-size:12px}.quick-btn-monalisa .btn-subtitle{font-size:5.5px}
   .quick-btn-tiktok,.quick-btn-wa,.quick-btn-note{flex:1;min-height:72px;padding:8px 3px}
   .quick-btn-tiktok .btn-icon svg,.quick-btn-wa .btn-icon svg,.quick-btn-note .btn-icon svg{width:22px;height:22px}
   .quick-btn-tiktok .btn-label,.quick-btn-wa .btn-label,.quick-btn-note .btn-label{font-size:clamp(7px,2.2vw,10px)}
@@ -444,26 +362,16 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <span id="offlineBarText">Mode Offline</span>
   <button class="retry-btn" id="retryBtn" onclick="retryFetch()" style="display:none">Coba Lagi</button>
 </div>
-
 <div class="stars-container" id="stars-container"></div>
-
 <div class="clouds-container">
-  <div class="cloud cloud-1"></div>
-  <div class="cloud cloud-2"></div>
-  <div class="cloud cloud-3"></div>
-  <div class="cloud cloud-4"></div>
-  <div class="cloud cloud-5"></div>
+  <div class="cloud cloud-1"></div><div class="cloud cloud-2"></div><div class="cloud cloud-3"></div>
+  <div class="cloud cloud-4"></div><div class="cloud cloud-5"></div>
 </div>
-
 <div class="rain-container" id="rainContainer"></div>
-
 <div class="sun-glow"></div>
 
 <div class="app-header">
-  <div class="sync-queue-badge" id="syncQueueBadge">
-    <div class="sq-dot"></div>
-    <span id="syncQueueText">0 pending</span>
-  </div>
+  <div class="sync-queue-badge" id="syncQueueBadge"><div class="sq-dot"></div><span id="syncQueueText">0 pending</span></div>
   <div class="header-icon">
     <a href="https://docs.google.com/spreadsheets/d/1bNTq4ImrP-4bE7WPqYiWPLCGQVrM1fgGe7TI_3vv9a0/" target="_blank" title="Buka Google Sheet" style="text-decoration:none;display:block;width:60px;height:60px;margin:0 auto 12px;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(2,136,209,.4);border:2px solid var(--sky-main);transition:transform .2s,box-shadow .2s;cursor:pointer" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 6px 22px rgba(2,136,209,.5)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 15px rgba(2,136,209,.4)'">
       <img src="login.png" alt="Logo HD Malahayati" style="width:100%;height:100%;object-fit:cover;display:block">
@@ -486,14 +394,9 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <div class="user-info" onclick="openProfileModal()">
     <div class="user-avatar-container">
       <div class="user-avatar" id="userAvatar">U</div>
-      <div class="edit-avatar-btn" title="Edit Profil">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
-      </div>
+      <div class="edit-avatar-btn" title="Edit Profil"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg></div>
     </div>
-    <div>
-      <div class="user-name" id="displayUserName">-</div>
-      <div class="user-details" id="displayUserDetails">-</div>
-    </div>
+    <div><div class="user-name" id="displayUserName">-</div><div class="user-details" id="displayUserDetails">-</div></div>
   </div>
   <button class="btn-logout" onclick="logout()">Keluar</button>
 </div>
@@ -528,21 +431,15 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
     <span class="btn-subtitle">Monitoring Akses Pembuluh Darah untuk Hemodialisis Anda</span>
   </a>
   <a href="https://www.tiktok.com/@malahayatirssa" target="_blank" class="quick-btn-tiktok">
-    <span class="btn-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
-    </span>
+    <span class="btn-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></span>
     <span class="btn-label">TikTok</span>
   </a>
   <button class="quick-btn-wa" onclick="toggleWA()">
-    <span class="btn-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-    </span>
+    <span class="btn-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></span>
     <span class="btn-label">WhatsApp</span>
   </button>
   <button class="quick-btn-note" onclick="openNoteModal()">
-    <span class="btn-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
-    </span>
+    <span class="btn-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg></span>
     <span class="btn-label">Note</span>
   </button>
 </div>
@@ -554,12 +451,8 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 
 <div class="social-footer">
   <div class="footer-text">Created by Iman Waluyo</div>
-  <a href="https://www.youtube.com/watch?v=nogsTKtyu84" target="_blank" class="youtube-btn" title="YouTube Malahayati">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-  </a>
-  <div class="wa-btn" onclick="toggleWA()" title="WhatsApp Perawat HD">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-  </div>
+  <a href="https://www.youtube.com/watch?v=nogsTKtyu84" target="_blank" class="youtube-btn" title="YouTube Malahayati"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+  <div class="wa-btn" onclick="toggleWA()" title="WhatsApp Perawat HD"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"></div>
 </div>
 
 <div class="wa-panel" id="waPanel">
@@ -572,179 +465,39 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
 </div>
 
-<!-- MODAL: LOGIN -->
-<div id="modalLogin" class="modal-login show">
-  <div class="modal-login-content">
-    <div class="login-header">
-      <h3>HD Malahayati</h3>
-      <p>Silakan login untuk akses penuh</p>
-    </div>
-    <div class="login-form">
-      <div class="input-group">
-        <label>Nama Lengkap</label>
-        <input type="text" id="loginName" placeholder="Masukkan nama Anda">
-      </div>
-      <div class="input-group">
-        <label>Peran</label>
-        <select id="loginRole">
-          <option value="perawat">Perawat HD</option>
-          <option value="dokter">Dokter</option>
-          <option value="pendaftaran">Pendaftaran</option>
-          <option value="lainnya">Lainnya</option>
-        </select>
-      </div>
-      <button class="btn-login" onclick="doLogin()">Masuk</button>
-      <div class="guest-divider"><span>atau</span></div>
-      <button class="btn-guest" onclick="doGuest()">Masuk sebagai Tamu</button>
-      <div class="login-error" id="loginError">Nama tidak boleh kosong</div>
-    </div>
-  </div>
-</div>
+<div id="modalLogin" class="modal-login show"><div class="modal-login-content"><div class="login-header"><h3>HD Malahayati</h3><p>Silakan login untuk akses penuh</p></div><div class="login-form"><div class="input-group"><label>Nama Lengkap</label><input type="text" id="loginName" placeholder="Masukkan nama Anda"></div><div class="input-group"><label>Peran</label><select id="loginRole"><option value="perawat">Perawat HD</option><option value="dokter">Dokter</option><option value="pendaftaran">Pendaftaran</option><option value="lainnya">Lainnya</option></select></div><button class="btn-login" onclick="doLogin()">Masuk</button><div class="guest-divider"><span>atau</span></div><button class="btn-guest" onclick="doGuest()">Masuk sebagai Tamu</button><div class="login-error" id="loginError">Nama tidak boleh kosong</div></div></div></div>
 
-<!-- MODAL: PROFILE -->
-<div id="modalProfile" class="modal-profile">
-  <div class="modal-profile-content">
-    <div class="modal-profile-header">
-      <h4>Edit Profil</h4>
-      <div class="modal-close" onclick="closeProfileModal()">✕</div>
-    </div>
-    <div class="modal-profile-body">
-      <div class="profile-avatar-section">
-        <div class="profile-avatar-preview" id="profileAvatarPreview">U</div>
-        <div class="avatar-options" id="avatarOptions"></div>
-        <label class="upload-photo-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M5 4v2h14V4H5zm0 10h4v6h6v-6h4l-7-7-7 7z"/></svg>
-          Upload Foto
-          <input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)">
-        </label>
-      </div>
-      <div class="profile-form">
-        <div class="input-group">
-          <label>Nama</label>
-          <input type="text" id="profileName" placeholder="Nama Anda">
-        </div>
-        <div class="input-group">
-          <label>Peran</label>
-          <input type="text" id="profileRole" placeholder="Peran Anda" readonly>
-        </div>
-        <button class="btn-save-profile" onclick="saveProfile()">Simpan Profil</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="modalProfile" class="modal-profile"><div class="modal-profile-content"><div class="modal-profile-header"><h4>Edit Profil</h4><div class="modal-close" onclick="closeProfileModal()">✕</div></div><div class="modal-profile-body"><div class="profile-avatar-section"><div class="profile-avatar-preview" id="profileAvatarPreview">U</div><div class="avatar-options" id="avatarOptions"></div><label class="upload-photo-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M5 4v2h14V4H5zm0 10h4v6h6v-6h4l-7-7-7 7z"/></svg>Upload Foto<input type="file" accept="image/*" style="display:none" onchange="handlePhotoUpload(event)"></label></div><div class="profile-form"><div class="input-group"><label>Nama</label><input type="text" id="profileName" placeholder="Nama Anda"></div><div class="input-group"><label>Peran</label><input type="text" id="profileRole" placeholder="Peran Anda" readonly></div><button class="btn-save-profile" onclick="saveProfile()">Simpan Profil</button></div></div></div></div>
 
-<!-- MODAL: RECORD -->
-<div id="modalRecord" class="modal-record">
-  <div class="modal-record-content">
-    <div class="modal-record-header">
-      <h4 id="recordModalTitle">Tambah Record HD</h4>
-      <div class="modal-close" onclick="closeRecordModal()">✕</div>
-    </div>
-    <div class="modal-record-body">
-      <div class="record-card">
-        <h3 id="recordPatientName">-</h3>
-        <div class="input-row">
-          <div class="input-group">
-            <label>Berat Badan Sebelum (kg)</label>
-            <input type="number" id="recBB" step="0.1" placeholder="0.0">
-          </div>
-          <div class="input-group">
-            <label>Berat Badan Sesudah (kg)</label>
-            <input type="number" id="recBBS" step="0.1" placeholder="0.0">
-          </div>
-        </div>
-        <div class="input-row">
-          <div class="input-group">
-            <label>Tekanan Darah Sebelum</label>
-            <input type="text" id="recTDS" placeholder="120/80">
-          </div>
-          <div class="input-group">
-            <label>Tekanan Darah Sesudah</label>
-            <input type="text" id="recTDSA" placeholder="120/80">
-          </div>
-        </div>
-        <div class="input-row">
-          <div class="input-group">
-            <label>UF Target (ml)</label>
-            <input type="number" id="recUF" placeholder="0">
-          </div>
-          <div class="input-group">
-            <label>Durasi (jam)</label>
-            <input type="number" id="recDurasi" step="0.5" placeholder="4">
-          </div>
-        </div>
-        <div class="section-title">Informasi Tambahan</div>
-        <div class="input-group">
-          <label>Catatan Perawat</label>
-          <textarea id="recCatatan" rows="3" placeholder="Catatan tambahan..."></textarea>
-        </div>
-        <button class="btn-save" id="btnSaveRecord" onclick="saveRecord()">Simpan Record</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div id="modalRecord" class="modal-record"><div class="modal-record-content"><div class="modal-record-header"><h4 id="recordModalTitle">Tambah Record HD</h4><div class="modal-close" onclick="closeRecordModal()">✕</div></div><div class="modal-record-body"><div class="record-card"><h3 id="recordPatientName">-</h3><div class="input-row"><div class="input-group"><label>Berat Badan Sebelum (kg)</label><input type="number" id="recBB" step="0.1" placeholder="0.0"></div><div class="input-group"><label>Berat Badan Sesudah (kg)</label><input type="number" id="recBBS" step="0.1" placeholder="0.0"></div></div><div class="input-row"><div class="input-group"><label>Tekanan Darah Sebelum</label><input type="text" id="recTDS" placeholder="120/80"></div><div class="input-group"><label>Tekanan Darah Sesudah</label><input type="text" id="recTDSA" placeholder="120/80"></div></div><div class="input-row"><div class="input-group"><label>UF Target (ml)</label><input type="number" id="recUF" placeholder="0"></div><div class="input-group"><label>Durasi (jam)</label><input type="number" id="recDurasi" step="0.5" placeholder="4"></div></div><div class="section-title">Informasi Tambahan</div><div class="input-group"><label>Catatan Perawat</label><textarea id="recCatatan" rows="3" placeholder="Catatan tambahan..."></textarea></div><button class="btn-save" onclick="saveRecord()">Simpan Record</button></div></div></div></div>
 
-<!-- MODAL: VIEW -->
-<div id="modalView" class="modal-view">
-  <div class="modal-view-content">
-    <div class="modal-view-header">
-      <h4>Detail Pasien</h4>
-      <div class="modal-close" onclick="closeViewModal()">✕</div>
-    </div>
-    <div id="viewContent"></div>
-  </div>
-</div>
+<div id="modalView" class="modal-view"><div class="modal-view-content"><div class="modal-view-header"><h4>Detail Pasien</h4><div class="modal-close" onclick="closeViewModal()">✕</div></div><div id="viewContent"></div></div></div>
 
-<!-- MODAL: NOTE -->
-<div id="modalNote" class="modal-note">
-  <div class="modal-note-content">
-    <div class="modal-note-header">
-      <h4>
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
-        Catatan Harian
-      </h4>
-      <div class="modal-close" onclick="closeNoteModal()">✕</div>
-    </div>
-    <div class="modal-note-body">
-      <div class="note-input-card">
-        <div class="note-date-row">
-          <label>Tanggal</label>
-          <input type="date" id="noteDate">
-        </div>
-        <textarea id="noteText" placeholder="Tulis catatan di sini..."></textarea>
-        <button class="btn-save-note" onclick="saveNote()" style="margin-top:12px">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-          Simpan Catatan
-        </button>
-      </div>
-      <div class="note-list-title">
-        <span>Riwayat Catatan</span>
-        <span class="note-count" id="noteCount">0</span>
-      </div>
-      <div id="noteList"></div>
-    </div>
-  </div>
-</div>
+<div id="modalNote" class="modal-note"><div class="modal-note-content"><div class="modal-note-header"><h4><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>Catatan Harian</h4><div class="modal-close" onclick="closeNoteModal()">✕</div></div><div class="modal-note-body"><div class="note-input-card"><div class="note-date-row"><label>Tanggal</label><input type="date" id="noteDate"></div><textarea id="noteText" placeholder="Tulis catatan di sini..."></textarea><button class="btn-save-note" onclick="saveNote()" style="margin-top:12px"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>Simpan Catatan</button></div><div class="note-list-title"><span>Riwayat Catatan</span><span class="note-count" id="noteCount">0</span></div><div id="noteList"></div></div></div></div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-/* =====================================================
-   KONFIGURASI & STATE
-   ===================================================== */
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec';
+/* ===========================================================
+   KONFIGURASI
+   =========================================================== */
+var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
+var GAS_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec";
 
-let allData = [];       // Semua data dari server/cache
-let filteredData = [];   // Data hasil filter pencarian
-let currentUser = null;
-let currentRecordIdx = -1;
-let waPanelOpen = false;
-let searchTimer = null;  // Debounce timer
-let isFetching = false;  // Mencegah fetch ganda
+var dataPasien = [];
+var filteredData = [];
+var currentUser = null;
+var isGuestMode = false;
+var currentViewData = null;
+var currentRecordIdx = -1;
+var menggunakanCache = false;
+var waPanelOpen = false;
+var searchTimer = null;
+var isFetching = false;
 
-/* =====================================================
+/* ===========================================================
    INISIALISASI
-   ===================================================== */
+   =========================================================== */
 document.addEventListener('DOMContentLoaded', function() {
   initClock();
   initSky();
@@ -753,29 +506,30 @@ document.addEventListener('DOMContentLoaded', function() {
   initUser();
   initSearchListeners();
   setDefaultNoteDate();
+  loadDataFromCSV();
 });
 
-/* =====================================================
-   JAM & TANGGAL
-   ===================================================== */
+/* ===========================================================
+   JAM
+   =========================================================== */
 function initClock() {
   updateClock();
   setInterval(updateClock, 1000);
 }
 function updateClock() {
   var now = new Date();
-  var h = String(now.getHours()).padStart(2, '0');
-  var m = String(now.getMinutes()).padStart(2, '0');
-  var s = String(now.getSeconds()).padStart(2, '0');
-  document.getElementById('clock').textContent = h + ':' + m + ':' + s;
-  var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-  var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-  document.getElementById('clockDate').textContent = days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  document.getElementById('clock').textContent =
+    String(now.getHours()).padStart(2,'0') + ':' +
+    String(now.getMinutes()).padStart(2,'0') + ':' +
+    String(now.getSeconds()).padStart(2,'0');
+  var days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  var months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  document.getElementById('clockDate').textContent = days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
 }
 
-/* =====================================================
-   DINAMIS LANGIT
-   ===================================================== */
+/* ===========================================================
+   LANGIT DINAMIS
+   =========================================================== */
 function initSky() {
   updateSky();
   setInterval(updateSky, 60000);
@@ -789,280 +543,290 @@ function updateSky() {
   else document.body.classList.add('sky-malam');
 }
 
-/* =====================================================
+/* ===========================================================
    BINTANG
-   ===================================================== */
+   =========================================================== */
 function initStars() {
   var c = document.getElementById('stars-container');
   for (var i = 0; i < 60; i++) {
     var s = document.createElement('div');
     s.className = 'star';
-    var size = Math.random() * 3 + 1;
-    s.style.width = size + 'px';
-    s.style.height = size + 'px';
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top = Math.random() * 60 + '%';
-    s.style.animationDelay = (Math.random() * 5) + 's';
-    s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    var size = Math.random()*3+1;
+    s.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+Math.random()*100+'%;top:'+Math.random()*60+'%;animation-delay:'+(Math.random()*5)+'s;animation-duration:'+(Math.random()*3+2)+'s';
     c.appendChild(s);
   }
-  var observer = new MutationObserver(function() {
-    c.style.opacity = document.body.classList.contains('sky-malam') ? '1' : '0';
-  });
-  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(function(){ c.style.opacity = document.body.classList.contains('sky-malam') ? '1' : '0'; }).observe(document.body, {attributes:true,attributeFilter:['class']});
   updateSky();
 }
 
-/* =====================================================
-   HUJAN SPARKLE
-   ===================================================== */
+/* ===========================================================
+   HUJAN
+   =========================================================== */
 function initRain() {
   var c = document.getElementById('rainContainer');
   for (var i = 0; i < 25; i++) {
     var d = document.createElement('div');
     d.className = 'rain-drop';
-    d.style.left = Math.random() * 100 + '%';
-    d.style.animationDuration = (Math.random() * 6 + 4) + 's';
-    d.style.animationDelay = (Math.random() * 8) + 's';
+    d.style.cssText = 'left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*6+4)+'s;animation-delay:'+(Math.random()*8)+'s';
     c.appendChild(d);
   }
 }
 
-/* =====================================================
+/* ===========================================================
    USER / LOGIN
-   ===================================================== */
+   =========================================================== */
 function initUser() {
   var saved = localStorage.getItem('hdUser');
-  if (saved) {
-    try {
-      currentUser = JSON.parse(saved);
-      showUserUI();
-    } catch(e) {
-      localStorage.removeItem('hdUser');
-    }
-  }
-  // Muat data pasien segera (tidak perlu tunggu login)
-  loadData();
+  if (saved) { try { currentUser = JSON.parse(saved); showUserUI(); } catch(e) { localStorage.removeItem('hdUser'); } }
 }
-
 function doLogin() {
   var name = document.getElementById('loginName').value.trim();
-  if (!name) {
-    document.getElementById('loginError').style.display = 'block';
-    return;
-  }
-  document.getElementById('loginError').style.display = 'none';
+  if (!name) { document.getElementById('loginError').style.display='block'; return; }
+  document.getElementById('loginError').style.display='none';
   var role = document.getElementById('loginRole').value;
-  var roleLabels = { perawat: 'Perawat HD', dokter: 'Dokter', pendaftaran: 'Pendaftaran', lainnya: 'Lainnya' };
-  currentUser = { name: name, role: roleLabels[role] || role, isGuest: false, avatar: null, photo: null };
+  var rl = {perawat:'Perawat HD',dokter:'Dokter',pendaftaran:'Pendaftaran',lainnya:'Lainnya'};
+  currentUser = {name:name,role:rl[role]||role,isGuest:false,avatar:null,photo:null};
+  isGuestMode = false;
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
   showUserUI();
   document.getElementById('modalLogin').classList.remove('show');
-  showToast('Selamat datang, ' + name + '!');
+  showToast('Selamat datang, '+name+'!');
 }
-
 function doGuest() {
-  currentUser = { name: 'Tamu', role: 'Tamu', isGuest: true, avatar: null, photo: null };
+  currentUser = {name:'Tamu',role:'Tamu',isGuest:true,avatar:null,photo:null};
+  isGuestMode = true;
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
   showUserUI();
   document.getElementById('modalLogin').classList.remove('show');
 }
-
-function showLoginFromGuest() {
-  document.getElementById('modalLogin').classList.add('show');
-}
-
+function showLoginFromGuest() { document.getElementById('modalLogin').classList.add('show'); }
 function logout() {
-  currentUser = null;
+  currentUser = null; isGuestMode = false;
   localStorage.removeItem('hdUser');
-  document.getElementById('userBar').style.display = 'none';
-  document.getElementById('guestNotice').style.display = 'none';
+  document.getElementById('userBar').style.display='none';
+  document.getElementById('guestNotice').style.display='none';
   document.getElementById('modalLogin').classList.add('show');
   showToast('Berhasil keluar');
 }
-
 function showUserUI() {
   if (!currentUser) return;
-  if (currentUser.isGuest) {
-    document.getElementById('guestNotice').style.display = 'flex';
-    document.getElementById('userBar').style.display = 'none';
+  if (isGuestMode || currentUser.isGuest) {
+    document.getElementById('guestNotice').style.display='flex';
+    document.getElementById('userBar').style.display='none';
   } else {
-    document.getElementById('guestNotice').style.display = 'none';
-    document.getElementById('userBar').style.display = 'flex';
+    document.getElementById('guestNotice').style.display='none';
+    document.getElementById('userBar').style.display='flex';
     document.getElementById('displayUserName').textContent = currentUser.name;
     document.getElementById('displayUserDetails').textContent = currentUser.role;
     updateAvatarDisplay();
   }
 }
-
 function updateAvatarDisplay() {
   var el = document.getElementById('userAvatar');
-  if (currentUser.photo) {
-    el.innerHTML = '<img src="' + currentUser.photo + '" alt="avatar">';
-  } else if (currentUser.avatar) {
-    el.textContent = currentUser.avatar;
-  } else {
-    el.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
-  }
+  if (currentUser.photo) el.innerHTML = '<img src="'+currentUser.photo+'" alt="avatar">';
+  else if (currentUser.avatar) el.textContent = currentUser.avatar;
+  else el.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
 }
 
-/* =====================================================
+/* ===========================================================
    PROFIL
-   ===================================================== */
+   =========================================================== */
 function openProfileModal() {
-  if (!currentUser || currentUser.isGuest) return;
+  if (!currentUser || isGuestMode) return;
   document.getElementById('profileName').value = currentUser.name;
   document.getElementById('profileRole').value = currentUser.role;
-  var preview = document.getElementById('profileAvatarPreview');
-  if (currentUser.photo) {
-    preview.innerHTML = '<img src="' + currentUser.photo + '" alt="avatar">';
-  } else {
-    preview.textContent = currentUser.avatar || currentUser.name.charAt(0).toUpperCase();
-  }
+  var pv = document.getElementById('profileAvatarPreview');
+  if (currentUser.photo) pv.innerHTML = '<img src="'+currentUser.photo+'" alt="avatar">';
+  else pv.textContent = currentUser.avatar || currentUser.name.charAt(0).toUpperCase();
   var opts = document.getElementById('avatarOptions');
   opts.innerHTML = '';
-  var colors = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5', 'color-6', 'color-7', 'color-8', 'color-9', 'color-10'];
-  var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
-  for (var i = 0; i < colors.length; i++) {
+  var colors = ['color-1','color-2','color-3','color-4','color-5','color-6','color-7','color-8','color-9','color-10'];
+  var letters = ['A','B','C','D','E','F','G','H','I','J'];
+  for (var i = 0; i < 10; i++) {
     (function(idx) {
-      var opt = document.createElement('div');
-      opt.className = 'avatar-option ' + colors[idx];
-      opt.textContent = letters[idx];
-      if (currentUser.avatar === letters[idx] && !currentUser.photo) opt.classList.add('selected');
-      opt.onclick = function() {
-        opts.querySelectorAll('.avatar-option').forEach(function(o) { o.classList.remove('selected'); });
-        opt.classList.add('selected');
-        preview.textContent = letters[idx];
-        preview.innerHTML = '';
-        preview.textContent = letters[idx];
-        currentUser.avatar = letters[idx];
-        currentUser.photo = null;
+      var o = document.createElement('div');
+      o.className = 'avatar-option '+colors[idx];
+      o.textContent = letters[idx];
+      if (currentUser.avatar===letters[idx] && !currentUser.photo) o.classList.add('selected');
+      o.onclick = function() {
+        opts.querySelectorAll('.avatar-option').forEach(function(x){x.classList.remove('selected')});
+        o.classList.add('selected');
+        pv.textContent = letters[idx]; pv.innerHTML = ''; pv.textContent = letters[idx];
+        currentUser.avatar = letters[idx]; currentUser.photo = null;
       };
-      opts.appendChild(opt);
+      opts.appendChild(o);
     })(i);
   }
   document.getElementById('modalProfile').classList.add('show');
 }
-
-function closeProfileModal() {
-  document.getElementById('modalProfile').classList.remove('show');
-}
-
+function closeProfileModal() { document.getElementById('modalProfile').classList.remove('show'); }
 function handlePhotoUpload(e) {
-  var file = e.target.files[0];
-  if (!file) return;
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    currentUser.photo = ev.target.result;
-    currentUser.avatar = null;
-    document.getElementById('profileAvatarPreview').innerHTML = '<img src="' + ev.target.result + '" alt="avatar">';
-    document.querySelectorAll('.avatar-option').forEach(function(o) { o.classList.remove('selected'); });
+  var f = e.target.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function(ev) {
+    currentUser.photo = ev.target.result; currentUser.avatar = null;
+    document.getElementById('profileAvatarPreview').innerHTML = '<img src="'+ev.target.result+'" alt="avatar">';
+    document.querySelectorAll('.avatar-option').forEach(function(o){o.classList.remove('selected')});
   };
-  reader.readAsDataURL(file);
+  r.readAsDataURL(f);
 }
-
 function saveProfile() {
-  var name = document.getElementById('profileName').value.trim();
-  if (!name) { showToast('Nama tidak boleh kosong'); return; }
-  currentUser.name = name;
+  var n = document.getElementById('profileName').value.trim();
+  if (!n) { showToast('Nama tidak boleh kosong'); return; }
+  currentUser.name = n;
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
-  showUserUI();
-  closeProfileModal();
-  showToast('Profil berhasil disimpan');
+  showUserUI(); closeProfileModal(); showToast('Profil berhasil disimpan');
 }
 
-/* =====================================================
-   LOAD DATA DARI SERVER / CACHE
-   ===================================================== */
-function loadData() {
-  // Tampilkan cache dulu jika ada
+/* ===========================================================
+   CSV PARSER — MENGUBAH CSV GOOGLE SHEETS MENJADI ARRAY OBJEK
+   =========================================================== */
+function parseCSV(text) {
+  var lines = [];
+  var current = '';
+  var inQuotes = false;
+
+  // Pisahkan baris dengan memperhatikan quote
+  for (var i = 0; i < text.length; i++) {
+    var ch = text[i];
+    if (ch === '"') {
+      if (inQuotes && i + 1 < text.length && text[i+1] === '"') {
+        current += '"'; i++; // escaped quote
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if ((ch === '\n' || ch === '\r') && !inQuotes) {
+      if (ch === '\r' && i + 1 < text.length && text[i+1] === '\n') i++; // skip \r\n
+      if (current.trim() !== '') lines.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  if (current.trim() !== '') lines.push(current);
+
+  if (lines.length < 2) return [];
+
+  // Parse header (baris pertama)
+  var headers = splitCSVRow(lines[0]);
+
+  // Parse data (baris selanjutnya)
+  var result = [];
+  for (var j = 1; j < lines.length; j++) {
+    var vals = splitCSVRow(lines[j]);
+    if (vals.length === 0 || (vals.length === 1 && vals[0] === '')) continue; // skip baris kosong
+    var obj = {};
+    for (var k = 0; k < headers.length; k++) {
+      var key = headers[k].trim().replace(/^["']|["']$/g, '');
+      var val = (k < vals.length) ? vals[k].trim().replace(/^["']|["']$/g, '') : '';
+      obj[key] = val;
+    }
+    result.push(obj);
+  }
+  return result;
+}
+
+function splitCSVRow(row) {
+  var fields = [];
+  var current = '';
+  var inQuotes = false;
+
+  for (var i = 0; i < row.length; i++) {
+    var ch = row[i];
+    if (ch === '"') {
+      if (inQuotes && i + 1 < row.length && row[i+1] === '"') {
+        current += '"'; i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+    } else if (ch === ',' && !inQuotes) {
+      fields.push(current);
+      current = '';
+    } else {
+      current += ch;
+    }
+  }
+  fields.push(current);
+  return fields;
+}
+
+/* ===========================================================
+   LOAD DATA DARI CSV (READ)
+   =========================================================== */
+function loadDataFromCSV() {
+  // Tampilkan cache dulu kalau ada
   var cached = [];
   try { cached = JSON.parse(localStorage.getItem('hdCache') || '[]'); } catch(e) { cached = []; }
   if (cached.length > 0) {
-    allData = cached;
+    dataPasien = cached;
+    menggunakanCache = true;
     showCacheInfo(cached.length, true);
   }
 
-  // Jika online, fetch dari server
+  // Fetch dari CSV jika online
   if (navigator.onLine) {
-    fetchFromServer();
+    fetchCSV();
   } else if (cached.length > 0) {
     showCacheInfo(cached.length, true);
   }
 }
 
-function fetchFromServer() {
+function fetchCSV() {
   if (isFetching) return;
   isFetching = true;
 
-  fetch(SHEET_URL + '?action=read')
+  fetch(CSV_URL)
     .then(function(response) {
       if (!response.ok) throw new Error('HTTP ' + response.status);
-      return response.json();
+      return response.text();
     })
-    .then(function(data) {
+    .then(function(csvText) {
       isFetching = false;
-      if (Array.isArray(data)) {
-        allData = data;
-      } else if (data && Array.isArray(data.data)) {
-        allData = data.data;
-      } else {
-        allData = [];
-      }
-      // Simpan ke cache
-      try {
-        localStorage.setItem('hdCache', JSON.stringify(allData));
-        localStorage.setItem('hdCacheTime', new Date().toISOString());
-      } catch(e) {}
-      showCacheInfo(allData.length, false);
-      // Re-render jika ada pencarian aktif
-      var q = document.getElementById('search').value.trim().toLowerCase();
-      var d = document.getElementById('searchDate').value;
-      if (q.length >= 2 || d) {
-        doFilter(q, d);
+      var parsed = parseCSV(csvText);
+      if (parsed.length > 0) {
+        dataPasien = parsed;
+        menggunakanCache = false;
+        try {
+          localStorage.setItem('hdCache', JSON.stringify(dataPasien));
+          localStorage.setItem('hdCacheTime', new Date().toISOString());
+        } catch(e) {}
+        showCacheInfo(dataPasien.length, false);
+        // Re-filter jika sedang ada pencarian aktif
+        var q = document.getElementById('search').value.trim().toLowerCase();
+        var d = document.getElementById('searchDate').value;
+        if (q.length >= 2 || d) doFilter(q, d);
       }
     })
     .catch(function(err) {
       isFetching = false;
-      console.error('Fetch error:', err);
-      if (allData.length > 0) {
-        showCacheInfo(allData.length, true);
+      console.error('CSV fetch error:', err);
+      if (dataPasien.length > 0) {
+        menggunakanCache = true;
+        showCacheInfo(dataPasien.length, true);
       }
     });
 }
 
 function retryFetch() {
-  allData = [];
   var btn = document.getElementById('refreshBtn');
   btn.classList.add('spinning');
-  fetchFromServer();
+  fetchCSV();
   setTimeout(function() { btn.classList.remove('spinning'); }, 2000);
 }
 
-/* =====================================================
-   PENCARIAN (DEBOUNCED, INDEX-BASED)
-   ===================================================== */
+/* ===========================================================
+   PENCARIAN
+   =========================================================== */
 function initSearchListeners() {
-  // Input pencarian: debounce 350ms
   document.getElementById('search').addEventListener('input', function() {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(function() {
-      cari();
-    }, 350);
+    searchTimer = setTimeout(cari, 350);
   });
-
-  // Filter tanggal: langsung cari
   document.getElementById('searchDate').addEventListener('change', function() {
-    checkDate();
-    cari();
+    checkDate(); cari();
   });
-
-  // Enter di search juga trigger
   document.getElementById('search').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      clearTimeout(searchTimer);
-      cari();
-    }
+    if (e.key === 'Enter') { clearTimeout(searchTimer); cari(); }
   });
 }
 
@@ -1071,18 +835,15 @@ function cari() {
   var dateVal = document.getElementById('searchDate').value;
   var hasil = document.getElementById('hasil');
 
-  // Jika belum cukup karakter dan tidak ada tanggal
   if (q.length < 2 && !dateVal) {
     hasil.innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
     filteredData = [];
     return;
   }
 
-  // Jika data masih kosong, coba fetch dulu
-  if (allData.length === 0) {
-    hasil.innerHTML = '<div style="padding:30px"><div class="loading-spinner"></div> Memuat data dari server...</div>';
-    fetchFromServer();
-    // Setelah fetch selesai, doFilter akan dipanggil otomatis
+  if (dataPasien.length === 0) {
+    hasil.innerHTML = '<div style="padding:30px"><div class="loading-spinner"></div> Memuat data pasien...</div>';
+    fetchCSV();
     return;
   }
 
@@ -1090,24 +851,26 @@ function cari() {
 }
 
 function doFilter(q, dateVal) {
-  var hasil = document.getElementById('hasil');
   filteredData = [];
 
-  for (var i = 0; i < allData.length; i++) {
-    var p = allData[i];
+  for (var i = 0; i < dataPasien.length; i++) {
+    var p = dataPasien[i];
     var matchQ = true;
     var matchD = true;
 
     if (q.length >= 2) {
-      var nama = (p.nama || '').toLowerCase();
-      var mr = (p.mr || '').toLowerCase();
-      var ruang = (p.ruang || '').toLowerCase();
-      var diag = (p.diagnosis || '').toLowerCase();
-      matchQ = nama.indexOf(q) !== -1 || mr.indexOf(q) !== -1 || ruang.indexOf(q) !== -1 || diag.indexOf(q) !== -1;
+      var haystack = [
+        p.nama || '', p.mr || '', p.ruang || '',
+        p.diagnosis || '', p.noHP || '',
+        p.status || '', p.jadwal || '', p.shift || ''
+      ].join(' ').toLowerCase();
+      matchQ = haystack.indexOf(q) !== -1;
     }
 
     if (dateVal) {
-      matchD = (p.tanggal === dateVal);
+      // Cocokkan tanggal — bisa format YYYY-MM-DD atau DD/MM/YYYY
+      var t = (p.tanggal || '').trim();
+      matchD = (t === dateVal) || (t.replace(/\//g,'-') === dateVal);
     }
 
     if (matchQ && matchD) {
@@ -1120,7 +883,7 @@ function doFilter(q, dateVal) {
 
 function renderFilteredResults() {
   var hasil = document.getElementById('hasil');
-  var isCache = !navigator.onLine && allData.length > 0;
+  var isCache = menggunakanCache;
 
   if (filteredData.length === 0) {
     hasil.innerHTML = 'Tidak ditemukan data yang cocok.';
@@ -1132,35 +895,24 @@ function renderFilteredResults() {
     var p = filteredData[i];
     var selesai = p.status && p.status.toLowerCase() === 'selesai';
 
-    html += '<div class="card' + (selesai ? ' selesai' : '') + (isCache ? ' from-cache' : '') + '">';
-
-    // Baris nama dan MR
-    html += '<div class="row">';
-    html += '<div class="nama">' + esc(p.nama || '-') + '</div>';
-    html += '<div class="mr">' + esc(p.mr || '-') + '</div>';
-    html += '</div>';
-
-    // Info
+    html += '<div class="card' + (selesai?' selesai':'') + (isCache?' from-cache':'') + '">';
+    html += '<div class="row"><div class="nama">' + esc(p.nama||'-') + '</div><div class="mr">' + esc(p.mr||'-') + '</div></div>';
     html += '<div class="info">';
-    if (p.tanggal) html += '📅 ' + esc(p.tanggal);
-    if (p.ruang) html += ' | 🏥 ' + esc(p.ruang);
-    if (p.shift) html += ' | 🕐 ' + esc(p.shift);
-    if (p.jadwal) html += ' | 🔄 ' + esc(p.jadwal);
+    if (p.tanggal) html += '\u{1F4C5} ' + esc(p.tanggal);
+    if (p.ruang) html += ' | \u{1F3E5} ' + esc(p.ruang);
+    if (p.shift) html += ' | \u{1F550} ' + esc(p.shift);
+    if (p.jadwal) html += ' | \u{1F504} ' + esc(p.jadwal);
     html += '<br><span class="badge">' + esc(p.diagnosis || p.status || 'HD') + '</span>';
     html += '</div>';
-
-    // Tombol aksi (menggunakan index i)
     html += '<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">';
     html += '<button class="action-btn view-btn" onclick="viewPatient(' + i + ')">Lihat</button>';
     html += '<button class="action-btn record-btn" onclick="openRecordModal(' + i + ')">Record</button>';
     if (p.noHP) {
-      var waNum = String(p.noHP).replace(/^0/, '62').replace(/[^0-9]/g, '');
+      var waNum = String(p.noHP).replace(/^0/,'62').replace(/[^0-9]/g,'');
       html += '<a class="action-btn wa-share-btn" href="https://wa.me/' + waNum + '" target="_blank">WA</a>';
     }
     html += '<button class="action-btn pdf-btn" onclick="generatePDF(' + i + ')">PDF</button>';
-    html += '</div>';
-
-    html += '</div>';
+    html += '</div></div>';
   }
 
   hasil.innerHTML = html;
@@ -1175,84 +927,61 @@ function esc(s) {
 
 function checkDate() {
   var w = document.getElementById('dateWrapper');
-  if (document.getElementById('searchDate').value) {
-    w.classList.add('has-value');
-  } else {
-    w.classList.remove('has-value');
-  }
+  if (document.getElementById('searchDate').value) w.classList.add('has-value');
+  else w.classList.remove('has-value');
 }
 
 function showCacheInfo(count, isCache) {
   var ci = document.getElementById('cacheInfo');
-  ci.className = 'cache-info show ' + (isCache ? 'is-cache' : 'is-live');
+  ci.className = 'cache-info show ' + (isCache?'is-cache':'is-live');
   document.getElementById('cacheCount').textContent = count;
-  document.getElementById('cacheLabel').textContent = isCache ? 'Data Lokal (Cache)' : 'Data dari Server';
+  document.getElementById('cacheLabel').textContent = isCache?'Data Lokal (Cache)':'Data dari Server';
   var t = localStorage.getItem('hdCacheTime');
-  document.getElementById('cacheTime').textContent = t ? 'Terakhir: ' + new Date(t).toLocaleString('id-ID') : '-';
+  document.getElementById('cacheTime').textContent = t?'Terakhir: '+new Date(t).toLocaleString('id-ID'):'-';
 }
 
-/* =====================================================
-   LIHAT DETAIL PASIEN (INDEX-BASED)
-   ===================================================== */
+/* ===========================================================
+   LIHAT DETAIL PASIEN
+   =========================================================== */
 function viewPatient(idx) {
   var p = filteredData[idx];
   if (!p) return;
+  currentViewData = p;
 
   var vc = document.getElementById('viewContent');
   var fields = [
-    { label: 'Nama', value: p.nama, icon: '👤' },
-    { label: 'No. MR', value: p.mr, icon: '📋' },
-    { label: 'Tanggal', value: p.tanggal, icon: '📅' },
-    { label: 'Ruang', value: p.ruang, icon: '🏥' },
-    { label: 'Shift', value: p.shift, icon: '🕐' },
-    { label: 'Jadwal', value: p.jadwal, icon: '🔄' },
-    { label: 'Diagnosis', value: p.diagnosis, icon: '🩺' },
-    { label: 'Status', value: p.status, icon: '✅' },
-    { label: 'No. HP', value: p.noHP, icon: '📱' },
-    { label: 'BB Sebelum', value: p.bb || p.bbSebelum, icon: '⚖️' },
-    { label: 'BB Sesudah', value: p.bbSesudah, icon: '⚖️' },
-    { label: 'TD Sebelum', value: p.tdSebelum, icon: '🩸' },
-    { label: 'TD Sesudah', value: p.tdSesudah, icon: '🩸' },
-    { label: 'UF Target', value: p.ufTarget, icon: '💧' },
-    { label: 'Durasi', value: p.durasi, icon: '⏱️' },
-    { label: 'Catatan', value: p.catatan, icon: '📝' }
+    {l:'Nama',v:p.nama,i:'\u{1F464}'},{l:'No. MR',v:p.mr,i:'\u{1F4CB}'},
+    {l:'Tanggal',v:p.tanggal,i:'\u{1F4C5}'},{l:'Ruang',v:p.ruang,i:'\u{1F3E5}'},
+    {l:'Shift',v:p.shift,i:'\u{1F550}'},{l:'Jadwal',v:p.jadwal,i:'\u{1F504}'},
+    {l:'Diagnosis',v:p.diagnosis,i:'\u{1FA7A}'},{l:'Status',v:p.status,i:'\u2705'},
+    {l:'No. HP',v:p.noHP,i:'\u{1F4F1}'},{l:'BB Sebelum',v:p.bb||p.bbSebelum,i:'\u2696\uFE0F'},
+    {l:'BB Sesudah',v:p.bbSesudah,i:'\u2696\uFE0F'},{l:'TD Sebelum',v:p.tdSebelum,i:'\u{1FA78}'},
+    {l:'TD Sesudah',v:p.tdSesudah,i:'\u{1FA78}'},{l:'UF Target',v:p.ufTarget,i:'\u{1F4A7}'},
+    {l:'Durasi',v:p.durasi,i:'\u23F1\uFE0F'},{l:'Catatan',v:p.catatan,i:'\u{1F4DD}'}
   ];
 
   var items = '';
-  for (var i = 0; i < fields.length; i++) {
-    var f = fields[i];
-    if (f.value) {
-      items += '<div class="view-item">';
-      items += '<div class="view-label"><div class="view-label-icon">' + f.icon + '</div>' + f.label + '</div>';
-      items += '<div class="view-value">' + esc(f.value) + '</div>';
-      items += '</div>';
+  for (var j = 0; j < fields.length; j++) {
+    var f = fields[j];
+    if (f.v) {
+      items += '<div class="view-item"><div class="view-label"><div class="view-label-icon">'+f.i+'</div>'+f.l+'</div><div class="view-value">'+esc(f.v)+'</div></div>';
     }
   }
 
-  vc.innerHTML = '<div class="view-card">' +
-    '<div class="view-card-header">' +
-    '<div class="view-patient-name">' + esc(p.nama || '-') + '</div>' +
-    '<div class="view-patient-mr">MR: ' + esc(p.mr || '-') + ' | ' + esc(p.tanggal || '-') + '</div>' +
-    '</div>' +
-    '<div class="view-card-body">' + items + '</div>' +
-    '</div>';
-
+  vc.innerHTML = '<div class="view-card"><div class="view-card-header"><div class="view-patient-name">'+esc(p.nama||'-')+'</div><div class="view-patient-mr">MR: '+esc(p.mr||'-')+' | '+esc(p.tanggal||'-')+'</div></div><div class="view-card-body">'+items+'</div></div>';
   document.getElementById('modalView').classList.add('show');
 }
+function closeViewModal() { document.getElementById('modalView').classList.remove('show'); }
 
-function closeViewModal() {
-  document.getElementById('modalView').classList.remove('show');
-}
-
-/* =====================================================
-   RECORD HD (INDEX-BASED)
-   ===================================================== */
+/* ===========================================================
+   RECORD HD
+   =========================================================== */
 function openRecordModal(idx) {
   var p = filteredData[idx];
   if (!p) return;
   currentRecordIdx = idx;
-  document.getElementById('recordModalTitle').textContent = 'Record HD - ' + (p.nama || '-');
-  document.getElementById('recordPatientName').textContent = (p.nama || '-') + ' (' + (p.mr || '-') + ')';
+  document.getElementById('recordModalTitle').textContent = 'Record HD - '+(p.nama||'-');
+  document.getElementById('recordPatientName').textContent = (p.nama||'-')+' ('+(p.mr||'-')+')';
   document.getElementById('recBB').value = '';
   document.getElementById('recBBS').value = '';
   document.getElementById('recTDS').value = '';
@@ -1262,15 +991,11 @@ function openRecordModal(idx) {
   document.getElementById('recCatatan').value = '';
   document.getElementById('modalRecord').classList.add('show');
 }
-
-function closeRecordModal() {
-  document.getElementById('modalRecord').classList.remove('show');
-}
+function closeRecordModal() { document.getElementById('modalRecord').classList.remove('show'); }
 
 function saveRecord() {
   if (currentRecordIdx < 0 || currentRecordIdx >= filteredData.length) return;
   var p = filteredData[currentRecordIdx];
-
   var rec = {
     patient: p,
     bb: document.getElementById('recBB').value,
@@ -1283,24 +1008,39 @@ function saveRecord() {
     timestamp: new Date().toISOString(),
     user: currentUser ? currentUser.name : 'Anonim'
   };
-
   var records = [];
-  try { records = JSON.parse(localStorage.getItem('hdRecords') || '[]'); } catch(e) { records = []; }
+  try { records = JSON.parse(localStorage.getItem('hdRecords')||'[]'); } catch(e) { records = []; }
   records.push(rec);
   if (records.length > 200) records = records.slice(-200);
   try { localStorage.setItem('hdRecords', JSON.stringify(records)); } catch(e) {}
+
+  // Kirim ke GAS jika online
+  if (navigator.onLine) {
+    var fd = new FormData();
+    fd.append('action', 'addRecord');
+    fd.append('mr', p.mr || '');
+    fd.append('nama', p.nama || '');
+    fd.append('bb', rec.bb);
+    fd.append('bbSesudah', rec.bbSesudah);
+    fd.append('tdSebelum', rec.tdSebelum);
+    fd.append('tdSesudah', rec.tdSesudah);
+    fd.append('uf', rec.uf);
+    fd.append('durasi', rec.durasi);
+    fd.append('catatan', rec.catatan);
+    fd.append('user', rec.user);
+    fetch(GAS_URL, { method: 'POST', body: fd }).catch(function(){});
+  }
 
   closeRecordModal();
   showToast('Record HD berhasil disimpan!');
 }
 
-/* =====================================================
-   PDF (INDEX-BASED)
-   ===================================================== */
+/* ===========================================================
+   PDF
+   =========================================================== */
 function generatePDF(idx) {
   var p = filteredData[idx];
   if (!p) return;
-
   try {
     var jsPDF = window.jspdf.jsPDF;
     var doc = new jsPDF();
@@ -1308,181 +1048,111 @@ function generatePDF(idx) {
     doc.text('HD Malahayati - Detail Pasien', 14, 20);
     doc.setFontSize(10);
     doc.setTextColor(100);
-    doc.text('Dicetak: ' + new Date().toLocaleString('id-ID'), 14, 28);
+    doc.text('Dicetak: '+new Date().toLocaleString('id-ID'), 14, 28);
     doc.setTextColor(0);
-
     var rows = [
-      ['Nama', p.nama || '-'],
-      ['No. MR', p.mr || '-'],
-      ['Tanggal', p.tanggal || '-'],
-      ['Ruang', p.ruang || '-'],
-      ['Shift', p.shift || '-'],
-      ['Jadwal', p.jadwal || '-'],
-      ['Diagnosis', p.diagnosis || '-'],
-      ['Status', p.status || '-'],
-      ['No. HP', p.noHP || '-']
+      ['Nama',p.nama||'-'],['No. MR',p.mr||'-'],['Tanggal',p.tanggal||'-'],
+      ['Ruang',p.ruang||'-'],['Shift',p.shift||'-'],['Jadwal',p.jadwal||'-'],
+      ['Diagnosis',p.diagnosis||'-'],['Status',p.status||'-'],['No. HP',p.noHP||'-']
     ];
-
-    doc.autoTable({
-      startY: 34,
-      head: [['Field', 'Nilai']],
-      body: rows,
-      theme: 'grid',
-      headStyles: { fillColor: [3, 169, 244] },
-      styles: { fontSize: 10 }
-    });
-
-    var filename = 'HD_' + (p.mr || 'pasien') + '_' + (p.tanggal || 'today') + '.pdf';
-    doc.save(filename);
+    doc.autoTable({startY:34,head:[['Field','Nilai']],body:rows,theme:'grid',headStyles:{fillColor:[3,169,244]},styles:{fontSize:10}});
+    doc.save('HD_'+(p.mr||'pasien')+'_'+(p.tanggal||'today')+'.pdf');
     showToast('PDF berhasil diunduh');
-  } catch (e) {
-    console.error('PDF error:', e);
-    showToast('Gagal membuat PDF');
-  }
+  } catch(e) { console.error('PDF error:',e); showToast('Gagal membuat PDF'); }
 }
 
-/* =====================================================
+/* ===========================================================
    CATATAN HARIAN
-   ===================================================== */
+   =========================================================== */
 function setDefaultNoteDate() {
-  var today = new Date();
-  var y = today.getFullYear();
-  var m = String(today.getMonth() + 1).padStart(2, '0');
-  var d = String(today.getDate()).padStart(2, '0');
-  document.getElementById('noteDate').value = y + '-' + m + '-' + d;
+  var t = new Date();
+  document.getElementById('noteDate').value = t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
 }
-
-function openNoteModal() {
-  setDefaultNoteDate();
-  document.getElementById('noteText').value = '';
-  renderNoteList();
-  document.getElementById('modalNote').classList.add('show');
-}
-
-function closeNoteModal() {
-  document.getElementById('modalNote').classList.remove('show');
-}
+function openNoteModal() { setDefaultNoteDate(); document.getElementById('noteText').value=''; renderNoteList(); document.getElementById('modalNote').classList.add('show'); }
+function closeNoteModal() { document.getElementById('modalNote').classList.remove('show'); }
 
 function saveNote() {
   var date = document.getElementById('noteDate').value;
   var text = document.getElementById('noteText').value.trim();
   if (!text) { showToast('Catatan tidak boleh kosong'); return; }
   if (!date) { showToast('Pilih tanggal'); return; }
-
   var notes = [];
-  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
-
-  notes.unshift({
-    id: Date.now(),
-    date: date,
-    text: text,
-    created: new Date().toISOString()
-  });
-
-  if (notes.length > 100) notes = notes.slice(0, 100);
+  try { notes = JSON.parse(localStorage.getItem('hdNotes')||'[]'); } catch(e) { notes=[]; }
+  notes.unshift({id:Date.now(),date:date,text:text,created:new Date().toISOString()});
+  if (notes.length > 100) notes = notes.slice(0,100);
   try { localStorage.setItem('hdNotes', JSON.stringify(notes)); } catch(e) {}
-
-  document.getElementById('noteText').value = '';
-  setDefaultNoteDate();
-  renderNoteList();
-  showToast('Catatan tersimpan!');
+  document.getElementById('noteText').value=''; setDefaultNoteDate(); renderNoteList(); showToast('Catatan tersimpan!');
 }
-
 function deleteNote(id) {
   var notes = [];
-  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
-  notes = notes.filter(function(n) { return n.id !== id; });
+  try { notes = JSON.parse(localStorage.getItem('hdNotes')||'[]'); } catch(e) { notes=[]; }
+  notes = notes.filter(function(n){return n.id!==id});
   try { localStorage.setItem('hdNotes', JSON.stringify(notes)); } catch(e) {}
-  renderNoteList();
-  showToast('Catatan dihapus');
+  renderNoteList(); showToast('Catatan dihapus');
 }
-
 function renderNoteList() {
   var notes = [];
-  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
+  try { notes = JSON.parse(localStorage.getItem('hdNotes')||'[]'); } catch(e) { notes=[]; }
   var list = document.getElementById('noteList');
   document.getElementById('noteCount').textContent = notes.length;
-
   if (notes.length === 0) {
     list.innerHTML = '<div class="note-empty"><svg viewBox="0 0 24 24" fill="#90a4ae" xmlns="http://www.w3.org/2000/svg"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg><br>Tidak ada catatan.<br>Mulai tulis catatan pertama Anda!</div>';
     return;
   }
-
   var html = '';
   for (var i = 0; i < notes.length; i++) {
     var n = notes[i];
     var d = '-';
-    if (n.date) {
-      try {
-        d = new Date(n.date + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-      } catch(e) {
-        d = n.date;
-      }
-    }
-    var displayText = n.text.length > 200 ? n.text.substring(0, 200) + '...' : n.text;
-
-    html += '<div class="note-item">';
-    html += '<div class="note-item-header">';
-    html += '<span class="note-item-date">' + esc(d) + '</span>';
-    html += '<button class="note-item-delete" onclick="deleteNote(' + n.id + ')" title="Hapus">✕</button>';
-    html += '</div>';
-    html += '<div class="note-item-text">' + esc(displayText) + '</div>';
-    html += '</div>';
+    if (n.date) { try { d = new Date(n.date+'T00:00:00').toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'}); } catch(e) { d=n.date; } }
+    var dt = n.text.length > 200 ? n.text.substring(0,200)+'...' : n.text;
+    html += '<div class="note-item"><div class="note-item-header"><span class="note-item-date">'+esc(d)+'</span><button class="note-item-delete" onclick="deleteNote('+n.id+')" title="Hapus">\u2715</button></div><div class="note-item-text">'+esc(dt)+'</div></div>';
   }
   list.innerHTML = html;
 }
 
-/* =====================================================
+/* ===========================================================
    WA PANEL
-   ===================================================== */
+   =========================================================== */
 function toggleWA() {
   waPanelOpen = !waPanelOpen;
   document.getElementById('waPanel').classList.toggle('show', waPanelOpen);
 }
 
-/* =====================================================
+/* ===========================================================
    TOAST
-   ===================================================== */
+   =========================================================== */
 function showToast(msg) {
   var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   clearTimeout(t._timer);
-  t._timer = setTimeout(function() { t.classList.remove('show'); }, 2500);
+  t._timer = setTimeout(function(){t.classList.remove('show')}, 2500);
 }
 
-/* =====================================================
-   OFFLINE / ONLINE DETECTION
-   ===================================================== */
+/* ===========================================================
+   OFFLINE / ONLINE
+   =========================================================== */
 window.addEventListener('online', function() {
   var bar = document.getElementById('offlineBar');
   bar.className = 'offline-bar show is-back';
   document.getElementById('offlineBarText').textContent = 'Kembali Online';
   document.getElementById('retryBtn').style.display = 'none';
-  setTimeout(function() { bar.classList.remove('show'); }, 3000);
-  // Auto-fetch ulang saat online
-  fetchFromServer();
+  setTimeout(function(){bar.classList.remove('show')}, 3000);
+  fetchCSV();
 });
-
 window.addEventListener('offline', function() {
   var bar = document.getElementById('offlineBar');
   bar.className = 'offline-bar show is-offline';
   document.getElementById('offlineBarText').textContent = 'Mode Offline - Data dari cache';
   document.getElementById('retryBtn').style.display = 'inline-block';
+  menggunakanCache = true;
 });
 
-/* =====================================================
-   KLIK DI LUAR MODAL UNTUK TUTUP
-   ===================================================== */
-['modalNote', 'modalView', 'modalRecord', 'modalProfile'].forEach(function(id) {
+/* ===========================================================
+   KLIK LUAR MODAL
+   =========================================================== */
+['modalNote','modalView','modalRecord','modalProfile'].forEach(function(id) {
   var el = document.getElementById(id);
-  if (el) {
-    el.addEventListener('click', function(e) {
-      if (e.target === this) {
-        this.classList.remove('show');
-      }
-    });
-  }
+  if (el) el.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('show'); });
 });
 </script>
 </body>
