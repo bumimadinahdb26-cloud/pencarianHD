@@ -116,7 +116,6 @@ body.sky-sore .sun-glow{background:radial-gradient(circle,rgba(255,112,67,.7) 0%
 body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 0%,rgba(130,177,255,.1) 40%,transparent 70%);top:80px;right:50px;transform:scale(.9);box-shadow:0 0 25px rgba(225,245,254,.5)}
 @keyframes sunPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
-/* ===== OFFLINE BAR ===== */
 .offline-bar{position:fixed;top:0;left:0;right:0;z-index:1500;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;font-weight:700;transform:translateY(-100%);transition:transform .3s}
 .offline-bar.show{transform:translateY(0)}
 .offline-bar.is-offline{background:linear-gradient(90deg,#e53935,#c62828);color:#fff;box-shadow:0 4px 16px rgba(229,57,53,.4)}
@@ -142,10 +141,8 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .sync-queue-badge.show{display:flex}
 .sync-queue-badge .sq-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink .6s infinite}
 
-/* ===== APP HEADER ===== */
 .app-header{position:relative;z-index:2;text-align:center;padding:24px 20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center center/cover no-repeat;border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,.15),0 2px 8px rgba(0,0,0,.08);animation:fadeInDown .8s ease-out;overflow:hidden}
 .app-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--sky-main),var(--leaf-main),#C62828,var(--sky-main))}
-.header-icon svg{width:32px;height:32px;fill:#fff}
 .header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-bottom:4px}
 .header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;margin-bottom:12px}
 .clock-container{padding:12px;background:linear-gradient(135deg,var(--sky-light) 0%,var(--leaf-light) 100%);border-radius:12px;margin-top:8px}
@@ -153,7 +150,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .clock-date{font-size:12px;margin-top:4px;color:var(--leaf-dark);font-weight:600}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== USER BAR ===== */
 .user-bar{position:relative;z-index:2;max-width:480px;margin:0 auto 10px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-radius:16px;padding:12px 16px;border:2px solid var(--sky-main);box-shadow:0 4px 15px rgba(2,136,209,.1)}
 .user-info{display:flex;align-items:center;gap:12px;color:var(--sky-dark);font-size:13px;cursor:pointer;transition:opacity .2s}
 .user-info:hover{opacity:.8}
@@ -168,7 +164,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .btn-logout{background:linear-gradient(135deg,var(--sky-light) 0%,#fff 100%);border:2px solid var(--sky-main);color:var(--sky-dark);padding:8px 16px;border-radius:12px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
 .btn-logout:hover{background:var(--sky-main);color:#fff}
 
-/* ===== TOOLBAR ===== */
 .toolbar{position:relative;z-index:2;max-width:480px;margin:0 auto 12px}
 .search-box{display:flex;align-items:center;background:rgba(255,255,255,.98);backdrop-filter:blur(8px);border:2px solid var(--sky-main);border-radius:30px;padding:0 8px 0 18px;box-shadow:0 4px 20px rgba(2,136,209,.15)}
 .search-box #search{flex:1;border:none;outline:none;padding:14px 0;font-size:14px;background:transparent;min-width:80px;color:var(--text)}
@@ -182,10 +177,8 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .search-box button:hover{transform:scale(1.1);box-shadow:0 5px 18px rgba(2,136,209,.4)}
 .search-box button svg{width:20px;height:20px;fill:#fff}
 
-/* ===== QUICK MENU ===== */
 .quick-menu{display:flex;gap:8px;margin:10px auto 15px;max-width:480px;position:relative;z-index:2}
 
-/* Monalisa - tetap sama */
 .quick-btn-monalisa{
   flex:1.5;text-decoration:none;text-align:center;padding:10px 8px;border-radius:14px;
   color:#fff;box-shadow:0 4px 18px rgba(1,87,155,.3),inset 0 1px 0 rgba(255,255,255,.15);
@@ -201,7 +194,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .quick-btn-monalisa .btn-text{font-size:clamp(14px,4vw,18px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;position:relative;z-index:1;font-weight:800;letter-spacing:1px}
 .quick-btn-monalisa .btn-subtitle{font-size:clamp(6px,1.6vw,8px);white-space:normal;line-height:1.3;max-width:100%;position:relative;z-index:1;opacity:.92;font-weight:600;margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.35)}
 
-/* TikTok Button */
 .quick-btn-tiktok{
   flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
   color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.15);
@@ -216,7 +208,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .quick-btn-tiktok .btn-icon svg{width:28px;height:28px}
 .quick-btn-tiktok .btn-label{font-size:clamp(9px,2.8vw,12px);font-weight:800;letter-spacing:.5px;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.4)}
 
-/* WA Button */
 .quick-btn-wa{
   flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
   color:#fff;box-shadow:0 4px 18px rgba(37,211,102,.3),inset 0 1px 0 rgba(255,255,255,.2);
@@ -231,7 +222,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .quick-btn-wa .btn-icon svg{width:28px;height:28px}
 .quick-btn-wa .btn-label{font-size:clamp(9px,2.8vw,12px);font-weight:800;letter-spacing:.5px;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.3)}
 
-/* Note Button - desain baru dengan ikon buku */
 .quick-btn-note{
   flex:1;text-decoration:none;text-align:center;padding:10px 4px;border-radius:14px;
   color:#fff;box-shadow:0 4px 18px rgba(230,81,0,.3),inset 0 1px 0 rgba(255,255,255,.2);
@@ -246,7 +236,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .quick-btn-note .btn-icon svg{width:28px;height:28px}
 .quick-btn-note .btn-label{font-size:clamp(9px,2.8vw,12px);font-weight:800;letter-spacing:.5px;position:relative;z-index:1;text-shadow:0 1px 3px rgba(0,0,0,.3)}
 
-/* ===== HASIL PENCARIAN ===== */
 #hasil{position:relative;z-index:2;max-width:480px;margin:0 auto;color:#fff;text-align:center;font-size:14px;font-weight:600;text-shadow:0 2px 5px rgba(0,0,0,.4)}
 .card{background:rgba(255,255,255,.98);backdrop-filter:blur(8px);border:2px solid var(--sky-main);border-radius:18px;padding:16px;margin-bottom:14px;position:relative;box-shadow:0 4px 20px rgba(2,136,209,.1);text-align:left;transition:transform .2s,box-shadow .2s}
 .card:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(2,136,209,.15)}
@@ -265,14 +254,8 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .view-btn{background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);color:#fff}
 .record-btn{background:linear-gradient(135deg,var(--leaf-main) 0%,var(--leaf-dark) 100%);color:#fff}
 .wa-share-btn{background:linear-gradient(135deg,#25D366 0%,#128C7E 100%);color:#fff}
-.tg-share-btn{background:linear-gradient(135deg,#0088cc 0%,#005f8f 100%);color:#fff}
-.sms-btn{background:linear-gradient(135deg,#ffb74d 0%,#f57c00 100%);color:#fff}
-.tel-btn{background:linear-gradient(135deg,var(--sky-main) 0%,#0288D1 100%);color:#fff}
 .pdf-btn{background:linear-gradient(135deg,#ef5350 0%,#c62828 100%);color:#fff}
-.delete-btn{background:linear-gradient(135deg,#90a4ae 0%,#607d8b 100%);color:#fff}
-.add-btn{background:linear-gradient(135deg,var(--accent) 0%,var(--leaf-dark) 100%);color:#fff}
 
-/* ===== SOCIAL FOOTER ===== */
 .social-footer{position:fixed;right:16px;bottom:20px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:1000}
 .youtube-btn{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#FF0000 0%,#CC0000 100%);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(255,0,0,.35);animation:pulseYoutube 2.2s infinite;border:3px solid #fff;transition:transform .2s}
 .youtube-btn:hover{transform:scale(1.1)}
@@ -284,7 +267,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .footer-text{font-size:9px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);white-space:nowrap;opacity:.9;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);margin-top:4px;font-weight:600}
 @keyframes pulseWA{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5),0 0 0 0 rgba(255,255,255,.3)}70%{box-shadow:0 0 0 14px rgba(37,211,102,0),0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0),0 0 0 0 rgba(255,255,255,0)}}
 
-/* ===== WA PANEL ===== */
 .wa-panel{position:fixed;right:16px;bottom:200px;width:220px;background:linear-gradient(135deg,rgba(255,255,255,.98) 0%,rgba(225,245,254,.95) 100%);color:var(--text);border-radius:18px;padding:14px;box-shadow:0 10px 35px rgba(0,0,0,.2);border:2px solid var(--sky-main);display:none;z-index:1000;animation:slideUp .25s ease}
 .wa-panel.show{display:block}
 @keyframes slideUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
@@ -294,7 +276,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .wa-panel a:hover{padding-left:8px;color:var(--sky-deep)}
 .wa-panel a:last-child{border:none}
 
-/* ===== MODAL LOGIN ===== */
 .modal-login{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;overflow-y:auto;padding:20px 0}
 .modal-login.show{display:flex}
 .modal-login-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);border-radius:24px;padding:0;max-width:360px;width:90%;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease;margin:auto;overflow:hidden}
@@ -316,7 +297,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .guest-divider::before,.guest-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sky-main),transparent)}
 .guest-divider span{padding:0 12px}
 
-/* ===== MODAL PROFILE ===== */
 .modal-profile{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;overflow-y:auto;padding:20px 0}
 .modal-profile.show{display:flex}
 .modal-profile-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);border-radius:24px;padding:0;max-width:400px;width:90%;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease;margin:auto;overflow:hidden}
@@ -351,7 +331,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .btn-save-profile{width:100%;padding:14px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;transition:transform .2s,box-shadow .2s}
 .btn-save-profile:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(2,136,209,.4)}
 
-/* ===== MODAL RECORD ===== */
 .modal-record{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,.85);backdrop-filter:blur(10px)}
 .modal-record.show{display:block}
 .modal-record-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);margin:20px auto;padding:0;border-radius:24px;max-width:500px;max-height:90vh;overflow-y:auto;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease}
@@ -368,9 +347,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .section-title{font-size:14px;font-weight:700;color:var(--sky-deep);margin:18px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--sky-light)}
 .btn-save{width:100%;padding:14px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);color:#fff;border:none;border-radius:14px;font-weight:700;cursor:pointer;margin-top:18px;font-size:15px;transition:transform .2s,box-shadow .2s}
 .btn-save:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(2,136,209,.4)}
-.btn-save:disabled{opacity:.6;cursor:not-allowed}
 
-/* ===== MODAL VIEW ===== */
 .modal-view{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,.85);backdrop-filter:blur(10px)}
 .modal-view.show{display:block}
 .modal-view-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);margin:20px auto;padding:0;border-radius:24px;max-width:500px;max-height:90vh;overflow-y:auto;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease}
@@ -386,9 +363,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .view-label{font-size:13px;color:var(--sky-dark);display:flex;align-items:center;gap:10px;font-weight:600}
 .view-label-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--sky-light) 0%,var(--leaf-light) 100%);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
 .view-value{font-size:15px;font-weight:700;color:var(--sky-deep)}
-.view-badge{display:inline-block;padding:8px 18px;border-radius:20px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);color:#fff;font-size:13px;font-weight:700}
 
-/* ===== MODAL NOTE (Sederhana) ===== */
 .modal-note{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,.85);backdrop-filter:blur(10px)}
 .modal-note.show{display:block}
 .modal-note-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);margin:20px auto;padding:0;border-radius:24px;max-width:420px;max-height:88vh;overflow-y:auto;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,.3);animation:modalPop .3s ease}
@@ -418,19 +393,16 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .note-empty{text-align:center;padding:40px 20px;color:#90a4ae;font-size:14px}
 .note-empty svg{width:48px;height:48px;margin-bottom:12px;opacity:.4}
 
-/* ===== GUEST NOTICE ===== */
 .guest-notice{background:linear-gradient(135deg,var(--sky-light) 0%,var(--leaf-light) 100%);border:2px solid var(--sky-main);border-radius:14px;padding:12px 16px;margin:0 auto 12px;max-width:480px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .guest-notice-text{font-size:13px;color:var(--sky-dark);font-weight:600}
 .guest-notice-btn{background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform .2s}
 .guest-notice-btn:hover{transform:scale(1.05)}
 
-/* ===== TOAST ===== */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,var(--sky-deep) 0%,var(--leaf-dark) 100%);color:#fff;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.3);z-index:3000;opacity:0;transition:all .3s ease;border:2px solid var(--sky-main);max-width:90%;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .loading-spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:spinAni .8s linear infinite;margin-right:8px}
 
-/* ===== ORNAMENTS ===== */
-.ornament{position:fixed;bottom:100px;font-size:26px;opacity:.5;animation:floatEdu 5s ease-in-out infinite;z-index:1;pointer-events:none;cursor:pointer;transition:transform .3s ease,filter .3s ease;animation:fadeIn 1.2s ease-out forwards}
+.ornament{position:fixed;bottom:100px;font-size:26px;opacity:.5;z-index:1;pointer-events:none;cursor:pointer;transition:transform .3s ease,filter .3s ease;animation:fadeIn 1.2s ease-out forwards}
 .ornament.left{left:16px;animation-delay:0s}
 .ornament.right{right:100px;animation-delay:2.5s}
 @keyframes floatEdu{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-10px) rotate(8deg)}}
@@ -439,7 +411,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 .ornament.left:hover{transform:scale(1.2) rotate(-15deg)}
 .ornament.right:hover{transform:scale(1.2) rotate(15deg)}
 
-/* ===== RESPONSIVE ===== */
 @media(min-width:481px){body{max-width:520px;margin:0 auto;border-radius:0}}
 @media(max-width:360px){
   .header-title{font-size:18px}
@@ -468,17 +439,14 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
 
 <body>
 
-<!-- OFFLINE BAR -->
 <div class="offline-bar" id="offlineBar">
   <div class="dot"></div>
   <span id="offlineBarText">Mode Offline</span>
   <button class="retry-btn" id="retryBtn" onclick="retryFetch()" style="display:none">Coba Lagi</button>
 </div>
 
-<!-- STARS -->
 <div class="stars-container" id="stars-container"></div>
 
-<!-- CLOUDS -->
 <div class="clouds-container">
   <div class="cloud cloud-1"></div>
   <div class="cloud cloud-2"></div>
@@ -487,13 +455,10 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <div class="cloud cloud-5"></div>
 </div>
 
-<!-- RAIN -->
 <div class="rain-container" id="rainContainer"></div>
 
-<!-- SUN / MOON -->
 <div class="sun-glow"></div>
 
-<!-- HEADER -->
 <div class="app-header">
   <div class="sync-queue-badge" id="syncQueueBadge">
     <div class="sq-dot"></div>
@@ -512,13 +477,11 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- GUEST NOTICE -->
 <div class="guest-notice" id="guestNotice" style="display:none">
   <div class="guest-notice-text">Anda masuk sebagai Tamu. Beberapa fitur terbatas.</div>
   <button class="guest-notice-btn" onclick="showLoginFromGuest()">Login</button>
 </div>
 
-<!-- USER BAR -->
 <div class="user-bar" id="userBar" style="display:none">
   <div class="user-info" onclick="openProfileModal()">
     <div class="user-avatar-container">
@@ -535,13 +498,12 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <button class="btn-logout" onclick="logout()">Keluar</button>
 </div>
 
-<!-- TOOLBAR -->
 <div class="toolbar">
   <div class="search-box">
-    <input id="search" placeholder="Cari Nama / MR / Ruang..." onkeyup="cari()">
+    <input id="search" placeholder="Cari Nama / MR / Ruang...">
     <div class="separator"></div>
     <div class="date-wrapper" id="dateWrapper">
-      <input type="date" id="searchDate" onchange="cari();checkDate()">
+      <input type="date" id="searchDate">
       <span class="date-placeholder">Filter Tanggal</span>
     </div>
     <button onclick="cari()">
@@ -550,7 +512,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- CACHE INFO -->
 <div class="cache-info" id="cacheInfo">
   <div class="cache-icon">💾</div>
   <div>
@@ -561,28 +522,23 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <div class="refresh-btn" id="refreshBtn" onclick="retryFetch()" title="Refresh dari Server">⟳</div>
 </div>
 
-<!-- ===== QUICK MENU (YANG DIUBAH) ===== -->
 <div class="quick-menu">
-  <!-- Monalisa - tetap -->
   <a href="https://bumimadinahdb26-cloud.github.io/asahginjal/" target="_blank" class="quick-btn-monalisa">
     <span class="btn-text">monalisa</span>
     <span class="btn-subtitle">Monitoring Akses Pembuluh Darah untuk Hemodialisis Anda</span>
   </a>
-  <!-- TikTok - menggantikan Hasil Laborat -->
   <a href="https://www.tiktok.com/@malahayatirssa" target="_blank" class="quick-btn-tiktok">
     <span class="btn-icon">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
     </span>
     <span class="btn-label">TikTok</span>
   </a>
-  <!-- WhatsApp -->
   <button class="quick-btn-wa" onclick="toggleWA()">
     <span class="btn-icon">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
     </span>
     <span class="btn-label">WhatsApp</span>
   </button>
-  <!-- Catatan Note - desain baru dengan ikon buku -->
   <button class="quick-btn-note" onclick="openNoteModal()">
     <span class="btn-icon">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
@@ -591,14 +547,11 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </button>
 </div>
 
-<!-- HASIL -->
 <div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
 
-<!-- ORNAMENTS -->
 <div class="ornament left">💻</div>
 <div class="ornament right">🚀</div>
 
-<!-- SOCIAL FOOTER -->
 <div class="social-footer">
   <div class="footer-text">Created by Iman Waluyo</div>
   <a href="https://www.youtube.com/watch?v=nogsTKtyu84" target="_blank" class="youtube-btn" title="YouTube Malahayati">
@@ -609,7 +562,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- WA PANEL -->
 <div class="wa-panel" id="waPanel">
   <h4>WA Perawat HD <span onclick="toggleWA()">✕</span></h4>
   <a href="https://wa.me/6287812203039" target="_blank">Iman Waluyo</a>
@@ -620,7 +572,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
 </div>
 
-<!-- ===== MODAL: LOGIN ===== -->
+<!-- MODAL: LOGIN -->
 <div id="modalLogin" class="modal-login show">
   <div class="modal-login-content">
     <div class="login-header">
@@ -649,7 +601,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- ===== MODAL: PROFILE ===== -->
+<!-- MODAL: PROFILE -->
 <div id="modalProfile" class="modal-profile">
   <div class="modal-profile-content">
     <div class="modal-profile-header">
@@ -681,7 +633,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- ===== MODAL: RECORD ===== -->
+<!-- MODAL: RECORD -->
 <div id="modalRecord" class="modal-record">
   <div class="modal-record-content">
     <div class="modal-record-header">
@@ -732,7 +684,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- ===== MODAL: VIEW ===== -->
+<!-- MODAL: VIEW -->
 <div id="modalView" class="modal-view">
   <div class="modal-view-content">
     <div class="modal-view-header">
@@ -743,7 +695,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- ===== MODAL: NOTE (Sederhana & Mudah) ===== -->
+<!-- MODAL: NOTE -->
 <div id="modalNote" class="modal-note">
   <div class="modal-note-content">
     <div class="modal-note-header">
@@ -754,7 +706,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
       <div class="modal-close" onclick="closeNoteModal()">✕</div>
     </div>
     <div class="modal-note-body">
-      <!-- Input sederhana -->
       <div class="note-input-card">
         <div class="note-date-row">
           <label>Tanggal</label>
@@ -766,7 +717,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
           Simpan Catatan
         </button>
       </div>
-      <!-- Daftar catatan -->
       <div class="note-list-title">
         <span>Riwayat Catatan</span>
         <span class="note-count" id="noteCount">0</span>
@@ -776,28 +726,32 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,.6) 
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 /* =====================================================
-   DATA & STATE
+   KONFIGURASI & STATE
    ===================================================== */
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzOHwRa8rDJDIP0baYhxFNy2RU7hVtAGLWbqFttmP8SW8xsBTgZNm5R3eVXQkzmFflA/exec';
-let allData = [];
+
+let allData = [];       // Semua data dari server/cache
+let filteredData = [];   // Data hasil filter pencarian
 let currentUser = null;
-let currentRecordPatient = null;
+let currentRecordIdx = -1;
 let waPanelOpen = false;
+let searchTimer = null;  // Debounce timer
+let isFetching = false;  // Mencegah fetch ganda
 
 /* =====================================================
    INISIALISASI
    ===================================================== */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
   initClock();
   initSky();
   initStars();
   initRain();
   initUser();
+  initSearchListeners();
   setDefaultNoteDate();
 });
 
@@ -809,14 +763,14 @@ function initClock() {
   setInterval(updateClock, 1000);
 }
 function updateClock() {
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2,'0');
-  const m = String(now.getMinutes()).padStart(2,'0');
-  const s = String(now.getSeconds()).padStart(2,'0');
-  document.getElementById('clock').textContent = h+':'+m+':'+s;
-  const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-  document.getElementById('clockDate').textContent = days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2, '0');
+  var m = String(now.getMinutes()).padStart(2, '0');
+  var s = String(now.getSeconds()).padStart(2, '0');
+  document.getElementById('clock').textContent = h + ':' + m + ':' + s;
+  var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+  var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+  document.getElementById('clockDate').textContent = days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
 }
 
 /* =====================================================
@@ -827,7 +781,7 @@ function initSky() {
   setInterval(updateSky, 60000);
 }
 function updateSky() {
-  const h = new Date().getHours();
+  var h = new Date().getHours();
   document.body.className = '';
   if (h >= 5 && h < 10) document.body.classList.add('sky-pagi');
   else if (h >= 10 && h < 15) document.body.classList.add('sky-siang');
@@ -836,41 +790,40 @@ function updateSky() {
 }
 
 /* =====================================================
-   BINTANG (MALAM)
+   BINTANG
    ===================================================== */
 function initStars() {
-  const c = document.getElementById('stars-container');
-  for (let i = 0; i < 60; i++) {
-    const s = document.createElement('div');
+  var c = document.getElementById('stars-container');
+  for (var i = 0; i < 60; i++) {
+    var s = document.createElement('div');
     s.className = 'star';
-    const size = Math.random()*3+1;
-    s.style.width = size+'px';
-    s.style.height = size+'px';
-    s.style.left = Math.random()*100+'%';
-    s.style.top = Math.random()*60+'%';
-    s.style.animationDelay = (Math.random()*5)+'s';
-    s.style.animationDuration = (Math.random()*3+2)+'s';
+    var size = Math.random() * 3 + 1;
+    s.style.width = size + 'px';
+    s.style.height = size + 'px';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 60 + '%';
+    s.style.animationDelay = (Math.random() * 5) + 's';
+    s.style.animationDuration = (Math.random() * 3 + 2) + 's';
     c.appendChild(s);
   }
-  // Tampilkan saat malam
-  const observer = new MutationObserver(() => {
+  var observer = new MutationObserver(function() {
     c.style.opacity = document.body.classList.contains('sky-malam') ? '1' : '0';
   });
-  observer.observe(document.body, {attributes:true, attributeFilter:['class']});
-  updateSky(); // trigger awal
+  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  updateSky();
 }
 
 /* =====================================================
    HUJAN SPARKLE
    ===================================================== */
 function initRain() {
-  const c = document.getElementById('rainContainer');
-  for (let i = 0; i < 25; i++) {
-    const d = document.createElement('div');
+  var c = document.getElementById('rainContainer');
+  for (var i = 0; i < 25; i++) {
+    var d = document.createElement('div');
     d.className = 'rain-drop';
-    d.style.left = Math.random()*100+'%';
-    d.style.animationDuration = (Math.random()*6+4)+'s';
-    d.style.animationDelay = (Math.random()*8)+'s';
+    d.style.left = Math.random() * 100 + '%';
+    d.style.animationDuration = (Math.random() * 6 + 4) + 's';
+    d.style.animationDelay = (Math.random() * 8) + 's';
     c.appendChild(d);
   }
 }
@@ -879,36 +832,46 @@ function initRain() {
    USER / LOGIN
    ===================================================== */
 function initUser() {
-  const saved = localStorage.getItem('hdUser');
+  var saved = localStorage.getItem('hdUser');
   if (saved) {
-    currentUser = JSON.parse(saved);
-    showUserUI();
+    try {
+      currentUser = JSON.parse(saved);
+      showUserUI();
+    } catch(e) {
+      localStorage.removeItem('hdUser');
+    }
   }
+  // Muat data pasien segera (tidak perlu tunggu login)
+  loadData();
 }
+
 function doLogin() {
-  const name = document.getElementById('loginName').value.trim();
+  var name = document.getElementById('loginName').value.trim();
   if (!name) {
     document.getElementById('loginError').style.display = 'block';
     return;
   }
   document.getElementById('loginError').style.display = 'none';
-  const role = document.getElementById('loginRole').value;
-  const roleLabels = {perawat:'Perawat HD',dokter:'Dokter',pendaftaran:'Pendaftaran',lainnya:'Lainnya'};
-  currentUser = {name, role: roleLabels[role]||role, isGuest:false, avatar:null, photo:null};
+  var role = document.getElementById('loginRole').value;
+  var roleLabels = { perawat: 'Perawat HD', dokter: 'Dokter', pendaftaran: 'Pendaftaran', lainnya: 'Lainnya' };
+  currentUser = { name: name, role: roleLabels[role] || role, isGuest: false, avatar: null, photo: null };
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
   showUserUI();
   document.getElementById('modalLogin').classList.remove('show');
-  showToast('Selamat datang, '+name+'!');
+  showToast('Selamat datang, ' + name + '!');
 }
+
 function doGuest() {
-  currentUser = {name:'Tamu', role:'Tamu', isGuest:true, avatar:null, photo:null};
+  currentUser = { name: 'Tamu', role: 'Tamu', isGuest: true, avatar: null, photo: null };
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
   showUserUI();
   document.getElementById('modalLogin').classList.remove('show');
 }
+
 function showLoginFromGuest() {
   document.getElementById('modalLogin').classList.add('show');
 }
+
 function logout() {
   currentUser = null;
   localStorage.removeItem('hdUser');
@@ -917,6 +880,7 @@ function logout() {
   document.getElementById('modalLogin').classList.add('show');
   showToast('Berhasil keluar');
 }
+
 function showUserUI() {
   if (!currentUser) return;
   if (currentUser.isGuest) {
@@ -930,16 +894,15 @@ function showUserUI() {
     updateAvatarDisplay();
   }
 }
+
 function updateAvatarDisplay() {
-  const el = document.getElementById('userAvatar');
+  var el = document.getElementById('userAvatar');
   if (currentUser.photo) {
-    el.innerHTML = '<img src="'+currentUser.photo+'" alt="avatar">';
+    el.innerHTML = '<img src="' + currentUser.photo + '" alt="avatar">';
   } else if (currentUser.avatar) {
     el.textContent = currentUser.avatar;
-    el.style.background = 'linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%)';
   } else {
     el.textContent = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
-    el.style.background = 'linear-gradient(135deg, var(--sky-main) 0%, var(--leaf-dark) 100%)';
   }
 }
 
@@ -950,52 +913,56 @@ function openProfileModal() {
   if (!currentUser || currentUser.isGuest) return;
   document.getElementById('profileName').value = currentUser.name;
   document.getElementById('profileRole').value = currentUser.role;
-  const preview = document.getElementById('profileAvatarPreview');
+  var preview = document.getElementById('profileAvatarPreview');
   if (currentUser.photo) {
-    preview.innerHTML = '<img src="'+currentUser.photo+'" alt="avatar">';
+    preview.innerHTML = '<img src="' + currentUser.photo + '" alt="avatar">';
   } else {
     preview.textContent = currentUser.avatar || currentUser.name.charAt(0).toUpperCase();
   }
-  // Generate avatar options
-  const opts = document.getElementById('avatarOptions');
+  var opts = document.getElementById('avatarOptions');
   opts.innerHTML = '';
-  const colors = ['color-1','color-2','color-3','color-4','color-5','color-6','color-7','color-8','color-9','color-10'];
-  const letters = ['A','B','C','D','E','F','G','H','I','J'];
-  colors.forEach((c,i) => {
-    const opt = document.createElement('div');
-    opt.className = 'avatar-option '+c;
-    opt.textContent = letters[i];
-    if (currentUser.avatar === letters[i] && !currentUser.photo) opt.classList.add('selected');
-    opt.onclick = () => {
-      opts.querySelectorAll('.avatar-option').forEach(o=>o.classList.remove('selected'));
-      opt.classList.add('selected');
-      preview.textContent = letters[i];
-      preview.innerHTML = '';
-      preview.textContent = letters[i];
-      currentUser.avatar = letters[i];
-      currentUser.photo = null;
-    };
-    opts.appendChild(opt);
-  });
+  var colors = ['color-1', 'color-2', 'color-3', 'color-4', 'color-5', 'color-6', 'color-7', 'color-8', 'color-9', 'color-10'];
+  var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  for (var i = 0; i < colors.length; i++) {
+    (function(idx) {
+      var opt = document.createElement('div');
+      opt.className = 'avatar-option ' + colors[idx];
+      opt.textContent = letters[idx];
+      if (currentUser.avatar === letters[idx] && !currentUser.photo) opt.classList.add('selected');
+      opt.onclick = function() {
+        opts.querySelectorAll('.avatar-option').forEach(function(o) { o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        preview.textContent = letters[idx];
+        preview.innerHTML = '';
+        preview.textContent = letters[idx];
+        currentUser.avatar = letters[idx];
+        currentUser.photo = null;
+      };
+      opts.appendChild(opt);
+    })(i);
+  }
   document.getElementById('modalProfile').classList.add('show');
 }
+
 function closeProfileModal() {
   document.getElementById('modalProfile').classList.remove('show');
 }
+
 function handlePhotoUpload(e) {
-  const file = e.target.files[0];
+  var file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
+  var reader = new FileReader();
   reader.onload = function(ev) {
     currentUser.photo = ev.target.result;
     currentUser.avatar = null;
-    document.getElementById('profileAvatarPreview').innerHTML = '<img src="'+ev.target.result+'" alt="avatar">';
-    document.querySelectorAll('.avatar-option').forEach(o=>o.classList.remove('selected'));
+    document.getElementById('profileAvatarPreview').innerHTML = '<img src="' + ev.target.result + '" alt="avatar">';
+    document.querySelectorAll('.avatar-option').forEach(function(o) { o.classList.remove('selected'); });
   };
   reader.readAsDataURL(file);
 }
+
 function saveProfile() {
-  const name = document.getElementById('profileName').value.trim();
+  var name = document.getElementById('profileName').value.trim();
   if (!name) { showToast('Nama tidak boleh kosong'); return; }
   currentUser.name = name;
   localStorage.setItem('hdUser', JSON.stringify(currentUser));
@@ -1005,191 +972,287 @@ function saveProfile() {
 }
 
 /* =====================================================
-   PENCARIAN
+   LOAD DATA DARI SERVER / CACHE
    ===================================================== */
-function cari() {
-  const q = document.getElementById('search').value.trim().toLowerCase();
-  const dateVal = document.getElementById('searchDate').value;
-  const hasil = document.getElementById('hasil');
-
-  if (q.length < 2 && !dateVal) {
-    hasil.innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
-    return;
+function loadData() {
+  // Tampilkan cache dulu jika ada
+  var cached = [];
+  try { cached = JSON.parse(localStorage.getItem('hdCache') || '[]'); } catch(e) { cached = []; }
+  if (cached.length > 0) {
+    allData = cached;
+    showCacheInfo(cached.length, true);
   }
 
-  if (allData.length === 0) {
-    hasil.innerHTML = '<div class="loading-spinner"></div> Mencari data...';
-    fetchAndSearch(q, dateVal);
-    return;
+  // Jika online, fetch dari server
+  if (navigator.onLine) {
+    fetchFromServer();
+  } else if (cached.length > 0) {
+    showCacheInfo(cached.length, true);
   }
-
-  renderResults(allData, q, dateVal);
 }
 
-function fetchAndSearch(q, dateVal) {
-  const isOffline = !navigator.onLine;
-  if (isOffline) {
-    const cached = JSON.parse(localStorage.getItem('hdCache')||'[]');
-    if (cached.length > 0) {
-      allData = cached;
-      renderResults(cached, q, dateVal);
-      showCacheInfo(cached.length, true);
-    } else {
-      document.getElementById('hasil').innerHTML = 'Tidak ada data offline. Hubungkan internet.';
-    }
-    return;
-  }
+function fetchFromServer() {
+  if (isFetching) return;
+  isFetching = true;
 
-  fetch(SHEET_URL+'?action=read')
-    .then(r=>r.json())
-    .then(data => {
-      allData = data || [];
-      localStorage.setItem('hdCache', JSON.stringify(allData));
-      localStorage.setItem('hdCacheTime', new Date().toISOString());
-      renderResults(allData, q, dateVal);
-      showCacheInfo(allData.length, false);
+  fetch(SHEET_URL + '?action=read')
+    .then(function(response) {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
+      return response.json();
     })
-    .catch(err => {
-      const cached = JSON.parse(localStorage.getItem('hdCache')||'[]');
-      if (cached.length > 0) {
-        allData = cached;
-        renderResults(cached, q, dateVal);
-        showCacheInfo(cached.length, true);
+    .then(function(data) {
+      isFetching = false;
+      if (Array.isArray(data)) {
+        allData = data;
+      } else if (data && Array.isArray(data.data)) {
+        allData = data.data;
       } else {
-        document.getElementById('hasil').innerHTML = 'Gagal memuat data. Coba lagi.';
+        allData = [];
+      }
+      // Simpan ke cache
+      try {
+        localStorage.setItem('hdCache', JSON.stringify(allData));
+        localStorage.setItem('hdCacheTime', new Date().toISOString());
+      } catch(e) {}
+      showCacheInfo(allData.length, false);
+      // Re-render jika ada pencarian aktif
+      var q = document.getElementById('search').value.trim().toLowerCase();
+      var d = document.getElementById('searchDate').value;
+      if (q.length >= 2 || d) {
+        doFilter(q, d);
+      }
+    })
+    .catch(function(err) {
+      isFetching = false;
+      console.error('Fetch error:', err);
+      if (allData.length > 0) {
+        showCacheInfo(allData.length, true);
       }
     });
 }
 
-function renderResults(data, q, dateVal) {
-  const hasil = document.getElementById('hasil');
-  let filtered = data;
+function retryFetch() {
+  allData = [];
+  var btn = document.getElementById('refreshBtn');
+  btn.classList.add('spinning');
+  fetchFromServer();
+  setTimeout(function() { btn.classList.remove('spinning'); }, 2000);
+}
 
-  if (q.length >= 2) {
-    filtered = filtered.filter(p =>
-      (p.nama && p.nama.toLowerCase().includes(q)) ||
-      (p.mr && p.mr.toLowerCase().includes(q)) ||
-      (p.ruang && p.ruang.toLowerCase().includes(q))
-    );
-  }
-  if (dateVal) {
-    filtered = filtered.filter(p => p.tanggal === dateVal);
+/* =====================================================
+   PENCARIAN (DEBOUNCED, INDEX-BASED)
+   ===================================================== */
+function initSearchListeners() {
+  // Input pencarian: debounce 350ms
+  document.getElementById('search').addEventListener('input', function() {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(function() {
+      cari();
+    }, 350);
+  });
+
+  // Filter tanggal: langsung cari
+  document.getElementById('searchDate').addEventListener('change', function() {
+    checkDate();
+    cari();
+  });
+
+  // Enter di search juga trigger
+  document.getElementById('search').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      clearTimeout(searchTimer);
+      cari();
+    }
+  });
+}
+
+function cari() {
+  var q = document.getElementById('search').value.trim().toLowerCase();
+  var dateVal = document.getElementById('searchDate').value;
+  var hasil = document.getElementById('hasil');
+
+  // Jika belum cukup karakter dan tidak ada tanggal
+  if (q.length < 2 && !dateVal) {
+    hasil.innerHTML = 'Ketik minimal 2 karakter atau pilih tanggal untuk mencari';
+    filteredData = [];
+    return;
   }
 
-  if (filtered.length === 0) {
+  // Jika data masih kosong, coba fetch dulu
+  if (allData.length === 0) {
+    hasil.innerHTML = '<div style="padding:30px"><div class="loading-spinner"></div> Memuat data dari server...</div>';
+    fetchFromServer();
+    // Setelah fetch selesai, doFilter akan dipanggil otomatis
+    return;
+  }
+
+  doFilter(q, dateVal);
+}
+
+function doFilter(q, dateVal) {
+  var hasil = document.getElementById('hasil');
+  filteredData = [];
+
+  for (var i = 0; i < allData.length; i++) {
+    var p = allData[i];
+    var matchQ = true;
+    var matchD = true;
+
+    if (q.length >= 2) {
+      var nama = (p.nama || '').toLowerCase();
+      var mr = (p.mr || '').toLowerCase();
+      var ruang = (p.ruang || '').toLowerCase();
+      var diag = (p.diagnosis || '').toLowerCase();
+      matchQ = nama.indexOf(q) !== -1 || mr.indexOf(q) !== -1 || ruang.indexOf(q) !== -1 || diag.indexOf(q) !== -1;
+    }
+
+    if (dateVal) {
+      matchD = (p.tanggal === dateVal);
+    }
+
+    if (matchQ && matchD) {
+      filteredData.push(p);
+    }
+  }
+
+  renderFilteredResults();
+}
+
+function renderFilteredResults() {
+  var hasil = document.getElementById('hasil');
+  var isCache = !navigator.onLine && allData.length > 0;
+
+  if (filteredData.length === 0) {
     hasil.innerHTML = 'Tidak ditemukan data yang cocok.';
     return;
   }
 
-  let html = '';
-  filtered.forEach((p,i) => {
-    const isCache = localStorage.getItem('hdCache') && !navigator.onLine;
-    const selesai = p.status && p.status.toLowerCase() === 'selesai';
-    html += `<div class="card${selesai?' selesai':''}${isCache?' from-cache':''}">
-      <div class="row">
-        <div class="nama">${esc(p.nama||'-')}</div>
-        <div class="mr">${esc(p.mr||'-')}</div>
-      </div>
-      <div class="info">
-        ${p.tanggal?'📅 '+esc(p.tanggal):''}
-        ${p.ruang?' | 🏥 '+esc(p.ruang):''}
-        ${p.shift?' | 🕐 '+esc(p.shift):''}
-        ${p.jadwal?' | 🔄 '+esc(p.jadwal):''}
-        <br><span class="badge">${esc(p.diagnosis||p.status||'HD')}</span>
-      </div>
-      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">
-        <button class="action-btn view-btn" onclick='viewPatient(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Lihat</button>
-        <button class="action-btn record-btn" onclick='openRecordModal(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Record</button>
-        ${p.noHP?'<a class="action-btn wa-share-btn" href="https://wa.me/'+p.noHP.replace(/^0/,'62')+'" target="_blank">WA</a>':''}
-        <button class="action-btn pdf-btn" onclick='generatePDF(${JSON.stringify(p).replace(/'/g,"&#39;")})'>PDF</button>
-      </div>
-    </div>`;
-  });
+  var html = '';
+  for (var i = 0; i < filteredData.length; i++) {
+    var p = filteredData[i];
+    var selesai = p.status && p.status.toLowerCase() === 'selesai';
+
+    html += '<div class="card' + (selesai ? ' selesai' : '') + (isCache ? ' from-cache' : '') + '">';
+
+    // Baris nama dan MR
+    html += '<div class="row">';
+    html += '<div class="nama">' + esc(p.nama || '-') + '</div>';
+    html += '<div class="mr">' + esc(p.mr || '-') + '</div>';
+    html += '</div>';
+
+    // Info
+    html += '<div class="info">';
+    if (p.tanggal) html += '📅 ' + esc(p.tanggal);
+    if (p.ruang) html += ' | 🏥 ' + esc(p.ruang);
+    if (p.shift) html += ' | 🕐 ' + esc(p.shift);
+    if (p.jadwal) html += ' | 🔄 ' + esc(p.jadwal);
+    html += '<br><span class="badge">' + esc(p.diagnosis || p.status || 'HD') + '</span>';
+    html += '</div>';
+
+    // Tombol aksi (menggunakan index i)
+    html += '<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">';
+    html += '<button class="action-btn view-btn" onclick="viewPatient(' + i + ')">Lihat</button>';
+    html += '<button class="action-btn record-btn" onclick="openRecordModal(' + i + ')">Record</button>';
+    if (p.noHP) {
+      var waNum = String(p.noHP).replace(/^0/, '62').replace(/[^0-9]/g, '');
+      html += '<a class="action-btn wa-share-btn" href="https://wa.me/' + waNum + '" target="_blank">WA</a>';
+    }
+    html += '<button class="action-btn pdf-btn" onclick="generatePDF(' + i + ')">PDF</button>';
+    html += '</div>';
+
+    html += '</div>';
+  }
+
   hasil.innerHTML = html;
 }
 
 function esc(s) {
-  if (!s) return '';
-  const d = document.createElement('div');
-  d.textContent = s;
+  if (s === null || s === undefined) return '';
+  var d = document.createElement('div');
+  d.textContent = String(s);
   return d.innerHTML;
 }
 
 function checkDate() {
-  const w = document.getElementById('dateWrapper');
-  if (document.getElementById('searchDate').value) w.classList.add('has-value');
-  else w.classList.remove('has-value');
+  var w = document.getElementById('dateWrapper');
+  if (document.getElementById('searchDate').value) {
+    w.classList.add('has-value');
+  } else {
+    w.classList.remove('has-value');
+  }
 }
 
 function showCacheInfo(count, isCache) {
-  const ci = document.getElementById('cacheInfo');
-  ci.className = 'cache-info show ' + (isCache?'is-cache':'is-live');
+  var ci = document.getElementById('cacheInfo');
+  ci.className = 'cache-info show ' + (isCache ? 'is-cache' : 'is-live');
   document.getElementById('cacheCount').textContent = count;
-  document.getElementById('cacheLabel').textContent = isCache?'Data Lokal (Cache)':'Data dari Server';
-  const t = localStorage.getItem('hdCacheTime');
-  document.getElementById('cacheTime').textContent = t?'Terakhir: '+new Date(t).toLocaleString('id-ID'):'-';
-}
-
-function retryFetch() {
-  allData = [];
-  const btn = document.getElementById('refreshBtn');
-  btn.classList.add('spinning');
-  cari();
-  setTimeout(()=>btn.classList.remove('spinning'), 1500);
+  document.getElementById('cacheLabel').textContent = isCache ? 'Data Lokal (Cache)' : 'Data dari Server';
+  var t = localStorage.getItem('hdCacheTime');
+  document.getElementById('cacheTime').textContent = t ? 'Terakhir: ' + new Date(t).toLocaleString('id-ID') : '-';
 }
 
 /* =====================================================
-   LIHAT DETAIL PASIEN
+   LIHAT DETAIL PASIEN (INDEX-BASED)
    ===================================================== */
-function viewPatient(p) {
-  const vc = document.getElementById('viewContent');
-  const fields = [
-    {label:'Nama',value:p.nama,icon:'👤'},
-    {label:'No. MR',value:p.mr,icon:'📋'},
-    {label:'Tanggal',value:p.tanggal,icon:'📅'},
-    {label:'Ruang',value:p.ruang,icon:'🏥'},
-    {label:'Shift',value:p.shift,icon:'🕐'},
-    {label:'Jadwal',value:p.jadwal,icon:'🔄'},
-    {label:'Diagnosis',value:p.diagnosis,icon:'🩺'},
-    {label:'Status',value:p.status,icon:'✅'},
-    {label:'No. HP',value:p.noHP,icon:'📱'},
-    {label:'BB Sebelum',value:p.bb||p.bbSebelum,icon:'⚖️'},
-    {label:'BB Sesudah',value:p.bbSesudah,icon:'⚖️'},
-    {label:'TD Sebelum',value:p.tdSebelum,icon:'🩸'},
-    {label:'TD Sesudah',value:p.tdSesudah,icon:'🩸'},
-    {label:'UF Target',value:p.ufTarget,icon:'💧'},
-    {label:'Durasi',value:p.durasi,icon:'⏱️'},
-    {label:'Catatan',value:p.catatan,icon:'📝'},
+function viewPatient(idx) {
+  var p = filteredData[idx];
+  if (!p) return;
+
+  var vc = document.getElementById('viewContent');
+  var fields = [
+    { label: 'Nama', value: p.nama, icon: '👤' },
+    { label: 'No. MR', value: p.mr, icon: '📋' },
+    { label: 'Tanggal', value: p.tanggal, icon: '📅' },
+    { label: 'Ruang', value: p.ruang, icon: '🏥' },
+    { label: 'Shift', value: p.shift, icon: '🕐' },
+    { label: 'Jadwal', value: p.jadwal, icon: '🔄' },
+    { label: 'Diagnosis', value: p.diagnosis, icon: '🩺' },
+    { label: 'Status', value: p.status, icon: '✅' },
+    { label: 'No. HP', value: p.noHP, icon: '📱' },
+    { label: 'BB Sebelum', value: p.bb || p.bbSebelum, icon: '⚖️' },
+    { label: 'BB Sesudah', value: p.bbSesudah, icon: '⚖️' },
+    { label: 'TD Sebelum', value: p.tdSebelum, icon: '🩸' },
+    { label: 'TD Sesudah', value: p.tdSesudah, icon: '🩸' },
+    { label: 'UF Target', value: p.ufTarget, icon: '💧' },
+    { label: 'Durasi', value: p.durasi, icon: '⏱️' },
+    { label: 'Catatan', value: p.catatan, icon: '📝' }
   ];
-  let items = '';
-  fields.forEach(f => {
+
+  var items = '';
+  for (var i = 0; i < fields.length; i++) {
+    var f = fields[i];
     if (f.value) {
-      items += `<div class="view-item">
-        <div class="view-label"><div class="view-label-icon">${f.icon}</div>${f.label}</div>
-        <div class="view-value">${esc(f.value)}</div>
-      </div>`;
+      items += '<div class="view-item">';
+      items += '<div class="view-label"><div class="view-label-icon">' + f.icon + '</div>' + f.label + '</div>';
+      items += '<div class="view-value">' + esc(f.value) + '</div>';
+      items += '</div>';
     }
-  });
-  vc.innerHTML = `<div class="view-card">
-    <div class="view-card-header">
-      <div class="view-patient-name">${esc(p.nama||'-')}</div>
-      <div class="view-patient-mr">MR: ${esc(p.mr||'-')} | ${esc(p.tanggal||'-')}</div>
-    </div>
-    <div class="view-card-body">${items}</div>
-  </div>`;
+  }
+
+  vc.innerHTML = '<div class="view-card">' +
+    '<div class="view-card-header">' +
+    '<div class="view-patient-name">' + esc(p.nama || '-') + '</div>' +
+    '<div class="view-patient-mr">MR: ' + esc(p.mr || '-') + ' | ' + esc(p.tanggal || '-') + '</div>' +
+    '</div>' +
+    '<div class="view-card-body">' + items + '</div>' +
+    '</div>';
+
   document.getElementById('modalView').classList.add('show');
 }
+
 function closeViewModal() {
   document.getElementById('modalView').classList.remove('show');
 }
 
 /* =====================================================
-   RECORD HD
+   RECORD HD (INDEX-BASED)
    ===================================================== */
-function openRecordModal(p) {
-  currentRecordPatient = p;
-  document.getElementById('recordModalTitle').textContent = 'Record HD - '+p.nama;
-  document.getElementById('recordPatientName').textContent = p.nama+' ('+p.mr+')';
+function openRecordModal(idx) {
+  var p = filteredData[idx];
+  if (!p) return;
+  currentRecordIdx = idx;
+  document.getElementById('recordModalTitle').textContent = 'Record HD - ' + (p.nama || '-');
+  document.getElementById('recordPatientName').textContent = (p.nama || '-') + ' (' + (p.mr || '-') + ')';
   document.getElementById('recBB').value = '';
   document.getElementById('recBBS').value = '';
   document.getElementById('recTDS').value = '';
@@ -1199,12 +1262,17 @@ function openRecordModal(p) {
   document.getElementById('recCatatan').value = '';
   document.getElementById('modalRecord').classList.add('show');
 }
+
 function closeRecordModal() {
   document.getElementById('modalRecord').classList.remove('show');
 }
+
 function saveRecord() {
-  const rec = {
-    patient: currentRecordPatient,
+  if (currentRecordIdx < 0 || currentRecordIdx >= filteredData.length) return;
+  var p = filteredData[currentRecordIdx];
+
+  var rec = {
+    patient: p,
     bb: document.getElementById('recBB').value,
     bbSesudah: document.getElementById('recBBS').value,
     tdSebelum: document.getElementById('recTDS').value,
@@ -1215,63 +1283,73 @@ function saveRecord() {
     timestamp: new Date().toISOString(),
     user: currentUser ? currentUser.name : 'Anonim'
   };
-  // Simpan ke localStorage
-  let records = JSON.parse(localStorage.getItem('hdRecords')||'[]');
+
+  var records = [];
+  try { records = JSON.parse(localStorage.getItem('hdRecords') || '[]'); } catch(e) { records = []; }
   records.push(rec);
-  localStorage.setItem('hdRecords', JSON.stringify(records));
+  if (records.length > 200) records = records.slice(-200);
+  try { localStorage.setItem('hdRecords', JSON.stringify(records)); } catch(e) {}
+
   closeRecordModal();
   showToast('Record HD berhasil disimpan!');
 }
 
 /* =====================================================
-   PDF
+   PDF (INDEX-BASED)
    ===================================================== */
-function generatePDF(p) {
+function generatePDF(idx) {
+  var p = filteredData[idx];
+  if (!p) return;
+
   try {
-    const {jsPDF} = window.jspdf;
-    const doc = new jsPDF();
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF();
     doc.setFontSize(16);
     doc.text('HD Malahayati - Detail Pasien', 14, 20);
     doc.setFontSize(10);
     doc.setTextColor(100);
-    doc.text('Dicetak: '+new Date().toLocaleString('id-ID'), 14, 28);
+    doc.text('Dicetak: ' + new Date().toLocaleString('id-ID'), 14, 28);
     doc.setTextColor(0);
 
-    const rows = [
-      ['Nama', p.nama||'-'],
-      ['No. MR', p.mr||'-'],
-      ['Tanggal', p.tanggal||'-'],
-      ['Ruang', p.ruang||'-'],
-      ['Shift', p.shift||'-'],
-      ['Jadwal', p.jadwal||'-'],
-      ['Diagnosis', p.diagnosis||'-'],
-      ['Status', p.status||'-'],
-      ['No. HP', p.noHP||'-'],
+    var rows = [
+      ['Nama', p.nama || '-'],
+      ['No. MR', p.mr || '-'],
+      ['Tanggal', p.tanggal || '-'],
+      ['Ruang', p.ruang || '-'],
+      ['Shift', p.shift || '-'],
+      ['Jadwal', p.jadwal || '-'],
+      ['Diagnosis', p.diagnosis || '-'],
+      ['Status', p.status || '-'],
+      ['No. HP', p.noHP || '-']
     ];
+
     doc.autoTable({
       startY: 34,
-      head: [['Field','Nilai']],
+      head: [['Field', 'Nilai']],
       body: rows,
       theme: 'grid',
-      headStyles:{fillColor:[3,169,244]},
-      styles:{fontSize:10}
+      headStyles: { fillColor: [3, 169, 244] },
+      styles: { fontSize: 10 }
     });
-    doc.save('HD_'+p.mr+'_'+p.tanggal+'.pdf');
+
+    var filename = 'HD_' + (p.mr || 'pasien') + '_' + (p.tanggal || 'today') + '.pdf';
+    doc.save(filename);
     showToast('PDF berhasil diunduh');
-  } catch(e) {
+  } catch (e) {
+    console.error('PDF error:', e);
     showToast('Gagal membuat PDF');
   }
 }
 
 /* =====================================================
-   CATATAN HARIAN (SIMPLE & MUDAH)
+   CATATAN HARIAN
    ===================================================== */
 function setDefaultNoteDate() {
-  const today = new Date();
-  const y = today.getFullYear();
-  const m = String(today.getMonth()+1).padStart(2,'0');
-  const d = String(today.getDate()).padStart(2,'0');
-  document.getElementById('noteDate').value = y+'-'+m+'-'+d;
+  var today = new Date();
+  var y = today.getFullYear();
+  var m = String(today.getMonth() + 1).padStart(2, '0');
+  var d = String(today.getDate()).padStart(2, '0');
+  document.getElementById('noteDate').value = y + '-' + m + '-' + d;
 }
 
 function openNoteModal() {
@@ -1280,31 +1358,30 @@ function openNoteModal() {
   renderNoteList();
   document.getElementById('modalNote').classList.add('show');
 }
+
 function closeNoteModal() {
   document.getElementById('modalNote').classList.remove('show');
 }
 
 function saveNote() {
-  const date = document.getElementById('noteDate').value;
-  const text = document.getElementById('noteText').value.trim();
-  if (!text) {
-    showToast('Catatan tidak boleh kosong');
-    return;
-  }
-  if (!date) {
-    showToast('Pilih tanggal');
-    return;
-  }
-  let notes = JSON.parse(localStorage.getItem('hdNotes')||'[]');
+  var date = document.getElementById('noteDate').value;
+  var text = document.getElementById('noteText').value.trim();
+  if (!text) { showToast('Catatan tidak boleh kosong'); return; }
+  if (!date) { showToast('Pilih tanggal'); return; }
+
+  var notes = [];
+  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
+
   notes.unshift({
     id: Date.now(),
     date: date,
     text: text,
     created: new Date().toISOString()
   });
-  // Simpan max 100 catatan
+
   if (notes.length > 100) notes = notes.slice(0, 100);
-  localStorage.setItem('hdNotes', JSON.stringify(notes));
+  try { localStorage.setItem('hdNotes', JSON.stringify(notes)); } catch(e) {}
+
   document.getElementById('noteText').value = '';
   setDefaultNoteDate();
   renderNoteList();
@@ -1312,36 +1389,46 @@ function saveNote() {
 }
 
 function deleteNote(id) {
-  let notes = JSON.parse(localStorage.getItem('hdNotes')||'[]');
-  notes = notes.filter(n => n.id !== id);
-  localStorage.setItem('hdNotes', JSON.stringify(notes));
+  var notes = [];
+  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
+  notes = notes.filter(function(n) { return n.id !== id; });
+  try { localStorage.setItem('hdNotes', JSON.stringify(notes)); } catch(e) {}
   renderNoteList();
   showToast('Catatan dihapus');
 }
 
 function renderNoteList() {
-  const notes = JSON.parse(localStorage.getItem('hdNotes')||'[]');
-  const list = document.getElementById('noteList');
+  var notes = [];
+  try { notes = JSON.parse(localStorage.getItem('hdNotes') || '[]'); } catch(e) { notes = []; }
+  var list = document.getElementById('noteList');
   document.getElementById('noteCount').textContent = notes.length;
 
   if (notes.length === 0) {
-    list.innerHTML = '<div class="note-empty"><svg viewBox="0 0 24 24" fill="#90a4ae" xmlns="http://www.w3.org/2000/svg"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg><br>Tidak ada catatan yet.<br>Mulai tulis catatan pertama Anda!</div>';
+    list.innerHTML = '<div class="note-empty"><svg viewBox="0 0 24 24" fill="#90a4ae" xmlns="http://www.w3.org/2000/svg"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg><br>Tidak ada catatan.<br>Mulai tulis catatan pertama Anda!</div>';
     return;
   }
 
-  let html = '';
-  notes.forEach(n => {
-    const d = n.date ? new Date(n.date+'T00:00:00').toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'}) : '-';
-    // Truncate tampilan jika terlalu panjang
-    const displayText = n.text.length > 200 ? n.text.substring(0,200)+'...' : n.text;
-    html += `<div class="note-item">
-      <div class="note-item-header">
-        <span class="note-item-date">${esc(d)}</span>
-        <button class="note-item-delete" onclick="deleteNote(${n.id})" title="Hapus">✕</button>
-      </div>
-      <div class="note-item-text">${esc(displayText)}</div>
-    </div>`;
-  });
+  var html = '';
+  for (var i = 0; i < notes.length; i++) {
+    var n = notes[i];
+    var d = '-';
+    if (n.date) {
+      try {
+        d = new Date(n.date + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+      } catch(e) {
+        d = n.date;
+      }
+    }
+    var displayText = n.text.length > 200 ? n.text.substring(0, 200) + '...' : n.text;
+
+    html += '<div class="note-item">';
+    html += '<div class="note-item-header">';
+    html += '<span class="note-item-date">' + esc(d) + '</span>';
+    html += '<button class="note-item-delete" onclick="deleteNote(' + n.id + ')" title="Hapus">✕</button>';
+    html += '</div>';
+    html += '<div class="note-item-text">' + esc(displayText) + '</div>';
+    html += '</div>';
+  }
   list.innerHTML = html;
 }
 
@@ -1357,39 +1444,45 @@ function toggleWA() {
    TOAST
    ===================================================== */
 function showToast(msg) {
-  const t = document.getElementById('toast');
+  var t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 2500);
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.classList.remove('show'); }, 2500);
 }
 
 /* =====================================================
    OFFLINE / ONLINE DETECTION
    ===================================================== */
-window.addEventListener('online', () => {
-  const bar = document.getElementById('offlineBar');
+window.addEventListener('online', function() {
+  var bar = document.getElementById('offlineBar');
   bar.className = 'offline-bar show is-back';
-  bar.querySelector('#offlineBarText').textContent = 'Kembali Online';
-  bar.querySelector('#retryBtn').style.display = 'none';
-  setTimeout(()=>bar.classList.remove('show'), 3000);
-  allData = [];
+  document.getElementById('offlineBarText').textContent = 'Kembali Online';
+  document.getElementById('retryBtn').style.display = 'none';
+  setTimeout(function() { bar.classList.remove('show'); }, 3000);
+  // Auto-fetch ulang saat online
+  fetchFromServer();
 });
-window.addEventListener('offline', () => {
-  const bar = document.getElementById('offlineBar');
+
+window.addEventListener('offline', function() {
+  var bar = document.getElementById('offlineBar');
   bar.className = 'offline-bar show is-offline';
-  bar.querySelector('#offlineBarText').textContent = 'Mode Offline - Data dari cache';
-  bar.querySelector('#retryBtn').style.display = 'inline-block';
+  document.getElementById('offlineBarText').textContent = 'Mode Offline - Data dari cache';
+  document.getElementById('retryBtn').style.display = 'inline-block';
 });
 
 /* =====================================================
    KLIK DI LUAR MODAL UNTUK TUTUP
    ===================================================== */
-document.querySelectorAll('.modal-note,.modal-view,.modal-record,.modal-profile').forEach(modal => {
-  modal.addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.classList.remove('show');
-    }
-  });
+['modalNote', 'modalView', 'modalRecord', 'modalProfile'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('show');
+      }
+    });
+  }
 });
 </script>
 </body>
