@@ -133,11 +133,12 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .sync-queue-badge .sq-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink .6s infinite}
 
 /* ===== APP HEADER ===== */
-.app-header{position:relative;z-index:2;text-align:center;padding:90px 20px 20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center top / contain no-repeat var(--sky-light);border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}
+.app-header{position:relative;z-index:2;text-align:center;padding:20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center center / contain no-repeat var(--sky-light);border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
 .app-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--sky-main),var(--leaf-main),#C62828,var(--sky-main))}
-.header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-bottom:4px;background:rgba(255,255,255,0.85);padding:4px 14px;border-radius:10px;display:inline-block;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;margin-bottom:12px;background:rgba(255,255,255,0.85);padding:3px 12px;border-radius:8px;display:inline-block}
-.clock-container{padding:12px;background:linear-gradient(135deg,rgba(225,245,254,0.95) 0%,rgba(255,248,225,0.95) 100%);border-radius:12px;margin-top:8px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
+.header-text-group{position:relative;z-index:2}
+.header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-top:4px;background:rgba(255,255,255,0.85);padding:4px 14px;border-radius:10px;display:inline-block;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;background:rgba(255,255,255,0.85);padding:3px 12px;border-radius:8px;display:inline-block}
+.clock-container{padding:12px;background:linear-gradient(135deg,rgba(225,245,254,0.95) 0%,rgba(255,248,225,0.95) 100%);border-radius:12px;position:relative;z-index:2;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
 .clock{font-size:22px;font-weight:700;letter-spacing:2px;color:var(--sky-deep)}
 .clock-date{font-size:12px;margin-top:4px;color:var(--leaf-dark);font-weight:600}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
@@ -355,7 +356,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 @media(min-width:481px){body{max-width:520px;margin:0 auto;border-radius:0}}
 @media(max-width:360px){
   .header-title{font-size:18px}.clock{font-size:18px}.clock-date{font-size:11px}
-  .app-header{margin-top:15px;padding:80px 15px 15px}
+  .app-header{margin-top:15px;padding:15px}
   .search-box #search{font-size:13px}.search-box #searchDate{width:100px;font-size:13px}
   .card{padding:14px}.nama{font-size:15px}
   .wa-btn{width:44px;height:44px}.footer-text{font-size:8px}
@@ -383,8 +384,12 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 <!-- HEADER -->
 <div class="app-header">
   <div class="sync-queue-badge" id="syncQueueBadge"><div class="sq-dot"></div><span id="syncQueueText">0 pending</span></div>
-  <div class="header-title">HD MALAHAYATI</div>
-  <div class="header-subtitle">Instalasi Dialisis RSSA</div>
+  
+  <div class="header-text-group">
+    <div class="header-subtitle">Instalasi Dialisis RSSA</div>
+    <div class="header-title">HD MALAHAYATI</div>
+  </div>
+  
   <div class="clock-container">
     <div class="clock" id="clock">--:--:--</div>
     <div class="clock-date" id="clockDate">--</div>
@@ -1180,13 +1185,23 @@ function selectAvatar(el, color) {
   var cm = {'1':'linear-gradient(135deg,#81D4FA 0%,#0288D1 100%)','2':'linear-gradient(135deg,#4FC3F7 0%,#01579B 100%)','3':'linear-gradient(135deg,#FFB74D 0%,#FF8F00 100%)','4':'linear-gradient(135deg,#EF9A9A 0%,#C62828 100%)','5':'linear-gradient(135deg,#FFD54F 0%,#F9A825 100%)','6':'linear-gradient(135deg,#90CAF9 0%,#1565C0 100%)','7':'linear-gradient(135deg,#FFCC80 0%,#E65100 100%)','8':'linear-gradient(135deg,#CE93D8 0%,#6A1B9A 100%)','9':'linear-gradient(135deg,#80CBC4 0%,#00695C 100%)','10':'linear-gradient(135deg,#81D4FA 0%,#FFB74D 100%)'};
   p.style.background = cm[color] || cm['1'];
 }
+
 function handleAvatarUpload(event) {
   var f = event.target.files[0]; if (!f) return;
-  if (f.size > 500000) { toast('Ukuran foto maksimal 500KB'); return; }
+  // Batas foto diubah menjadi 1000 MB (1 GB) sesuai permintaan
+  if (f.size > 1000000000) { 
+    toast('Ukuran foto maksimal 1000MB'); 
+    return; 
+  }
   var r = new FileReader();
-  r.onload = function(e) { currentUser.avatarPhoto = e.target.result; document.getElementById('profileAvatarPreview').innerHTML = '<img src="'+e.target.result+'" alt="avatar">'; document.querySelectorAll('.avatar-option').forEach(function(el) { el.classList.remove('selected'); }); };
+  r.onload = function(e) { 
+    currentUser.avatarPhoto = e.target.result; 
+    document.getElementById('profileAvatarPreview').innerHTML = '<img src="'+e.target.result+'" alt="avatar">'; 
+    document.querySelectorAll('.avatar-option').forEach(function(el) { el.classList.remove('selected'); }); 
+  };
   r.readAsDataURL(f);
 }
+
 function saveProfile() {
   if (!currentUser) return;
   currentUser.name = document.getElementById('profileName').value.trim() || 'Pengguna';
@@ -1196,7 +1211,14 @@ function saveProfile() {
   currentUser.bb = document.getElementById('profileBB').value.trim();
   currentUser.tb = document.getElementById('profileTB').value.trim();
   currentUser.goldar = document.getElementById('profileGolDarah').value;
-  localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+  
+  // Menggunakan try-catch agar aplikasi tidak crash jika foto terlalu besar melebihi kapasitas memory browser
+  try {
+    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+  } catch(e) {
+    toast('Ukuran foto terlalu besar untuk disimpan lokal, foto tidak akan tersimpan.');
+    currentUser.avatarPhoto = null; // Hapus foto agar tidak crash
+  }
   applyUserUI(); closeProfileModal(); toast('Data diri berhasil disimpan!');
 }
 
