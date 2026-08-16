@@ -133,11 +133,11 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .sync-queue-badge .sq-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink .6s infinite}
 
 /* ===== APP HEADER ===== */
-.app-header{position:relative;z-index:2;text-align:center;padding:24px 20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center center/cover no-repeat;border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden}
+.app-header{position:relative;z-index:2;text-align:center;padding:90px 20px 20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center top / contain no-repeat var(--sky-light);border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end}
 .app-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--sky-main),var(--leaf-main),#C62828,var(--sky-main))}
-.header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-bottom:4px}
-.header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;margin-bottom:12px}
-.clock-container{padding:12px;background:linear-gradient(135deg,var(--sky-light) 0%,var(--leaf-light) 100%);border-radius:12px;margin-top:8px}
+.header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-bottom:4px;background:rgba(255,255,255,0.85);padding:4px 14px;border-radius:10px;display:inline-block;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;margin-bottom:12px;background:rgba(255,255,255,0.85);padding:3px 12px;border-radius:8px;display:inline-block}
+.clock-container{padding:12px;background:linear-gradient(135deg,rgba(225,245,254,0.95) 0%,rgba(255,248,225,0.95) 100%);border-radius:12px;margin-top:8px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
 .clock{font-size:22px;font-weight:700;letter-spacing:2px;color:var(--sky-deep)}
 .clock-date{font-size:12px;margin-top:4px;color:var(--leaf-dark);font-weight:600}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
@@ -355,7 +355,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 @media(min-width:481px){body{max-width:520px;margin:0 auto;border-radius:0}}
 @media(max-width:360px){
   .header-title{font-size:18px}.clock{font-size:18px}.clock-date{font-size:11px}
-  .app-header{margin-top:15px;padding:20px 15px}
+  .app-header{margin-top:15px;padding:80px 15px 15px}
   .search-box #search{font-size:13px}.search-box #searchDate{width:100px;font-size:13px}
   .card{padding:14px}.nama{font-size:15px}
   .wa-btn{width:44px;height:44px}.footer-text{font-size:8px}
@@ -573,7 +573,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 /* =========================================================
    KONFIGURASI
    ========================================================= */
-var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv";
+var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSLoc7yUqr4bOCQ8hN8b7dkoxaiUPQMbi3B1lL4QmNRfhQxpKovP5OUd6j3Hc4I2cMdPk64k0KvXdQy/pub?gid=1350268941&single=true&output=csv"; // jangan dihilangin dong
 var GAS_URL = "https://script.google.com/macros/s/AKfycby0IPbjixMW1PgNXatcRM4RNgGiQUbOHQ-O7aa0js8Ox3CkQhcr5XkPTkEJJMcqM63D/exec";
 
 var dataPasien = [];
