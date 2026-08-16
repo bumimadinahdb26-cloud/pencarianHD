@@ -242,39 +242,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .wa-panel a:hover{padding-left:8px;color:var(--sky-deep)}
 .wa-panel a:last-child{border:none}
 
-/* ===== MODAL LOGIN ===== */
-.modal-login{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;overflow-y:auto;padding:20px 0}
-.modal-login.show{display:flex}
-.modal-login-content{background:linear-gradient(180deg,#fff 0%,var(--sky-light) 100%);border-radius:24px;padding:0;max-width:400px;width:92%;border:3px solid var(--sky-main);box-shadow:0 25px 60px rgba(0,0,0,0.3);animation:modalPop 0.3s ease;margin:auto;overflow:hidden}
-@keyframes modalPop{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
-.login-header{text-align:center;padding:24px 20px 16px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%)}
-.login-header h3{color:#fff;font-size:20px;margin-bottom:6px}
-.login-header p{color:rgba(255,255,255,0.9);font-size:13px}
-.login-form{padding:20px}
-.login-form .input-group{margin-bottom:14px}
-.login-form label{display:block;color:var(--sky-dark);font-size:12px;margin-bottom:5px;font-weight:600}
-.login-form input,.login-form select{width:100%;padding:12px;border:2px solid var(--sky-light);border-radius:12px;font-size:14px;background:#fff;color:var(--text);transition:border-color 0.2s}
-.login-form input:focus,.login-form select:focus{outline:none;border-color:var(--sky-main)}
-.btn-login{width:100%;padding:14px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
-.btn-login:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(2,136,209,0.4)}
-.btn-login:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-.btn-guest{width:100%;padding:14px;background:transparent;color:var(--sky-dark);border:2px solid var(--sky-main);border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:12px}
-.btn-guest:hover{background:var(--sky-light);transform:scale(1.02)}
-.btn-register{width:100%;padding:14px;background:linear-gradient(135deg,var(--leaf-main) 0%,var(--leaf-dark) 100%);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;margin-top:12px}
-.btn-register:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(255,143,0,0.4)}
-.btn-register:disabled{opacity:0.6;cursor:not-allowed;transform:none}
-.login-error{color:var(--danger-color);font-size:12px;text-align:center;margin-top:12px;display:none;font-weight:600}
-.login-success{color:var(--sky-dark);font-size:12px;text-align:center;margin-top:12px;display:none;font-weight:600}
-.guest-divider{display:flex;align-items:center;margin:16px 0;color:var(--sky-main);font-size:12px}
-.guest-divider::before,.guest-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sky-main),transparent)}
-.guest-divider span{padding:0 12px}
-.login-tabs{display:flex;border-bottom:2px solid var(--sky-light);margin:0}
-.login-tab{flex:1;padding:12px;text-align:center;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;color:var(--sky-dark);background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px}
-.login-tab.active{color:var(--sky-deep);border-bottom-color:var(--sky-main);background:var(--sky-light)}
-.login-tab:hover{background:var(--sky-light)}
-.tab-content{display:none}
-.tab-content.active{display:block}
-
 /* ===== MODAL PROFILE ===== */
 .modal-profile{display:none;position:fixed;z-index:2000;inset:0;background:rgba(1,87,155,0.85);backdrop-filter:blur(10px);align-items:center;justify-content:center;overflow-y:auto;padding:20px 0}
 .modal-profile.show{display:flex}
@@ -283,7 +250,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .modal-profile-header h4{margin:0;font-size:17px;color:#fff}
 .modal-close{cursor:pointer;font-size:22px;font-weight:bold;color:#fff;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.2);border-radius:50%;transition:background 0.2s}
 .modal-close:hover{background:rgba(255,255,255,0.3)}
-.modal-profile-body{padding:22px}
+.modal-profile-body{padding:22px;max-height:80vh;overflow-y:auto}
 .profile-avatar-section{text-align:center;margin-bottom:22px}
 .profile-avatar-preview{width:100px;height:100px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:#fff;overflow:hidden;border:4px solid var(--sky-light);box-shadow:0 4px 20px rgba(2,136,209,0.25)}
 .profile-avatar-preview img{width:100%;height:100%;object-fit:cover}
@@ -305,8 +272,8 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .upload-photo-btn:hover{transform:scale(1.05);box-shadow:0 4px 15px rgba(255,143,0,0.3)}
 .profile-form .input-group{margin-bottom:14px}
 .profile-form label{display:block;color:var(--sky-dark);font-size:12px;margin-bottom:5px;font-weight:600}
-.profile-form input{width:100%;padding:12px;border:2px solid var(--sky-light);border-radius:12px;font-size:14px;background:#fff;color:var(--text)}
-.profile-form input:focus{outline:none;border-color:var(--sky-main)}
+.profile-form input,.profile-form select{width:100%;padding:12px;border:2px solid var(--sky-light);border-radius:12px;font-size:14px;background:#fff;color:var(--text)}
+.profile-form input:focus,.profile-form select:focus{outline:none;border-color:var(--sky-main)}
 .btn-save-profile{width:100%;padding:14px;background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;transition:transform 0.2s,box-shadow 0.2s}
 .btn-save-profile:hover{transform:scale(1.02);box-shadow:0 5px 20px rgba(2,136,209,0.4)}
 
@@ -370,12 +337,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .history-empty{text-align:center;padding:50px 20px;color:var(--sky-dark);font-size:14px}
 .pending-tag{position:absolute;top:8px;right:12px;font-size:9px;font-weight:800;color:var(--leaf-dark);background:var(--leaf-light);padding:2px 8px;border-radius:6px}
 
-/* ===== GUEST NOTICE ===== */
-.guest-notice{background:linear-gradient(135deg,var(--sky-light) 0%,var(--leaf-light) 100%);border:2px solid var(--sky-main);border-radius:14px;padding:12px 16px;margin:0 auto 12px;max-width:480px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.guest-notice-text{font-size:13px;color:var(--sky-dark);font-weight:600}
-.guest-notice-btn{background:linear-gradient(135deg,var(--sky-main) 0%,var(--leaf-dark) 100%);color:#fff;border:none;padding:8px 16px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform 0.2s}
-.guest-notice-btn:hover{transform:scale(1.05)}
-
 /* ===== TOAST ===== */
 .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(100px);background:linear-gradient(135deg,var(--sky-deep) 0%,var(--leaf-dark) 100%);color:#fff;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,0.3);z-index:3000;opacity:0;transition:all 0.3s ease;border:2px solid var(--sky-main);max-width:90%;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -406,7 +367,6 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
   .quick-btn-notes{flex:1.1;min-height:72px;padding:8px 3px}
   .quick-btn-notes .btn-line{font-size:clamp(8px,3vw,16px)}
   .offline-bar{font-size:10px;padding:6px 12px}
-  .modal-login-content{max-width:95%}.login-tab{font-size:12px;padding:10px 4px}
 }
 </style>
 </head>
@@ -423,22 +383,12 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 <!-- HEADER -->
 <div class="app-header">
   <div class="sync-queue-badge" id="syncQueueBadge"><div class="sq-dot"></div><span id="syncQueueText">0 pending</span></div>
-  <div class="header-icon">
-    <a href="https://docs.google.com/spreadsheets/d/1bNTq4ImrP-4bE7WPqYiWPLCGQVrM1fgGe7TI_3vv9a0/" target="_blank" title="Buka Google Sheet" style="text-decoration:none;display:block;width:60px;height:60px;margin:0 auto 12px;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px rgba(2,136,209,0.4);border:2px solid var(--sky-main);transition:transform 0.2s,box-shadow 0.2s;cursor:pointer;" onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 6px 22px rgba(2,136,209,0.5)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 15px rgba(2,136,209,0.4)'">
-      <img src="login.png" alt="Logo HD Malahayati" style="width:100%;height:100%;object-fit:cover;display:block;">
-    </a>
-  </div>
   <div class="header-title">HD MALAHAYATI</div>
   <div class="header-subtitle">Instalasi Dialisis RSSA</div>
   <div class="clock-container">
     <div class="clock" id="clock">--:--:--</div>
     <div class="clock-date" id="clockDate">--</div>
   </div>
-</div>
-
-<div class="guest-notice" id="guestNotice" style="display:none;">
-  <div class="guest-notice-text">Anda masuk sebagai Tamu. Beberapa fitur terbatas.</div>
-  <button class="guest-notice-btn" onclick="showLoginFromGuest()">Login</button>
 </div>
 
 <div class="user-bar" id="userBar" style="display:none;">
@@ -449,7 +399,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
     </div>
     <div><div class="user-name" id="displayUserName">-</div><div class="user-details" id="displayUserDetails">-</div></div>
   </div>
-  <button class="btn-logout" onclick="logout()">Keluar</button>
+  <button class="btn-logout" onclick="openProfileModal()">Data Diri</button>
 </div>
 
 <!-- TOOLBAR -->
@@ -517,44 +467,10 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
   <a href="https://wa.me/6282257296694" target="_blank">Samsuga / Agus</a>
 </div>
 
-<!-- MODAL: LOGIN -->
-<div id="modalLogin" class="modal-login show">
-  <div class="modal-login-content">
-    <div class="login-header"><h3>🔐 HD Malahayati</h3><p>Login atau buat akun baru</p></div>
-    <div class="login-tabs">
-      <button class="login-tab active" onclick="switchLoginTab('login')">Masuk</button>
-      <button class="login-tab" onclick="switchLoginTab('register')">Daftar Akun</button>
-    </div>
-    <div class="tab-content active" id="tabLogin">
-      <div class="login-form">
-        <div class="input-group"><label>Username</label><input type="text" id="loginUser" placeholder="Masukkan username" autocomplete="off"></div>
-        <div class="input-group"><label>Password</label><input type="password" id="loginPass" placeholder="Masukkan password"></div>
-        <button class="btn-login" id="btnDoLogin" onclick="doLogin()">Masuk</button>
-        <div class="guest-divider"><span>atau</span></div>
-        <button class="btn-guest" onclick="doGuest()">Masuk sebagai Tamu</button>
-        <div class="login-error" id="loginError"></div>
-      </div>
-    </div>
-    <div class="tab-content" id="tabRegister">
-      <div class="login-form">
-        <div class="input-group"><label>Nama Lengkap</label><input type="text" id="regName" placeholder="Nama lengkap Anda"></div>
-        <div class="input-group"><label>Username</label><input type="text" id="regUser" placeholder="Pilih username" autocomplete="off"></div>
-        <div class="input-group"><label>Password</label><input type="password" id="regPass" placeholder="Buat password (min 4 karakter)"></div>
-        <div class="input-group"><label>Jabatan / Role</label>
-          <select id="regRole"><option value="Perawat HD">Perawat HD</option><option value="Dokter">Dokter</option><option value="Admin HD">Admin HD</option><option value="Mahasiswa">Mahasiswa</option><option value="Lainnya">Lainnya</option></select>
-        </div>
-        <button class="btn-register" id="btnDoRegister" onclick="doRegister()">Daftar Akun</button>
-        <div class="login-error" id="regError"></div>
-        <div class="login-success" id="regSuccess"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: PROFILE -->
+<!-- MODAL: PROFILE (Data Diri) -->
 <div id="modalProfile" class="modal-profile">
   <div class="modal-profile-content">
-    <div class="modal-profile-header"><h4>👤 Profil Pengguna</h4><div class="modal-close" onclick="closeProfileModal()">✕</div></div>
+    <div class="modal-profile-header"><h4>👤 Data Diri Pengguna</h4><div class="modal-close" onclick="closeProfileModal()">✕</div></div>
     <div class="modal-profile-body">
       <div class="profile-avatar-section">
         <div class="profile-avatar-preview" id="profileAvatarPreview">U</div>
@@ -575,8 +491,23 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
       </div>
       <div class="profile-form">
         <div class="input-group"><label>Nama Lengkap</label><input type="text" id="profileName" placeholder="Nama Anda"></div>
-        <div class="input-group"><label>Jabatan / Role</label><input type="text" id="profileRole" placeholder="Contoh: Perawat HD"></div>
-        <button class="btn-save-profile" onclick="saveProfile()">Simpan Profil</button>
+        <div class="input-group"><label>Alamat</label><input type="text" id="profileAlamat" placeholder="Alamat Lengkap"></div>
+        <div class="input-group"><label>No TLP/HP</label><input type="text" id="profilePhone" placeholder="08xxxxxxxxxx"></div>
+        <div class="input-group"><label>Email</label><input type="email" id="profileEmail" placeholder="email@domain.com"></div>
+        <div class="input-row">
+          <div class="input-group"><label>Berat Badan (kg)</label><input type="number" id="profileBB" step="0.1" placeholder="0.0"></div>
+          <div class="input-group"><label>Tinggi Badan (cm)</label><input type="number" id="profileTB" placeholder="0"></div>
+        </div>
+        <div class="input-group"><label>Golongan Darah</label>
+          <select id="profileGolDarah">
+            <option value="">Pilih Gol. Darah</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+          </select>
+        </div>
+        <button class="btn-save-profile" onclick="saveProfile()">Simpan Data Diri</button>
       </div>
     </div>
   </div>
@@ -1063,7 +994,6 @@ function clearRecordForm() {
 function closeRecordModal() { document.getElementById('modalRecord').classList.remove('show'); }
 
 function saveRecord() {
-  if (isGuestMode) { toast('Tamu tidak bisa menyimpan catatan'); return; }
   var mr = document.getElementById('recordMr').value;
   var nama = document.getElementById('recordPatientName').textContent;
   if (nama.indexOf('Isi manual') === 0) nama = 'Manual';
@@ -1180,117 +1110,39 @@ function generatePDF(pDataStr) {
 }
 
 /* =========================================================
-   LOGIN TAB
-   ========================================================= */
-function switchLoginTab(tab) {
-  document.querySelectorAll('.login-tab').forEach(function(t, i) { t.classList.toggle('active', (tab==='login'&&i===0)||(tab==='register'&&i===1)); });
-  document.getElementById('tabLogin').classList.toggle('active', tab==='login');
-  document.getElementById('tabRegister').classList.toggle('active', tab==='register');
-  document.getElementById('loginError').style.display = 'none';
-  document.getElementById('regError').style.display = 'none';
-  document.getElementById('regSuccess').style.display = 'none';
-}
-
-/* =========================================================
-   LOGIN (GAS + fallback lokal)
-   ========================================================= */
-function doLogin() {
-  var user = document.getElementById('loginUser').value.trim();
-  var pass = document.getElementById('loginPass').value;
-  var errEl = document.getElementById('loginError');
-  var btn = document.getElementById('btnDoLogin');
-  if (!user || !pass) { errEl.textContent = 'Username dan password harus diisi'; errEl.style.display = 'block'; return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span>Masuk...';
-
-  fetch(GAS_URL + '?action=login&username=' + encodeURIComponent(user) + '&password=' + encodeURIComponent(pass))
-    .then(function(r) { return r.json(); })
-    .then(function(resp) {
-      if (resp.success && resp.user) {
-        currentUser = resp.user; currentUser.avatarColor = currentUser.avatarColor || '1'; isGuestMode = false;
-        localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-        errEl.style.display = 'none'; document.getElementById('modalLogin').classList.remove('show');
-        applyUserUI(); toast('Selamat datang, ' + currentUser.name + '!');
-      } else { errEl.textContent = resp.message || 'Username atau password salah!'; errEl.style.display = 'block'; }
-    })
-    .catch(function() { loginFallback(user, pass, errEl); })
-    .finally(function() { btn.disabled = false; btn.textContent = 'Masuk'; });
-}
-function loginFallback(user, pass, errEl) {
-  var saved = JSON.parse(localStorage.getItem('hd_users_local') || '{}');
-  if (saved[user] && saved[user].password === pass) {
-    currentUser = saved[user]; currentUser.avatarColor = currentUser.avatarColor || '1'; isGuestMode = false;
-    localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-    errEl.style.display = 'none'; document.getElementById('modalLogin').classList.remove('show');
-    applyUserUI(); toast('Selamat datang, ' + currentUser.name + '!');
-  } else { errEl.textContent = 'Gagal terhubung server. Periksa koneksi atau coba lagi.'; errEl.style.display = 'block'; }
-}
-
-/* =========================================================
-   REGISTER
-   ========================================================= */
-function doRegister() {
-  var name = document.getElementById('regName').value.trim();
-  var user = document.getElementById('regUser').value.trim();
-  var pass = document.getElementById('regPass').value;
-  var role = document.getElementById('regRole').value;
-  var errEl = document.getElementById('regError'), sucEl = document.getElementById('regSuccess');
-  var btn = document.getElementById('btnDoRegister');
-  if (!name) { errEl.textContent='Nama lengkap harus diisi'; errEl.style.display='block'; return; }
-  if (!user || user.length < 3) { errEl.textContent='Username minimal 3 karakter'; errEl.style.display='block'; return; }
-  if (!pass || pass.length < 4) { errEl.textContent='Password minimal 4 karakter'; errEl.style.display='block'; return; }
-  if (/[^a-zA-Z0-9_.]/.test(user)) { errEl.textContent='Username hanya boleh huruf, angka, _ dan .'; errEl.style.display='block'; return; }
-  btn.disabled = true; btn.innerHTML = '<span class="loading-spinner"></span>Mendaftar...';
-
-  fetch(GAS_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action:'register', username:user, password:pass, name:name, role:role })
-  }).then(function() {
-    saveLocalUser(user, pass, name, role);
-    errEl.style.display='none'; sucEl.textContent='✅ Pendaftaran berhasil! Silakan masuk.'; sucEl.style.display='block';
-    setTimeout(function() { switchLoginTab('login'); document.getElementById('loginUser').value=user; document.getElementById('loginPass').value=''; }, 1500);
-  }).catch(function() {
-    saveLocalUser(user, pass, name, role);
-    errEl.style.display='none'; sucEl.textContent='✅ Akun tersimpan lokal (offline). Silakan masuk.'; sucEl.style.display='block';
-    setTimeout(function() { switchLoginTab('login'); document.getElementById('loginUser').value=user; }, 1500);
-  }).finally(function() { btn.disabled=false; btn.textContent='Daftar Akun'; });
-}
-function saveLocalUser(u, p, n, r) {
-  var s = JSON.parse(localStorage.getItem('hd_users_local')||'{}');
-  s[u] = { username:u, password:p, name:n, role:r, avatarColor:'1', avatarPhoto:null };
-  localStorage.setItem('hd_users_local', JSON.stringify(s));
-}
-
-/* =========================================================
-   GUEST
-   ========================================================= */
-function doGuest() {
-  currentUser = { username:'tamu', name:'Tamu', role:'Tamu', avatarColor:'1', avatarPhoto:null };
-  isGuestMode = true; localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-  document.getElementById('modalLogin').classList.remove('show'); applyUserUI(); toast('Selamat datang, Tamu!');
-}
-function showLoginFromGuest() { document.getElementById('guestNotice').style.display='none'; document.getElementById('modalLogin').classList.add('show'); }
-function logout() {
-  currentUser = null; isGuestMode = false; localStorage.removeItem(USER_KEY);
-  document.getElementById('userBar').style.display='none'; document.getElementById('guestNotice').style.display='none';
-  document.getElementById('modalLogin').classList.add('show');
-  document.getElementById('loginUser').value=''; document.getElementById('loginPass').value='';
-  document.getElementById('loginError').style.display='none'; switchLoginTab('login');
-}
-
-/* =========================================================
-   USER UI
+   USER UI & PROFILE (Tanpa Login Langsung Masuk)
    ========================================================= */
 function loadUser() {
-  try { var s = JSON.parse(localStorage.getItem(USER_KEY)); if (s) { currentUser = s; isGuestMode = (s.role==='Tamu'||s.username==='tamu'); applyUserUI(); } } catch(e) {}
+  try {
+    var s = JSON.parse(localStorage.getItem(USER_KEY));
+    if (s) {
+      currentUser = s;
+      isGuestMode = false;
+    } else {
+      // Auto create default user to bypass login
+      currentUser = { username:'pengguna', name:'Pengguna', role:'Pasien', avatarColor:'1', avatarPhoto:null, alamat:'', phone:'', email:'', bb:'', tb:'', goldar:'' };
+      localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
+      isGuestMode = false;
+    }
+    applyUserUI();
+  } catch(e) {}
 }
+
 function applyUserUI() {
   if (!currentUser) return;
-  if (isGuestMode) { document.getElementById('userBar').style.display='none'; document.getElementById('guestNotice').style.display='flex'; }
-  else { document.getElementById('userBar').style.display='flex'; document.getElementById('guestNotice').style.display='none';
-    document.getElementById('displayUserName').textContent = currentUser.name;
-    document.getElementById('displayUserDetails').textContent = currentUser.role;
-    updateUserAvatarUI();
-  }
+  document.getElementById('userBar').style.display = 'flex';
+  document.getElementById('displayUserName').textContent = currentUser.name || 'Pengguna';
+  
+  var details = [];
+  if (currentUser.goldar) details.push('Gol. Darah: ' + currentUser.goldar);
+  if (currentUser.bb) details.push('BB: ' + currentUser.bb + 'kg');
+  if (currentUser.tb) details.push('TB: ' + currentUser.tb + 'cm');
+  if (currentUser.phone) details.push(currentUser.phone);
+  document.getElementById('displayUserDetails').textContent = details.join(' | ') || 'Lengkapi data diri Anda';
+  
+  updateUserAvatarUI();
 }
+
 function updateUserAvatarUI() {
   var el = document.getElementById('userAvatar');
   var cm = {'1':'linear-gradient(135deg,#81D4FA 0%,#0288D1 100%)','2':'linear-gradient(135deg,#4FC3F7 0%,#01579B 100%)','3':'linear-gradient(135deg,#FFB74D 0%,#FF8F00 100%)','4':'linear-gradient(135deg,#EF9A9A 0%,#C62828 100%)','5':'linear-gradient(135deg,#FFD54F 0%,#F9A825 100%)','6':'linear-gradient(135deg,#90CAF9 0%,#1565C0 100%)','7':'linear-gradient(135deg,#FFCC80 0%,#E65100 100%)','8':'linear-gradient(135deg,#CE93D8 0%,#6A1B9A 100%)','9':'linear-gradient(135deg,#80CBC4 0%,#00695C 100%)','10':'linear-gradient(135deg,#81D4FA 0%,#FFB74D 100%)'};
@@ -1298,20 +1150,29 @@ function updateUserAvatarUI() {
   else { el.textContent = currentUser.name.charAt(0).toUpperCase(); el.style.background = cm[currentUser.avatarColor] || cm['1']; }
 }
 
-/* =========================================================
-   PROFIL
-   ========================================================= */
 function openProfileModal() {
-  if (!currentUser || isGuestMode) return;
+  if (!currentUser) return;
   document.getElementById('profileName').value = currentUser.name || '';
-  document.getElementById('profileRole').value = currentUser.role || '';
+  document.getElementById('profileAlamat').value = currentUser.alamat || '';
+  document.getElementById('profilePhone').value = currentUser.phone || '';
+  document.getElementById('profileEmail').value = currentUser.email || '';
+  document.getElementById('profileBB').value = currentUser.bb || '';
+  document.getElementById('profileTB').value = currentUser.tb || '';
+  document.getElementById('profileGolDarah').value = currentUser.goldar || '';
+  
   var p = document.getElementById('profileAvatarPreview');
   if (currentUser.avatarPhoto) { p.innerHTML = '<img src="'+currentUser.avatarPhoto+'" alt="avatar">'; }
-  else { p.textContent = currentUser.name.charAt(0).toUpperCase(); p.style.background = 'var(--sky-main)'; }
-  document.querySelectorAll('.avatar-option').forEach(function(el) { el.classList.remove('selected'); if (el.dataset.color===currentUser.avatarColor) el.classList.add('selected'); el.textContent = currentUser.name.charAt(0).toUpperCase(); });
+  else { p.textContent = (currentUser.name || 'U').charAt(0).toUpperCase(); p.style.background = 'var(--sky-main)'; }
+  
+  document.querySelectorAll('.avatar-option').forEach(function(el) {
+    el.classList.remove('selected');
+    if (el.dataset.color === currentUser.avatarColor) el.classList.add('selected');
+    el.textContent = (currentUser.name || 'U').charAt(0).toUpperCase();
+  });
   document.getElementById('modalProfile').classList.add('show');
 }
 function closeProfileModal() { document.getElementById('modalProfile').classList.remove('show'); }
+
 function selectAvatar(el, color) {
   document.querySelectorAll('.avatar-option').forEach(function(e) { e.classList.remove('selected'); });
   el.classList.add('selected'); currentUser.avatarColor = color; currentUser.avatarPhoto = null;
@@ -1328,13 +1189,15 @@ function handleAvatarUpload(event) {
 }
 function saveProfile() {
   if (!currentUser) return;
-  var name = document.getElementById('profileName').value.trim();
-  if (!name) { toast('Nama tidak boleh kosong'); return; }
-  currentUser.name = name; currentUser.role = document.getElementById('profileRole').value.trim() || currentUser.role;
+  currentUser.name = document.getElementById('profileName').value.trim() || 'Pengguna';
+  currentUser.alamat = document.getElementById('profileAlamat').value.trim();
+  currentUser.phone = document.getElementById('profilePhone').value.trim();
+  currentUser.email = document.getElementById('profileEmail').value.trim();
+  currentUser.bb = document.getElementById('profileBB').value.trim();
+  currentUser.tb = document.getElementById('profileTB').value.trim();
+  currentUser.goldar = document.getElementById('profileGolDarah').value;
   localStorage.setItem(USER_KEY, JSON.stringify(currentUser));
-  var s = JSON.parse(localStorage.getItem('hd_users_local')||'{}');
-  if (s[currentUser.username]) { s[currentUser.username].name = name; localStorage.setItem('hd_users_local', JSON.stringify(s)); }
-  applyUserUI(); closeProfileModal(); toast('Profil berhasil disimpan!');
+  applyUserUI(); closeProfileModal(); toast('Data diri berhasil disimpan!');
 }
 
 /* =========================================================
@@ -1352,9 +1215,6 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
   if (waPanelOpen) { var p = document.getElementById('waPanel'), b = document.querySelector('.wa-btn'); if (!p.contains(e.target) && !b.contains(e.target)) toggleWA(); }
 });
-document.getElementById('loginPass').addEventListener('keyup', function(e) { if (e.key === 'Enter') doLogin(); });
-document.getElementById('loginUser').addEventListener('keyup', function(e) { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
-document.getElementById('regPass').addEventListener('keyup', function(e) { if (e.key === 'Enter') doRegister(); });
 </script>
 
 </body>
