@@ -133,8 +133,9 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .sync-queue-badge .sq-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:blink .6s infinite}
 
 /* ===== APP HEADER ===== */
-.app-header{position:relative;z-index:2;text-align:center;padding:20px;margin:20px auto 15px;max-width:360px;background:url('kartini.png') center center / contain no-repeat var(--sky-light);border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
+.app-header{position:relative;z-index:2;text-align:center;padding:20px;margin:20px auto 15px;max-width:360px;background:var(--sky-light);border-radius:24px;border:2px solid var(--sky-main);box-shadow:0 8px 32px rgba(2,136,209,0.15),0 2px 8px rgba(0,0,0,0.08);animation:fadeInDown 0.8s ease-out;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:space-between}
 .app-header::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--sky-main),var(--leaf-main),#C62828,var(--sky-main))}
+.header-bg-layer{position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;z-index:0;cursor:pointer;opacity:1;transition:opacity 0.8s ease-in-out}
 .header-text-group{position:relative;z-index:2}
 .header-title{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--sky-deep);letter-spacing:1px;margin-top:4px;background:rgba(255,255,255,0.85);padding:4px 14px;border-radius:10px;display:inline-block;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
 .header-subtitle{font-size:13px;color:var(--leaf-dark);font-weight:600;background:rgba(255,255,255,0.85);padding:3px 12px;border-radius:8px;display:inline-block}
@@ -142,6 +143,13 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .clock{font-size:22px;font-weight:700;letter-spacing:2px;color:var(--sky-deep)}
 .clock-date{font-size:12px;margin-top:4px;color:var(--leaf-dark);font-weight:600}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== IMAGE VIEWER MODAL ===== */
+.modal-image-viewer{display:none;position:fixed;z-index:3000;inset:0;background:rgba(0,0,0,0.95);align-items:center;justify-content:center;flex-direction:column}
+.modal-image-viewer.show{display:flex}
+.image-viewer-close{position:absolute;top:20px;right:20px;color:#fff;font-size:32px;cursor:pointer;background:rgba(255,255,255,0.2);width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.5);font-weight:bold;transition:background 0.2s}
+.image-viewer-close:hover{background:rgba(255,255,255,0.4)}
+#fullImage{max-width:95%;max-height:90vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
 
 /* ===== USER BAR ===== */
 .user-bar{position:relative;z-index:2;max-width:480px;margin:0 auto 10px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-radius:16px;padding:12px 16px;border:2px solid var(--sky-main);box-shadow:0 4px 15px rgba(2,136,209,0.1)}
@@ -383,6 +391,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 
 <!-- HEADER -->
 <div class="app-header">
+  <div class="header-bg-layer" id="headerBgLayer" onclick="openImageViewer()"></div>
   <div class="sync-queue-badge" id="syncQueueBadge"><div class="sq-dot"></div><span id="syncQueueText">0 pending</span></div>
   
   <div class="header-text-group">
@@ -572,6 +581,12 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
   </div>
 </div>
 
+<!-- MODAL: IMAGE VIEWER -->
+<div id="imageViewerModal" class="modal-image-viewer" onclick="closeImageViewer(event)">
+  <div class="image-viewer-close" onclick="closeImageViewer(event)">✕</div>
+  <img id="fullImage" src="" alt="Gambar Header" onclick="event.stopPropagation()">
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -595,11 +610,14 @@ var USER_KEY = 'hd_malahayati_user';
 var NOTES_KEY = 'hd_malahayati_notes';
 var SYNC_KEY = 'hd_malahayati_sync_queue';
 
+var headerImages = ['kartini.png', 'alur rujukan.jpg'];
+var currentHeaderImg = 0;
+
 /* =========================================================
    INISIALISASI
    ========================================================= */
 document.addEventListener('DOMContentLoaded', function() {
-  initClock(); initSky(); initRain(); initStars();
+  initClock(); initSky(); initRain(); initStars(); initHeaderRotator();
   loadUser(); loadCacheAndFetch(); setupOnlineListener(); checkDate();
 });
 
@@ -653,6 +671,33 @@ function initStars() {
     s.style.animationDelay = (Math.random()*5)+'s';
     c.appendChild(s);
   }
+}
+
+/* =========================================================
+   HEADER ROTATOR & IMAGE VIEWER
+   ========================================================= */
+function initHeaderRotator() {
+  var layer = document.getElementById('headerBgLayer');
+  layer.style.backgroundImage = "url('" + headerImages[0] + "')";
+  setInterval(function() {
+    currentHeaderImg = (currentHeaderImg + 1) % headerImages.length;
+    layer.style.opacity = '0';
+    setTimeout(function() {
+      layer.style.backgroundImage = "url('" + headerImages[currentHeaderImg] + "')";
+      layer.style.opacity = '1';
+    }, 800);
+  }, 3000);
+}
+function openImageViewer(e) {
+  if(e) e.stopPropagation();
+  var imgSrc = headerImages[currentHeaderImg];
+  document.getElementById('fullImage').src = imgSrc;
+  document.getElementById('imageViewerModal').classList.add('show');
+}
+function closeImageViewer(e) {
+  if(e) e.stopPropagation();
+  document.getElementById('imageViewerModal').classList.remove('show');
+  document.getElementById('fullImage').src = '';
 }
 
 /* =========================================================
@@ -1232,7 +1277,7 @@ function toast(msg) { var el = document.getElementById('toast'); el.textContent 
    KEYBOARD & CLICK
    ========================================================= */
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeViewModal(); closeRecordModal(); closeHistoryModal(); closeProfileModal(); if (waPanelOpen) toggleWA(); }
+  if (e.key === 'Escape') { closeViewModal(); closeRecordModal(); closeHistoryModal(); closeProfileModal(); closeImageViewer(); if (waPanelOpen) toggleWA(); }
 });
 document.addEventListener('click', function(e) {
   if (waPanelOpen) { var p = document.getElementById('waPanel'), b = document.querySelector('.wa-btn'); if (!p.contains(e.target) && !b.contains(e.target)) toggleWA(); }
