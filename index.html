@@ -610,7 +610,7 @@ var USER_KEY = 'hd_malahayati_user';
 var NOTES_KEY = 'hd_malahayati_notes';
 var SYNC_KEY = 'hd_malahayati_sync_queue';
 
-var headerImages = ['kartini.png', 'alur rujukan.jpg'];
+var headerImages = ['kartini.png', 'alur rujukan.jpg', 'cucitangan.jpg', 'etikabatuk.png', 'etikabatuk2.png'];
 var currentHeaderImg = 0;
 
 /* =========================================================
@@ -686,7 +686,7 @@ function initHeaderRotator() {
       layer.style.backgroundImage = "url('" + headerImages[currentHeaderImg] + "')";
       layer.style.opacity = '1';
     }, 800);
-  }, 3000);
+  }, 4000); // Ganti setiap 4 detik
 }
 function openImageViewer(e) {
   if(e) e.stopPropagation();
