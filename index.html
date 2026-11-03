@@ -182,10 +182,18 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 .search-box #search{flex:1;border:none;outline:none;padding:14px 0;font-size:14px;background:transparent;min-width:80px;color:var(--text)}
 .search-box #search::placeholder{color:#90a4ae}
 .separator{width:1px;height:24px;background:var(--sky-main);margin:0 12px}
-.date-wrapper{position:relative;display:flex;align-items:center}
-.date-placeholder{position:absolute;left:0;top:50%;transform:translateY(-50%);color:#90a4ae;font-size:14px;pointer-events:none;transition:opacity 0.2s;white-space:nowrap}
-.date-wrapper.has-value .date-placeholder{opacity:0}
-.search-box #searchDate{border:none;outline:none;padding:14px 0;font-size:14px;background:transparent;width:120px;cursor:pointer;color:var(--text);position:relative;z-index:1}
+/* Tombol Mic (Speech-to-Text) */
+.search-box .mic-btn{background:linear-gradient(135deg,#fff 0%,var(--sky-light) 100%);border:2px solid var(--sky-main);cursor:pointer;padding:10px;font-size:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(2,136,209,0.2);transition:transform 0.2s,box-shadow 0.2s,background 0.25s}
+.search-box .mic-btn:hover{transform:scale(1.1);box-shadow:0 5px 18px rgba(2,136,209,0.35)}
+.search-box .mic-btn svg{width:20px;height:20px;fill:var(--sky-dark)}
+/* Status LISTENING: merah berdenyut supaya user tahu mic sedang aktif */
+.search-box .mic-btn.listening{background:linear-gradient(135deg,#ef5350 0%,#c62828 100%);border-color:#b71c1c;animation:micPulse 1.2s infinite}
+.search-box .mic-btn.listening svg{fill:#fff}
+@keyframes micPulse{
+  0%{box-shadow:0 0 0 0 rgba(229,57,53,0.55),0 3px 12px rgba(229,57,53,0.35)}
+  70%{box-shadow:0 0 0 14px rgba(229,57,53,0),0 3px 12px rgba(229,57,53,0.35)}
+  100%{box-shadow:0 0 0 0 rgba(229,57,53,0),0 3px 12px rgba(229,57,53,0.35)}
+}
 .search-box button{background:linear-gradient(135deg,var(--sky-main) 0%,var(--sky-dark) 100%);border:none;cursor:pointer;padding:12px;font-size:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(2,136,209,0.3);transition:transform 0.2s,box-shadow 0.2s}
 .search-box button:hover{transform:scale(1.1);box-shadow:0 5px 18px rgba(2,136,209,0.4)}
 .search-box button svg{width:20px;height:20px;fill:#fff}
@@ -375,7 +383,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 @media(max-width:360px){
   .header-title{font-size:18px}.clock{font-size:18px}.clock-date{font-size:11px}
   .app-header{margin-top:15px;padding:15px}
-  .search-box #search{font-size:13px}.search-box #searchDate{width:100px;font-size:13px}
+  .search-box #search{font-size:13px}.search-box .mic-btn{padding:8px}.search-box .mic-btn svg{width:16px;height:16px}
   .card{padding:14px}.nama{font-size:15px}
   .wa-btn{width:44px;height:44px}.footer-text{font-size:8px}
   .wa-panel{bottom:70px;width:200px}
@@ -429,13 +437,13 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
 <!-- TOOLBAR -->
 <div class="toolbar">
   <div class="search-box">
-    <input id="search" placeholder="Cari Nama / MR / Ruang..." onkeyup="cari()">
+    <input id="search" placeholder="Cari Nama / MR / Ruang..." onkeyup="cari()" autocomplete="off">
     <div class="separator"></div>
-    <div class="date-wrapper" id="dateWrapper">
-      <input type="date" id="searchDate" onchange="cari(); checkDate();">
-      <span class="date-placeholder">Filter Tanggal</span>
-    </div>
-    <button onclick="cari()"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
+    <!-- Tombol Mic: Speech-to-Text REAL-TIME -->
+    <button class="mic-btn" id="micBtn" onclick="toggleSpeech()" title="Cari dengan Suara (klik untuk mulai/berhenti)">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+    </button>
+    <button onclick="cari()" title="Cari"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
   </div>
 </div>
 
@@ -471,7 +479,7 @@ body.sky-malam .sun-glow{background:radial-gradient(circle,rgba(225,245,254,0.6)
   </button>
 </div>
 
-<div id="hasil">Ketik minimal 2 karakter atau pilih tanggal untuk mencari</div>
+<div id="hasil">Ketik minimal 2 karakter atau tekan mic untuk bicara</div>
 
 <div class="ornament left">💻</div>
 <div class="ornament right">🚀</div>
@@ -637,7 +645,7 @@ var currentHeaderImg = 0;
    ========================================================= */
 document.addEventListener('DOMContentLoaded', function() {
   initClock(); initSky(); initRain(); initStars(); initHeaderRotator();
-  loadUser(); loadCacheAndFetch(); setupOnlineListener(); checkDate();
+  loadUser(); loadCacheAndFetch(); setupOnlineListener(); initSpeechRecognition();
 });
 
 /* =========================================================
@@ -878,9 +886,112 @@ function showCacheInfo(isC, cnt, time) {
    ========================================================= */
 function toggleWA() { waPanelOpen = !waPanelOpen; document.getElementById('waPanel').classList.toggle('show', waPanelOpen); }
 
-function checkDate() {
-  var w = document.getElementById('dateWrapper'), i = document.getElementById('searchDate');
-  if (i.value) w.classList.add('has-value'); else w.classList.remove('has-value');
+/* =========================================================
+   SPEECH-TO-TEXT REAL-TIME (Web Speech API)
+   - Pakai interimResults=true supaya kata langsung muncul
+     saat user bicara, TIDAK perlu klik mic lagi untuk
+     melihat hasil ucapan.
+   - continuous=true: mic tetap aktif sampai user klik stop.
+   ========================================================= */
+var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+var recognition = null;
+var isListening = false;
+var baseFinalText = ''; // teks final yang sudah pasti (sebelum sesuara terbaru)
+
+function initSpeechRecognition() {
+  if (!SpeechRecognition) {
+    console.warn('Browser tidak mendukung Web Speech API. Gunakan Chrome/Edge.');
+    return;
+  }
+  recognition = new SpeechRecognition();
+  recognition.lang = 'id-ID';        // Bahasa Indonesia
+  recognition.continuous = true;     // Tetap mendengarkan sampai user berhenti
+  recognition.interimResults = true; // Tampilkan kata REAL-TIME saat user bicara
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function(event) {
+    var interim = '';
+    var finalPortion = '';
+    // Susun ulang semua hasil dari awal sampai indeks terakhir
+    for (var i = 0; i < event.results.length; i++) {
+      var transcript = event.results[i][0].transcript;
+      if (event.results[i].isFinal) {
+        finalPortion += transcript;
+      } else {
+        interim += transcript;
+      }
+    }
+    // Gabungan final + interim = apa yang sedang diucapkan user saat ini
+    var combined = (finalPortion + interim).replace(/\s+/g, ' ').trim();
+    var searchInput = document.getElementById('search');
+    searchInput.value = combined;
+    // Simpan final text sebagai baseline
+    baseFinalText = finalPortion;
+    // Langsung cari supaya hasil pencarian update REAL-TIME
+    cari();
+  };
+
+  recognition.onerror = function(event) {
+    console.error('Speech recognition error:', event.error);
+    if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+      toast('Izinkan akses mikrofon untuk menggunakan fitur suara');
+      stopListening();
+    } else if (event.error === 'no-speech') {
+      // Abaikan - recognition akan auto restart di onend jika masih listening
+    } else if (event.error === 'audio-capture') {
+      toast('Mikrofon tidak terdeteksi pada perangkat');
+      stopListening();
+    }
+  };
+
+  recognition.onend = function() {
+    // Kalau user belum klik stop, restart otomatis biar tetap mendengarkan
+    if (isListening) {
+      try { recognition.start(); } catch(e) { /* sudah berjalan */ }
+    }
+  };
+}
+
+function toggleSpeech() {
+  if (!SpeechRecognition) {
+    toast('Browser tidak mendukung Speech Recognition. Gunakan Chrome/Edge.');
+    return;
+  }
+  if (!recognition) initSpeechRecognition();
+  if (!recognition) return;
+
+  if (isListening) {
+    stopListening();
+  } else {
+    startListening();
+  }
+}
+
+function startListening() {
+  var searchInput = document.getElementById('search');
+  // Reset input saat mulai bicara supaya bersih
+  searchInput.value = '';
+  baseFinalText = '';
+  try {
+    recognition.start();
+    isListening = true;
+    document.getElementById('micBtn').classList.add('listening');
+    searchInput.placeholder = 'Mendengarkan... silakan bicara';
+    toast('Mic aktif - kata yang diucapkan langsung muncul');
+  } catch(e) {
+    console.error('Start recognition error:', e);
+  }
+}
+
+function stopListening() {
+  isListening = false;
+  if (recognition) {
+    try { recognition.stop(); } catch(e) {}
+  }
+  var micBtn = document.getElementById('micBtn');
+  if (micBtn) micBtn.classList.remove('listening');
+  var searchInput = document.getElementById('search');
+  if (searchInput) searchInput.placeholder = 'Cari Nama / MR / Ruang...';
 }
 
 function parseTanggal(t) {
@@ -905,11 +1016,9 @@ function getTarget(tanggal, shift) {
 
 function cari() {
   var keyword = document.getElementById('search').value.toLowerCase();
-  var dateInput = document.getElementById('searchDate').value;
-  checkDate();
 
-  if (keyword.length < 2 && !dateInput) {
-    document.getElementById('hasil').innerHTML = "Ketik minimal 2 karakter atau pilih tanggal";
+  if (keyword.length < 2) {
+    document.getElementById('hasil').innerHTML = "Ketik minimal 2 karakter atau tekan mic untuk bicara";
     return;
   }
 
@@ -923,19 +1032,7 @@ function cari() {
       textMatch = r.join(" ").toLowerCase().includes(keyword);
     }
 
-    var dateMatch = true;
-    if (dateInput) {
-      var rowDate = parseTanggal(r[4]);
-      if (rowDate) {
-        var dd = rowDate.getDate(), mm = rowDate.getMonth() + 1, yy = rowDate.getFullYear();
-        var formatted = yy + '-' + (mm < 10 ? '0' : '') + mm + '-' + (dd < 10 ? '0' : '') + dd;
-        dateMatch = (formatted === dateInput);
-      } else {
-        dateMatch = false;
-      }
-    }
-
-    if (!textMatch || !dateMatch) return;
+    if (!textMatch) return;
 
     var target = getTarget(r[4], r[7]);
     var selesai = new Date() > target;
